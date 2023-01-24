@@ -1,9 +1,9 @@
 [gd_scene load_steps=18 format=2]
 
-[ext_resource path="res://entities/planes/InterzkiAI.tscn" type="PackedScene" id=1]
+[ext_resource path="res://entities/planes/IntorvPlayer.tscn" type="PackedScene" id=1]
 [ext_resource path="res://fonts/Nasa21-l23X.ttf" type="DynamicFontData" id=2]
-[ext_resource path="res://entities/planes/IntorvPlayer.tscn" type="PackedScene" id=3]
 [ext_resource path="res://entities/PlayerCamera.gd" type="Script" id=4]
+[ext_resource path="res://entities/planes/IntorvAI.tscn" type="PackedScene" id=5]
 
 [sub_resource type="GDScript" id=2]
 script/source = "extends Node2D
@@ -348,18 +348,26 @@ void fragment() {
 
 [sub_resource type="ShaderMaterial" id=38]
 shader = SubResource( 37 )
-shader_param/blue = 0.8
-shader_param/red = 0.3
-shader_param/green = 0.4
+shader_param/blue = 0.888
+shader_param/red = 0.605
+shader_param/green = 0.375
 
 [node name="testing2" type="Node2D"]
 script = SubResource( 2 )
 
 [node name="AI" type="Node2D" parent="."]
 
-[node name="InterzkiAI" parent="AI" instance=ExtResource( 1 )]
-position = Vector2( 3560, 545 )
-plane_color = Color( 0.305882, 0.34902, 0.113725, 1 )
+[node name="IntorvAI" parent="AI" instance=ExtResource( 5 )]
+position = Vector2( 3849, -271 )
+
+[node name="IntorvAI2" parent="AI" instance=ExtResource( 5 )]
+position = Vector2( 4869, 1103 )
+
+[node name="IntorvAI3" parent="AI" instance=ExtResource( 5 )]
+position = Vector2( 3886, 327 )
+
+[node name="IntorvAI4" parent="AI" instance=ExtResource( 5 )]
+position = Vector2( 4906, 1701 )
 
 [node name="PlayerCamera" type="Camera2D" parent="."]
 show_behind_parent = true
@@ -434,5 +442,6 @@ material = SubResource( 38 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 
-[node name="Player" parent="." instance=ExtResource( 3 )]
-position = Vector2( 2529, 400 )
+[node name="Player" parent="." instance=ExtResource( 1 )]
+position = Vector2( 3443, 326 )
+plane_color = Color( 0.0509804, 0.407843, 0.698039, 1 )

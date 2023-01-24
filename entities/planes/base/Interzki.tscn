@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://textures/Interzki_shape.png" type="Texture" id=1]
 [ext_resource path="res://textures/Interzki_color.png" type="Texture" id=2]
@@ -54,6 +54,10 @@ angular_velocity = 25.0
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
 scale = 0.1
+
+[sub_resource type="CanvasItemMaterial" id=30]
+blend_mode = 1
+light_mode = 1
 
 [sub_resource type="Gradient" id=19]
 offsets = PoolRealArray( 0, 0.113208, 0.660377, 0.811321, 0.95283 )
@@ -227,6 +231,7 @@ process_material = ExtResource( 6 )
 texture = ExtResource( 4 )
 
 [node name="Fire" type="Particles2D" parent="Plane"]
+material = SubResource( 30 )
 position = Vector2( 3, 2 )
 emitting = false
 amount = 50
@@ -235,6 +240,7 @@ process_material = SubResource( 23 )
 texture = ExtResource( 4 )
 
 [node name="MachineGun" parent="Plane" instance=ExtResource( 7 )]
+position = Vector2( 97, 0 )
 
 [node name="HitBox" type="CollisionShape2D" parent="."]
 rotation = 1.5708
@@ -246,7 +252,7 @@ stream = ExtResource( 9 )
 volume_db = -5.0
 pitch_scale = 1.5
 autoplay = true
-max_distance = 5000.0
+max_distance = 10000.0
 attenuation = 1.46409
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

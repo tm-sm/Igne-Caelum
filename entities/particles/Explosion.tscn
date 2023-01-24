@@ -1,9 +1,10 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://textures/smoke.png" type="Texture" id=1]
 [ext_resource path="res://entities/particles/Explosion.gd" type="Script" id=2]
 [ext_resource path="res://textures/shaders/Distortion.tres" type="Material" id=3]
 [ext_resource path="res://textures/explosion_shape.png" type="Texture" id=4]
+[ext_resource path="res://sounds/explosion.ogg" type="AudioStream" id=5]
 
 [sub_resource type="Gradient" id=6]
 offsets = PoolRealArray( 0, 0.735849, 1 )
@@ -110,7 +111,6 @@ sleeping = true
 script = ExtResource( 2 )
 
 [node name="Explosion" type="Particles2D" parent="."]
-emitting = false
 amount = 100
 lifetime = 10.0
 one_shot = true
@@ -159,5 +159,12 @@ texture = ExtResource( 4 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/explode = SubResource( 17 )
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 5 )
+volume_db = -10.0
+pitch_scale = 1.5
+autoplay = true
+max_distance = 15000.0
 
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

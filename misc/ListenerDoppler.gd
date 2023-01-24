@@ -7,7 +7,6 @@ func _ready():
 
 func _process(delta):
 	var sound_sources = active_sounds.keys()
-	print(sound_sources)
 	for s in sound_sources:
 		var sound_mod =  active_sounds[s] / global_position.distance_to(s.global_position) 
 		if sound_mod < 1:
@@ -20,6 +19,10 @@ func _process(delta):
 func _on_ListeningArea_body_entered(body):
 	if body.is_in_group("sound_emitter") and body != get_parent():
 		active_sounds[body] = global_position.distance_to(body.global_position)
+		body.connect("destroyed", self, "_on_emitter_destroyed", [body])
 
 func _on_ListeningArea_body_exited(body):
+	active_sounds.erase(body)
+
+func _on_emitter_destroyed(body):
 	active_sounds.erase(body)

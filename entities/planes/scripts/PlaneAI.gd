@@ -2,6 +2,8 @@ extends BasePlane
 class_name PlaneAI
 
 export(int) var machinegun_range : int = 10000
+export(float) var tight_turn_thrust : float = 0.2
+export(float) var wide_turn_thrust : float = 0.8
 
 enum combat_action { idle, heading_to_target, target_in_range}
 enum flight_action { stalling, straight_ahead, wide_turn, sharp_turn, returning_to_base}
@@ -60,16 +62,12 @@ func update_pitch():
 
 func update_thrust():
 	match flight_state:
-		flight_action.stalling:
-			throttle_target = 1
-		flight_action.straight_ahead:
-			throttle_target = 1
 		flight_action.wide_turn:
-			throttle_target = 0.8
+			throttle_target = wide_turn_thrust
 		flight_action.sharp_turn:
-			throttle_target = 0.2
+			throttle_target = tight_turn_thrust
 		_:
-			throttle_target = 0
+			throttle_target = 1
 	
 	if engine_thrust_percentage > throttle_target:
 		throttle_down()

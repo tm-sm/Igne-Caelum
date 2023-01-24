@@ -4,8 +4,8 @@
 [ext_resource path="res://textures/smoke.png" type="Texture" id=2]
 [ext_resource path="res://entities/weapons/BaseBullet.gd" type="Script" id=3]
 
-[sub_resource type="CircleShape2D" id=1]
-radius = 6.08276
+[sub_resource type="CapsuleShape2D" id=17]
+height = 76.0
 
 [sub_resource type="Curve" id=2]
 min_value = -360.0
@@ -142,13 +142,14 @@ scale_curve = SubResource( 14 )
 color_ramp = SubResource( 16 )
 
 [node name="BaseBullet" type="RigidBody2D"]
-continuous_cd = 1
 contacts_reported = 2
 contact_monitor = true
 script = ExtResource( 3 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource( 1 )
+position = Vector2( 113, 3 )
+rotation = 1.5708
+shape = SubResource( 17 )
 
 [node name="Explode" type="Particles2D" parent="."]
 position = Vector2( 8, 1 )
@@ -170,6 +171,7 @@ texture = ExtResource( 1 )
 centered = false
 
 [node name="Light2D" type="Light2D" parent="Sprite"]
+position = Vector2( -0.7, 4 )
 scale = Vector2( 0.5, 1 )
 texture = ExtResource( 1 )
 offset = Vector2( 10, 0 )

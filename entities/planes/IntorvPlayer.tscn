@@ -30,7 +30,7 @@ position = Vector2( -94, -2 )
 position = Vector2( -54, -1 )
 
 [node name="MachineGun" parent="Plane" index="7"]
-position = Vector2( 43, 21 )
+position = Vector2( 86, 0 )
 
 [node name="ListenerDoppler" parent="." index="4" instance=ExtResource( 3 )]
 current = true

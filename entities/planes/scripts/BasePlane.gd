@@ -19,7 +19,7 @@ onready var anim = $AnimationPlayer
 export(Color) var plane_color = Color.dimgray
 export(float) var weight_tons : float = 20
 export(int) var max_health : int = 100
-export(float) var max_speed = 2000
+export(float) var max_speed = 2000.0
 export(float) var stall_speed = 600 #at which speed the aircraft starts to feel the effects of gravity
 export(float) var agility : float = 70
 export(float) var brakes_power : float = 100
@@ -103,8 +103,6 @@ func damage(dmg):
 	if health <= 0:
 		emit_signal("destroyed")
 		anim.play("die")
-	else:
-		anim.play("damaged")
 
 func apply_thrust():
 	#calculating the force needed to mantain the desired speed

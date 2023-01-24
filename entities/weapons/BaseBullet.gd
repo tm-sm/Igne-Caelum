@@ -10,7 +10,7 @@ export(float) var bullet_weight : float = 0.1
 func fire(impulse):
 	weight = bullet_weight
 	apply_central_impulse(impulse)
-	timer.start(5)
+	timer.start(3)
 
 func _on_Bullet_body_entered(body):
 	add_collision_exception_with(body)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://entities/planes/scripts/BasePlane.gd" type="Script" id=1]
 [ext_resource path="res://entities/particles/Fire.tres" type="Material" id=2]
@@ -55,9 +55,12 @@ orbit_velocity = 0.0
 orbit_velocity_random = 0.0
 scale = 0.1
 
+[sub_resource type="CanvasItemMaterial" id=32]
+blend_mode = 1
+
 [sub_resource type="Gradient" id=19]
-offsets = PoolRealArray( 0, 0.113208, 0.660377, 0.811321, 0.95283 )
-colors = PoolColorArray( 0.839844, 0.831335, 0.295258, 1, 0.943945, 0.438269, 0.10334, 1, 0.96875, 1, 0, 1, 1, 0.996094, 0.996094, 1, 0, 0, 0, 0 )
+offsets = PoolRealArray( 0, 0.129032, 0.660377, 0.811321, 0.95283 )
+colors = PoolColorArray( 0.499023, 0.351485, 0.0623779, 1, 0.483398, 0.192604, 0, 1, 0.96875, 1, 0, 1, 0.0185547, 0.0185547, 0.0185547, 1, 0, 0, 0, 0 )
 
 [sub_resource type="GradientTexture" id=20]
 gradient = SubResource( 19 )
@@ -183,7 +186,6 @@ __meta__ = {
 weight_tons = 25.0
 max_health = 150
 max_speed = 2500.0
-stall_speed = 800.0
 agility = 60.0
 engine_power = 1000.0
 torque_strength = 5500.0
@@ -236,6 +238,7 @@ process_material = ExtResource( 2 )
 texture = ExtResource( 7 )
 
 [node name="Fire" type="Particles2D" parent="Plane"]
+material = SubResource( 32 )
 position = Vector2( -46, 0 )
 emitting = false
 amount = 50
@@ -244,7 +247,8 @@ process_material = SubResource( 23 )
 texture = ExtResource( 7 )
 
 [node name="MachineGun" parent="Plane" instance=ExtResource( 4 )]
-position = Vector2( 44, 22 )
+position = Vector2( 82, 0 )
+fire_rate_seconds = 0.05
 
 [node name="HitBox" type="CollisionShape2D" parent="."]
 position = Vector2( -27, 1 )

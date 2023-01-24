@@ -6,3 +6,5 @@
 [node name="IntorvAI" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
 machinegun_range = 10000
+tight_turn_thrust = 0.6
+wide_turn_thrust = 0.9
