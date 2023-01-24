@@ -183,6 +183,7 @@ script = ExtResource( 1 )
 __meta__ = {
 "_edit_group_": true
 }
+plane_color = Color( 0.364706, 0.345098, 0.345098, 1 )
 weight_tons = 25.0
 max_health = 150
 max_speed = 2500.0

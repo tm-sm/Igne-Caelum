@@ -24,7 +24,7 @@ func initialize(trgts, p):
 	else:
 		status = mode.PLAYER
 	
-func _process(delta):
+func _process(_delta):
 	match status:
 		mode.PLAYER_AND_TARGET:
 			player_and_target_follow()

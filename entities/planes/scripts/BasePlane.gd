@@ -20,7 +20,7 @@ export(Color) var plane_color = Color.dimgray
 export(float) var weight_tons : float = 20
 export(int) var max_health : int = 100
 export(float) var max_speed = 2000.0
-export(float) var stall_speed = 600 #at which speed the aircraft starts to feel the effects of gravity
+export(float) var stall_speed = 600.0  #at which speed the aircraft starts to feel the effects of gravity
 export(float) var agility : float = 70
 export(float) var brakes_power : float = 100
 export(float) var engine_power : float = 800
@@ -65,7 +65,7 @@ func _ready():
 	machinegun.initialize(self)
 	color.modulate = plane_color
 
-func _process(delta):
+func _process(_delta):
 	if controls_enabled:
 		update_pitch()
 		update_thrust()
@@ -84,21 +84,21 @@ func _process(delta):
 		stalling = false
 	
 	#this checks if stall_vapor should be emitting
-	if forward_speed > stall_speed / 2: 
+	if forward_speed > stall_speed / 2 and vertical_speed != 0:
 		if forward_speed / abs(vertical_speed) < 0.5:
-#			var sign_needed = 1
-#			apply_central_impulse(Vector2(0, 10).rotated(get_rotation()) * sign_needed)
+			#var sign_needed = 1
+			#apply_central_impulse(Vector2(0, 10).rotated(get_rotation()) * sign_needed)
 			stall_vapor.emitting = true
 		else:
 			stall_vapor.emitting = false
 
-func _integrate_forces(state):
+func _integrate_forces(_state):
 	apply_thrust()
 	apply_pitch()
 	apply_gravity_effects()
 	apply_wind_resistance()
 
-func damage(dmg):
+func recieve_damage(dmg):
 	health = health - dmg
 	if health <= 0:
 		emit_signal("destroyed")

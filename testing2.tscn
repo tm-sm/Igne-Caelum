@@ -41,7 +41,7 @@ func initialize(dt):
 	data.connect(\"destroyed\", self, \"_on_data_source_destroyed\")
 	gathering_data = true
 
-func _process(delta):
+func _process(_delta):
 	if gathering_data:
 		speed_value.text = str(stepify(data.forward_speed / 2, 0.01)) + \"km/h\"
 		thrust_value.text = str(data.engine_thrust_percentage * 100) + \"%\"
@@ -359,15 +359,19 @@ script = SubResource( 2 )
 
 [node name="IntorvAI" parent="AI" instance=ExtResource( 5 )]
 position = Vector2( 3849, -271 )
+plane_color = Color( 0.411765, 0.411765, 0.411765, 1 )
 
 [node name="IntorvAI2" parent="AI" instance=ExtResource( 5 )]
 position = Vector2( 4869, 1103 )
+plane_color = Color( 0.411765, 0.411765, 0.411765, 1 )
 
 [node name="IntorvAI3" parent="AI" instance=ExtResource( 5 )]
 position = Vector2( 3886, 327 )
+plane_color = Color( 0.411765, 0.411765, 0.411765, 1 )
 
 [node name="IntorvAI4" parent="AI" instance=ExtResource( 5 )]
 position = Vector2( 4906, 1701 )
+plane_color = Color( 0.411765, 0.411765, 0.411765, 1 )
 
 [node name="PlayerCamera" type="Camera2D" parent="."]
 show_behind_parent = true
@@ -443,5 +447,5 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
-position = Vector2( 3443, 326 )
+position = Vector2( 2833, 45 )
 plane_color = Color( 0.0509804, 0.407843, 0.698039, 1 )

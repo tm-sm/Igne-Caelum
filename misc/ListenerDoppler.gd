@@ -5,7 +5,7 @@ var active_sounds = Dictionary()
 func _ready():
 	pass
 
-func _process(delta):
+func _process(_delta):
 	var sound_sources = active_sounds.keys()
 	for s in sound_sources:
 		var sound_mod =  active_sounds[s] / global_position.distance_to(s.global_position) 

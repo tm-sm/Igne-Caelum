@@ -37,7 +37,7 @@ func _process(delta):
 	
 	if stalling:
 		flight_state = flight_action.stalling
-	elif abs(angle_to_target) < pi/180 * 2:
+	elif abs(angle_to_target) < pi/180 * 5:
 		flight_state = flight_action.straight_ahead
 	elif abs(angle_to_target) > pi/180 * 90:
 		flight_state = flight_action.sharp_turn
