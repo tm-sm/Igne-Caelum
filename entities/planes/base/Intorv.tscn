@@ -1,0 +1,265 @@
+[gd_scene load_steps=24 format=2]
+
+[ext_resource path="res://entities/planes/scripts/BasePlane.gd" type="Script" id=1]
+[ext_resource path="res://entities/particles/Fire.tres" type="Material" id=2]
+[ext_resource path="res://entities/particles/Smoke.tres" type="Material" id=3]
+[ext_resource path="res://entities/weapons/MachineGun.tscn" type="PackedScene" id=4]
+[ext_resource path="res://textures/intorv_shape.png" type="Texture" id=5]
+[ext_resource path="res://textures/intorv_color.png" type="Texture" id=6]
+[ext_resource path="res://textures/smoke.png" type="Texture" id=7]
+[ext_resource path="res://sounds/jet_engine.ogg" type="AudioStream" id=8]
+
+[sub_resource type="PhysicsMaterial" id=16]
+
+[sub_resource type="Gradient" id=11]
+offsets = PoolRealArray( 0, 0.535484, 1 )
+colors = PoolColorArray( 1, 0, 0, 1, 0.891113, 0.863048, 0.222778, 1, 1, 1, 1, 1 )
+
+[sub_resource type="GradientTexture" id=12]
+gradient = SubResource( 11 )
+
+[sub_resource type="Curve" id=3]
+max_value = 2.0
+_data = [ Vector2( 0, 0.531818 ), 0.0, 0.0, 0, 0, Vector2( 0.994382, 0.731818 ), -7.28182, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=4]
+curve = SubResource( 3 )
+
+[sub_resource type="ParticlesMaterial" id=30]
+emission_shape = 5
+emission_ring_radius = 0.01
+emission_ring_inner_radius = 0.0
+emission_ring_height = 0.0
+emission_ring_axis = Vector3( 0, 0, 1 )
+flag_disable_z = true
+direction = Vector3( 0, 0, 0 )
+spread = 52.13
+gravity = Vector3( -40, 0, 0 )
+initial_velocity = 15.71
+initial_velocity_random = 1.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+scale_curve = SubResource( 4 )
+color_ramp = SubResource( 12 )
+
+[sub_resource type="ParticlesMaterial" id=13]
+emission_shape = 5
+emission_ring_radius = 20.0
+emission_ring_inner_radius = 0.0
+emission_ring_height = 0.0
+emission_ring_axis = Vector3( 0, 0, 1 )
+flag_disable_z = true
+gravity = Vector3( 0, 0, 0 )
+angular_velocity = 25.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+scale = 0.1
+
+[sub_resource type="Gradient" id=19]
+offsets = PoolRealArray( 0, 0.113208, 0.660377, 0.811321, 0.95283 )
+colors = PoolColorArray( 0.839844, 0.831335, 0.295258, 1, 0.943945, 0.438269, 0.10334, 1, 0.96875, 1, 0, 1, 1, 0.996094, 0.996094, 1, 0, 0, 0, 0 )
+
+[sub_resource type="GradientTexture" id=20]
+gradient = SubResource( 19 )
+
+[sub_resource type="Curve" id=21]
+max_value = 5.0
+_data = [ Vector2( 0.0310078, 0.784091 ), 0.0, -1.64915, 0, 0, Vector2( 0.325581, 0.329545 ), 0.0, 0.0, 0, 0, Vector2( 0.906977, 0.329545 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=22]
+curve = SubResource( 21 )
+
+[sub_resource type="ParticlesMaterial" id=23]
+emission_shape = 1
+emission_sphere_radius = 17.84
+flag_disable_z = true
+gravity = Vector3( -50, 0, 0 )
+angular_velocity = 2.0
+orbit_velocity = 0.0
+orbit_velocity_random = 1.0
+linear_accel = 100.44
+radial_accel = 35.96
+tangential_accel = 21.76
+tangential_accel_random = 1.0
+scale_curve = SubResource( 22 )
+color_ramp = SubResource( 20 )
+
+[sub_resource type="CapsuleShape2D" id=31]
+radius = 15.0
+height = 220.0
+
+[sub_resource type="Animation" id=29]
+resource_name = "die"
+length = 10.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("Plane/FireSmoke:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 7.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ true, true ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 9.9, 10 ),
+"transitions": PoolRealArray( 1, 1 ),
+"values": [ {
+"args": [  ],
+"method": "explode"
+}, {
+"args": [  ],
+"method": "queue_free"
+} ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath(".:controls_enabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Plane/Fire:emitting")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Plane/Vapor:emitting")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+
+[sub_resource type="Animation" id=18]
+resource_name = "empty"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:controls_enabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+
+[node name="Intorv" type="RigidBody2D" groups=["sound_emitters"]]
+position = Vector2( 574, 178 )
+physics_material_override = SubResource( 16 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
+weight_tons = 25.0
+max_health = 150
+max_speed = 2500.0
+stall_speed = 800.0
+agility = 60.0
+engine_power = 1000.0
+torque_strength = 5500.0
+wind_resistance_factor = 0.1
+
+[node name="Plane" type="Sprite" parent="."]
+position = Vector2( -13, 0 )
+texture = ExtResource( 5 )
+
+[node name="Color" type="Sprite" parent="Plane"]
+modulate = Color( 0.454902, 0.454902, 0.454902, 1 )
+show_behind_parent = true
+texture = ExtResource( 6 )
+
+[node name="Engine" type="Particles2D" parent="Plane"]
+position = Vector2( -144, -3 )
+amount = 500
+speed_scale = 2.76
+process_material = SubResource( 30 )
+
+[node name="Vapor" type="Particles2D" parent="Plane"]
+position = Vector2( -190, -2 )
+amount = 500
+lifetime = 15.0
+visibility_rect = Rect2( -10000, -10000, 20000, 20000 )
+local_coords = false
+process_material = ExtResource( 3 )
+texture = ExtResource( 7 )
+
+[node name="StallVapor" type="Particles2D" parent="Plane"]
+position = Vector2( -13, 0 )
+amount = 250
+lifetime = 0.05
+local_coords = false
+process_material = SubResource( 13 )
+texture = ExtResource( 7 )
+
+[node name="EnginePosition" type="Position2D" parent="Plane"]
+position = Vector2( -96, 0 )
+
+[node name="FireSmoke" type="Particles2D" parent="Plane"]
+position = Vector2( -38, 0 )
+emitting = false
+amount = 100
+lifetime = 2.0
+one_shot = true
+visibility_rect = Rect2( -10000, -10000, 20000, 20000 )
+local_coords = false
+process_material = ExtResource( 2 )
+texture = ExtResource( 7 )
+
+[node name="Fire" type="Particles2D" parent="Plane"]
+position = Vector2( -46, 0 )
+emitting = false
+amount = 50
+local_coords = false
+process_material = SubResource( 23 )
+texture = ExtResource( 7 )
+
+[node name="MachineGun" parent="Plane" instance=ExtResource( 4 )]
+position = Vector2( 44, 22 )
+
+[node name="HitBox" type="CollisionShape2D" parent="."]
+position = Vector2( -27, 1 )
+rotation = 1.5708
+shape = SubResource( 31 )
+
+[node name="JetSound" type="AudioStreamPlayer2D" parent="."]
+position = Vector2( -71, 0 )
+stream = ExtResource( 8 )
+volume_db = -5.0
+pitch_scale = 1.5
+autoplay = true
+max_distance = 10000.0
+attenuation = 1.46409
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/die = SubResource( 29 )
+anims/empty = SubResource( 18 )

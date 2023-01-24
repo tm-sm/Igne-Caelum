@@ -1,0 +1,193 @@
+[gd_scene load_steps=18 format=2]
+
+[ext_resource path="res://textures/bullet.png" type="Texture" id=1]
+[ext_resource path="res://textures/smoke.png" type="Texture" id=2]
+[ext_resource path="res://entities/weapons/BaseBullet.gd" type="Script" id=3]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 6.08276
+
+[sub_resource type="Curve" id=2]
+min_value = -360.0
+max_value = 360.0
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.271318, 185.727 ), 0.0, 0.0, 0, 0, Vector2( 1, 41.7273 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=3]
+curve = SubResource( 2 )
+
+[sub_resource type="Gradient" id=4]
+offsets = PoolRealArray( 0, 0.0754717, 0.877358, 0.95283 )
+colors = PoolColorArray( 0.98291, 0.930117, 0, 1, 0.17041, 0.160425, 0.160425, 1, 0, 0, 0, 0.690196, 0.901961, 0.901961, 0.901961, 0 )
+
+[sub_resource type="GradientTexture" id=5]
+gradient = SubResource( 4 )
+
+[sub_resource type="Curve" id=8]
+max_value = 2.0
+_data = [ Vector2( 0, 0.85 ), 0.0, 0.0, 0, 0, Vector2( 1, 2 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=9]
+curve = SubResource( 8 )
+
+[sub_resource type="ParticlesMaterial" id=10]
+flag_disable_z = true
+direction = Vector3( 0, 0, 0 )
+spread = 0.0
+gravity = Vector3( 50, 50, 0 )
+angular_velocity_curve = SubResource( 3 )
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+damping = 37.26
+scale_curve = SubResource( 9 )
+color_ramp = SubResource( 5 )
+
+[sub_resource type="Animation" id=11]
+resource_name = "explode"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Explode:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 1 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "queue_free"
+} ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Path:emitting")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Path:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Sprite:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath(".:sleeping")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+
+[sub_resource type="Gradient" id=15]
+offsets = PoolRealArray( 0, 0.150943, 0.867925 )
+colors = PoolColorArray( 0.941176, 1, 0, 1, 0, 0, 0, 0.2, 0, 0, 0, 0 )
+
+[sub_resource type="GradientTexture" id=16]
+gradient = SubResource( 15 )
+width = 2047
+
+[sub_resource type="Curve" id=13]
+_data = [ Vector2( 0.0310078, 0.426136 ), 0.0, 0.0, 0, 0, Vector2( 0.906977, 0.617045 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=14]
+curve = SubResource( 13 )
+
+[sub_resource type="ParticlesMaterial" id=12]
+flag_disable_z = true
+direction = Vector3( 0, 0, 0 )
+gravity = Vector3( 0, 0, 0 )
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+scale_curve = SubResource( 14 )
+color_ramp = SubResource( 16 )
+
+[node name="BaseBullet" type="RigidBody2D"]
+continuous_cd = 1
+contacts_reported = 2
+contact_monitor = true
+script = ExtResource( 3 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 1 )
+
+[node name="Explode" type="Particles2D" parent="."]
+position = Vector2( 8, 1 )
+emitting = false
+amount = 1
+lifetime = 5.0
+one_shot = true
+local_coords = false
+process_material = SubResource( 10 )
+texture = ExtResource( 2 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/explode = SubResource( 11 )
+
+[node name="Sprite" type="Sprite" parent="."]
+modulate = Color( 0.937255, 0.72549, 0, 1 )
+scale = Vector2( 20, 1 )
+texture = ExtResource( 1 )
+centered = false
+
+[node name="Light2D" type="Light2D" parent="Sprite"]
+scale = Vector2( 0.5, 1 )
+texture = ExtResource( 1 )
+offset = Vector2( 10, 0 )
+texture_scale = 2.45
+color = Color( 1, 0.121569, 0.00392157, 1 )
+energy = 13.12
+
+[node name="Path" type="Particles2D" parent="."]
+emitting = false
+amount = 50
+visibility_rect = Rect2( -10000, -10000, 20000, 20000 )
+local_coords = false
+process_material = SubResource( 12 )
+texture = ExtResource( 2 )
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 10.0
+one_shot = true
+
+[connection signal="body_entered" from="." to="." method="_on_Bullet_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

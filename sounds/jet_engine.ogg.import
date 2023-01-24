@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/jet_engine.ogg-d62875a6b73c3785e613459d1a3b5010.oggstr"
+
+[deps]
+
+source_file="res://sounds/jet_engine.ogg"
+dest_files=[ "res://.import/jet_engine.ogg-d62875a6b73c3785e613459d1a3b5010.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0
