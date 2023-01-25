@@ -34,7 +34,7 @@ func set_target(t):
 		combat_state = combat_action.heading_to_target
 		objective = objective_type.fight
 
-func _process(delta):
+func _physics_process(delta):
 	var target_position
 	if objective != objective_type.retreat:
 		target_position = target.global_position
@@ -58,7 +58,7 @@ func _process(delta):
 		else:
 			combat_state = combat_action.heading_to_target
 	
-	._process(delta)
+	._physics_process(delta)
 
 func update_pitch():
 	pitch = 0

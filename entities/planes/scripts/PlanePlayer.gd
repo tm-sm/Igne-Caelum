@@ -18,7 +18,6 @@ func _process(delta):
 			lock_on_sound.play(0)
 	else:
 		lock_on_sound.stop()
-	._process(delta)
 
 func update_thrust():
 	if Input.is_action_pressed("thrust_increase"):

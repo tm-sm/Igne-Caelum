@@ -55,13 +55,12 @@ func fire():
 	apply_thrust()
 	timer.start(lifespan)
 
-func _process(_delta):
+func _physics_process(_delta):
 	update_pitch()
 	
 	relative_speed = linear_velocity.rotated(-get_rotation())
 	forward_speed = abs(relative_speed.x)
 	vertical_speed = relative_speed.y #the sign is important for air resistance calculations
-	speed_vector  = sqrt(pow(forward_speed, 2) + pow(vertical_speed, 2))
 
 func _integrate_forces(_state):
 	apply_pitch()
@@ -96,10 +95,10 @@ func update_pitch():
 	pitch = 0
 	if target:
 		var angle_to_target = get_angle_to(target.global_position)
-		if angle_to_target > pi/180 * 2:
+		if angle_to_target > pi/180 * 5:
 			#for some reason this works better than just using degrees
 			pitch_down()
-		elif angle_to_target < -pi/180 * 2:
+		elif angle_to_target < -pi/180 * 5:
 			pitch_up()
 
 func pitch_up():

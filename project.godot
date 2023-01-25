@@ -90,6 +90,14 @@ config/name="Igne Caelum"
 run/main_scene="res://testing2.tscn"
 config/icon="res://icon.png"
 
+[audio]
+
+default_bus_layout=""
+
+[debug]
+
+settings/fps/force_fps=60
+
 [display]
 
 window/size/width=1600
@@ -218,4 +226,3 @@ quality/filters/sharpen_intensity=0.46
 quality/filters/anisotropic_filter_level=16
 quality/filters/use_nearest_mipmap_filter=true
 quality/filters/use_fxaa=true
-environment/default_environment="res://default_env.tres"

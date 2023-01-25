@@ -69,7 +69,7 @@ func _ready():
 	missile_launcher.initialize(self)
 	color.modulate = plane_color
 
-func _process(_delta):
+func _physics_process(_delta):
 	if controls_enabled:
 		update_pitch()
 		update_thrust()
