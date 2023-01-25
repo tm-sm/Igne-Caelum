@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://ui/VHS_font.tres" type="DynamicFont" id=1]
 [ext_resource path="res://ui/GUI_theme.tres" type="Theme" id=2]
@@ -12,6 +12,7 @@ var data
 onready var speed_value = $Info/FlightInfo/Speed/Value
 onready var thrust_value = $Info/FlightInfo/Thrust/Value
 onready var lock_warning = $Weapons/WeaponSensors/TargetLockLabel
+onready var missile_warning = $Warning/WarningSensors/LockedOnLabel
 
 var gathering_data
 
@@ -28,9 +29,17 @@ func _process(_delta):
 			lock_warning.text = \"TRGT LOCK\"
 		else:
 			lock_warning.text = \"\"
+		if data.locked_on_by_missile:
+			missile_warning.text = \"WARNING MISSILE\"
+		else:
+			missile_warning.text = \"\"
 
 func _on_data_source_destroyed():
 	gathering_data = false
+	speed_value.text = \"N/A\"
+	thrust_value.text = \"N/A\"
+	lock_warning.text = \"\"
+	missile_warning.text = \"CONNECTION LOST\"
 "
 
 [sub_resource type="StyleBoxEmpty" id=36]
@@ -48,6 +57,13 @@ Label/fonts/font = ExtResource( 1 )
 PanelContainer/styles/panel = SubResource( 36 )
 
 [sub_resource type="DynamicFont" id=41]
+size = 30
+outline_color = Color( 0, 0, 0, 1 )
+use_filter = true
+extra_spacing_char = 2
+font_data = ExtResource( 3 )
+
+[sub_resource type="DynamicFont" id=42]
 size = 30
 outline_color = Color( 0, 0, 0, 1 )
 use_filter = true
@@ -327,33 +343,33 @@ theme = SubResource( 6 )
 
 [node name="Speed" type="HBoxContainer" parent="Info/FlightInfo"]
 margin_right = 269.0
-margin_bottom = 22.0
+margin_bottom = 18.0
 
 [node name="Type" type="Label" parent="Info/FlightInfo/Speed"]
-margin_right = 66.0
-margin_bottom = 22.0
+margin_right = 54.0
+margin_bottom = 18.0
 text = "SPD:"
 
 [node name="Value" type="Label" parent="Info/FlightInfo/Speed"]
-margin_left = 70.0
-margin_right = 119.0
-margin_bottom = 22.0
+margin_left = 58.0
+margin_right = 98.0
+margin_bottom = 18.0
 text = "N/A"
 
 [node name="Thrust" type="HBoxContainer" parent="Info/FlightInfo"]
-margin_top = 26.0
+margin_top = 22.0
 margin_right = 269.0
-margin_bottom = 48.0
+margin_bottom = 40.0
 
 [node name="Type" type="Label" parent="Info/FlightInfo/Thrust"]
-margin_right = 66.0
-margin_bottom = 22.0
+margin_right = 54.0
+margin_bottom = 18.0
 text = "THR:"
 
 [node name="Value" type="Label" parent="Info/FlightInfo/Thrust"]
-margin_left = 70.0
-margin_right = 119.0
-margin_bottom = 22.0
+margin_left = 58.0
+margin_right = 98.0
+margin_bottom = 18.0
 text = "N/A"
 
 [node name="Weapons" type="PanelContainer" parent="."]
@@ -375,10 +391,33 @@ grow_horizontal = 2
 margin_right = 134.0
 margin_bottom = 27.0
 grow_horizontal = 2
-custom_colors/font_color = Color( 1, 0.0352941, 0, 1 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
 custom_fonts/font = SubResource( 41 )
 align = 1
 uppercase = true
+
+[node name="Warning" type="PanelContainer" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -58.5
+margin_top = -11.0
+margin_right = 58.5
+margin_bottom = 11.0
+grow_horizontal = 2
+theme = ExtResource( 2 )
+
+[node name="WarningSensors" type="VBoxContainer" parent="Warning"]
+margin_right = 298.0
+margin_bottom = 27.0
+
+[node name="LockedOnLabel" type="Label" parent="Warning/WarningSensors"]
+margin_right = 298.0
+margin_bottom = 27.0
+custom_colors/font_color = Color( 0.996078, 0, 0, 1 )
+custom_fonts/font = SubResource( 42 )
+text = "WARNING MISSILE"
 
 [node name="Screen" type="ColorRect" parent="."]
 material = SubResource( 40 )

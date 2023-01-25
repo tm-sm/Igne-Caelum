@@ -13,7 +13,7 @@ func _ready():
 	selected_weapon = weapons.machinegun
 
 func _process(_delta):
-	if missile_launcher.targetting:
+	if missile_launcher.targeting:
 		if not lock_on_sound.playing:
 			lock_on_sound.play(0)
 	else:

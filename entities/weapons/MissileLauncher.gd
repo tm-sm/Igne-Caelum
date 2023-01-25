@@ -10,7 +10,7 @@ onready var reciever = $TargetReciever
 
 var can_fire = true
 
-var targetting = false
+var targeting = false
 var attached_body
 
 func initialize(body):
@@ -26,16 +26,31 @@ func fire():
 		missile_ins.add_collision_exception_with(attached_body)
 		missile_ins.fire()
 		missile_ins.world = attached_body.world
+		missile_ins.connect("destroyed", attached_body, "_on_missile_destroyed")
 		can_fire = false
 		timer.start(cooldown)
 
 func _process(_delta):
-	targetting = false
+	targeting = false
 	var targets = reciever.get_overlapping_bodies()
 	for t in targets:
 		if t.is_in_group("heat_emitter"):
-			targetting = true
+			targeting = true
 			break
 
 func _on_Timer_timeout():
 	can_fire = true
+
+func get_most_likely_target():
+	if targeting:
+		var targets = reciever.get_overlapping_bodies()
+		var closest_target = null
+		var closest_dist
+		for t in targets:
+			#getting the closest target
+			var dist = global_position.distance_to(t.global_position)
+			if t.is_in_group("heat_emitter") and (not closest_target or dist < closest_dist):
+				closest_target = t
+				closest_dist = dist
+		return closest_target
+

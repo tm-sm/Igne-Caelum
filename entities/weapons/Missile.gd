@@ -19,7 +19,7 @@ onready var fuse_safety = $FuseSafety
 export(float) var weight_tons : float = 10
 export(int) var damage : int = 500
 export(float) var engine_power : float = 1500
-export(float) var torque_strength : float = 750
+export(float) var torque_strength : float = 1500
 export(float) var wind_resistance_factor : float = 1
 export(float) var lifespan : float = 10
 
@@ -94,6 +94,8 @@ func apply_wind_resistance():
 func update_pitch():
 	pitch = 0
 	if target:
+		#this is the only place where it checks if there's a target available in runtime
+		target.locked_on_by_missile = true
 		var angle_to_target = get_angle_to(target.global_position)
 		if angle_to_target > pi/180 * 5:
 			#for some reason this works better than just using degrees
@@ -110,6 +112,8 @@ func pitch_down():
 	pitching = true
 
 func explode():
+	if target:
+		target.locked_on_by_missile = false
 	var expl = explosion.instance()
 	world.add_child(expl)
 	expl.global_position = global_position
@@ -147,6 +151,7 @@ func _on_target_destroyed():
 func _on_HeatDetector_body_exited(body):
 	if body == target:
 		target.disconnect("destroyed", self, "_on_target_destroyed")
+		target.locked_on_by_missile = false
 		_on_target_destroyed()
 
 

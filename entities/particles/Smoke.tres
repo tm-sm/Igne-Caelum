@@ -17,7 +17,7 @@ curve = SubResource( 9 )
 [resource]
 lifetime_randomness = 1.0
 flag_disable_z = true
-gravity = Vector3( 1, 2, 0 )
+gravity = Vector3( 0, 0, 0 )
 initial_velocity = 2.0
 initial_velocity_random = 1.0
 angular_velocity = 33.57

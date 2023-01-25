@@ -13,7 +13,9 @@ onready var machinegun = $Plane/MachineGun
 onready var missile_launcher = $Plane/MissileLauncher
 onready var sprite = $Plane
 onready var color = $Plane/Color
+onready var vapor = $Plane/Vapor
 onready var stall_vapor = $Plane/StallVapor
+onready var smoke = $Plane/FireSmoke
 onready var engine_particles = $Plane/Engine
 onready var anim = $AnimationPlayer
 
@@ -38,7 +40,7 @@ var braking = false
 var pitching = false
 var stalling = false
 var flipped = false
-
+var locked_on_by_missile = false
 export var controls_enabled = true
 
 var sprite_angle_offset = 0
@@ -105,6 +107,7 @@ func _integrate_forces(_state):
 func recieve_damage(dmg):
 	health = health - dmg
 	if health <= 0:
+		smoke.emitting = true
 		emit_signal("destroyed")
 		anim.play("die")
 
@@ -221,4 +224,4 @@ func get_sounds():
 	return $JetSound
 
 func get_missile_sensor():
-	return missile_launcher.targetting
+	return missile_launcher.targeting
