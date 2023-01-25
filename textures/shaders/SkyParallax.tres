@@ -18,7 +18,7 @@ void fragment() {
 }"
 
 [sub_resource type="Gradient" id=46]
-offsets = PoolRealArray( 0, 0.0580645, 0.16129, 0.232258, 0.812903 )
+offsets = PoolRealArray( 0, 0.103226, 0.193548, 0.232258, 0.812903 )
 colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0.0833334, 1, 1, 1, 0.0742575, 1, 1, 1, 0 )
 
 [sub_resource type="GradientTexture" id=47]
@@ -27,7 +27,7 @@ gradient = SubResource( 46 )
 [sub_resource type="OpenSimplexNoise" id=45]
 
 [sub_resource type="NoiseTexture" id=48]
-width = 353
+width = 381
 height = 1
 seamless = true
 noise = SubResource( 45 )
