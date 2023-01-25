@@ -38,3 +38,4 @@ current = true
 
 [node name="TargetLockSound" type="AudioStreamPlayer2D" parent="." index="5"]
 stream = ExtResource( 4 )
+volume_db = -10.0
