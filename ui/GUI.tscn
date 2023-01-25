@@ -25,7 +25,7 @@ func _process(_delta):
 		speed_value.text = str(stepify(data.forward_speed / 2, 0.01)) + \"km/h\"
 		thrust_value.text = str(data.engine_thrust_percentage * 100) + \"%\"
 		if data.get_missile_sensor():
-			lock_warning.text = \"MSL LOCK\"
+			lock_warning.text = \"TRGT LOCK\"
 		else:
 			lock_warning.text = \"\"
 
@@ -302,7 +302,7 @@ shader_param/noise_opacity = 0.0
 shader_param/noise_speed = 5.0
 shader_param/static_noise_intensity = 0.013
 shader_param/aberration = 0.01
-shader_param/brightness = 1.2
+shader_param/brightness = 1.0
 shader_param/discolor = true
 shader_param/warp_amount = 0.211
 shader_param/clip_warp = false
@@ -384,3 +384,4 @@ uppercase = true
 material = SubResource( 40 )
 anchor_right = 1.0
 anchor_bottom = 1.0
+color = Color( 0, 0, 0, 1 )

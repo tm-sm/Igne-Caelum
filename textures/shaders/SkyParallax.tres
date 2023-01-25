@@ -17,24 +17,24 @@ void fragment() {
 	COLOR = color;
 }"
 
-[sub_resource type="Gradient" id=43]
-offsets = PoolRealArray( 0, 0.0645161, 0.16129, 0.812903 )
-colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0.0833334, 1, 1, 1, 0 )
+[sub_resource type="Gradient" id=46]
+offsets = PoolRealArray( 0, 0.0580645, 0.16129, 0.232258, 0.812903 )
+colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0.0833334, 1, 1, 1, 0.0742575, 1, 1, 1, 0 )
 
-[sub_resource type="GradientTexture" id=44]
-gradient = SubResource( 43 )
+[sub_resource type="GradientTexture" id=47]
+gradient = SubResource( 46 )
 
 [sub_resource type="OpenSimplexNoise" id=45]
 
-[sub_resource type="NoiseTexture" id=46]
-width = 522
+[sub_resource type="NoiseTexture" id=48]
+width = 353
 height = 1
 seamless = true
 noise = SubResource( 45 )
 
 [resource]
 shader = SubResource( 39 )
-shader_param/scroll = Vector2( 0.001, 0.001 )
+shader_param/scroll = Vector2( 0.002, 0.001 )
 shader_param/scroll2 = Vector2( 0, 0 )
-shader_param/texture2 = SubResource( 46 )
-shader_param/colorTexture = SubResource( 44 )
+shader_param/texture2 = SubResource( 48 )
+shader_param/colorTexture = SubResource( 47 )

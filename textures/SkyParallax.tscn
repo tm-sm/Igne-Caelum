@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://textures/shaders/SkyParallax.tres" type="Material" id=1]
 
@@ -31,6 +31,51 @@ height = 2042
 seamless = true
 noise = SubResource( 41 )
 
+[sub_resource type="Shader" id=39]
+code = "shader_type canvas_item;
+
+uniform sampler2D texture2;
+uniform sampler2D colorTexture;
+
+uniform vec2 scroll = vec2(0.1, 0.1);
+uniform vec2 scroll2 = vec2(0.1, 0.1);
+
+void fragment() {
+	float textureColor1 = texture(TEXTURE, UV + scroll * TIME).r;
+	float textureColor2 = texture(texture2, UV + scroll2 * TIME).r;
+	float energy = textureColor1 * textureColor2;
+	vec4 color = texture(colorTexture, vec2(energy));
+	COLOR = color;
+}"
+
+[sub_resource type="Gradient" id=46]
+offsets = PoolRealArray( 0, 0.0580645, 0.16129, 0.232258, 0.812903 )
+colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0.0833334, 1, 1, 1, 0.0742575, 1, 1, 1, 0 )
+
+[sub_resource type="GradientTexture" id=47]
+gradient = SubResource( 46 )
+
+[sub_resource type="OpenSimplexNoise" id=45]
+
+[sub_resource type="NoiseTexture" id=48]
+width = 353
+height = 1
+seamless = true
+noise = SubResource( 45 )
+
+[sub_resource type="ShaderMaterial" id=49]
+shader = SubResource( 39 )
+shader_param/scroll = Vector2( 0.002, 0.001 )
+shader_param/scroll2 = Vector2( 0, 0 )
+shader_param/texture2 = SubResource( 48 )
+shader_param/colorTexture = SubResource( 47 )
+
+[sub_resource type="NoiseTexture" id=50]
+width = 2042
+height = 2042
+seamless = true
+noise = SubResource( 41 )
+
 [node name="SkyParallax" type="ParallaxBackground"]
 scroll_ignore_camera_zoom = true
 
@@ -49,10 +94,10 @@ texture = SubResource( 40 )
 centered = false
 
 [node name="NearClouds" type="ParallaxLayer" parent="."]
-motion_scale = Vector2( 0.1, 0.1 )
+motion_scale = Vector2( 0.05, 0.05 )
 motion_mirroring = Vector2( 2042, 2042 )
 
 [node name="Sprite" type="Sprite" parent="NearClouds"]
-material = ExtResource( 1 )
-texture = SubResource( 40 )
+material = SubResource( 49 )
+texture = SubResource( 50 )
 centered = false

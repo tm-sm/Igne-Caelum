@@ -13,7 +13,7 @@ func _process(_delta):
 			#getting away
 			sound_mod = 0.75
 		else:
-			sound_mod = 1
+			sound_mod = 1.1
 		s.get_sounds().pitch_scale = s.get_sounds().pitch_scale * sound_mod
 
 func _on_ListeningArea_body_entered(body):

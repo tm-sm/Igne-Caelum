@@ -57,7 +57,7 @@ func fire():
 
 func _physics_process(_delta):
 	update_pitch()
-	
+	engine_sound.pitch_scale = 7
 	relative_speed = linear_velocity.rotated(-get_rotation())
 	forward_speed = abs(relative_speed.x)
 	vertical_speed = relative_speed.y #the sign is important for air resistance calculations

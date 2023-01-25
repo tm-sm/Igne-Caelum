@@ -1,11 +1,10 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://textures/SkyParallax.tscn" type="PackedScene" id=1]
 [ext_resource path="res://ui/GUI.tscn" type="PackedScene" id=2]
 [ext_resource path="res://entities/planes/InterzkiPlayer.tscn" type="PackedScene" id=3]
 [ext_resource path="res://entities/PlayerCamera.gd" type="Script" id=4]
 [ext_resource path="res://entities/planes/IntorvAI.tscn" type="PackedScene" id=5]
-[ext_resource path="res://entities/weapons/Missile.tscn" type="PackedScene" id=6]
 
 [sub_resource type="GDScript" id=2]
 script/source = "extends Node2D
@@ -14,7 +13,6 @@ onready var AI = $AI.get_children()
 onready var player = $Player
 onready var stats = $GUI
 onready var camera = $PlayerCamera
-onready var missile = $Missile
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -27,15 +25,10 @@ func _ready():
 	stats.initialize(player)
 	camera.initialize(AI, player)
 	player.world = self
-	missile.fire()
-	missile.world = self
 "
 
 [node name="testing2" type="Node2D"]
 script = SubResource( 2 )
-
-[node name="Missile" parent="." instance=ExtResource( 6 )]
-position = Vector2( 2150, 1445 )
 
 [node name="AI" type="Node2D" parent="."]
 

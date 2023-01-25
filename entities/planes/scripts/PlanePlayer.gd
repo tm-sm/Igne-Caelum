@@ -12,7 +12,7 @@ func _ready():
 	engine_sound.volume_db = -15
 	selected_weapon = weapons.machinegun
 
-func _process(delta):
+func _process(_delta):
 	if missile_launcher.targetting:
 		if not lock_on_sound.playing:
 			lock_on_sound.play(0)
