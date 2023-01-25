@@ -94,7 +94,8 @@ func _on_player_destroyed():
 
 func _input(event):
 	if event.is_action_pressed("zoom_in"):
-		zoom_multiplier -= 0.1
+		if zoom_multiplier > 0.2 :
+			zoom_multiplier -= 0.1
 	if event.is_action_pressed("zoom_out"):
 		zoom_multiplier += 0.1
 	if event.is_action_released("switch_target"):
