@@ -17,8 +17,9 @@ func initialize(body):
 func fire():
 	if can_fire:
 		var missile_ins = ammo.instance()
-		add_child(missile_ins)
-		missile_ins.set_target_rotation(attached_body.get_rotation())
+		missile_ins.rotation = attached_body.get_rotation()
+		attached_body.world.add_child(missile_ins)
+		missile_ins.global_position = global_position
 		missile_ins.apply_central_impulse(attached_body.linear_velocity)
 		missile_ins.add_collision_exception_with(attached_body)
 		missile_ins.fire()

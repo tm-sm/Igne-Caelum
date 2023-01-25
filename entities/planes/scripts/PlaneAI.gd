@@ -6,8 +6,10 @@ export(float) var tight_turn_thrust : float = 0.2
 export(float) var wide_turn_thrust : float = 0.8
 
 enum combat_action { idle, heading_to_target, target_in_range}
-enum flight_action { stalling, straight_ahead, wide_turn, sharp_turn, returning_to_base}
+enum flight_action { stalling, straight_ahead, wide_turn, sharp_turn}
+enum objective_type { fight, retreat}
 
+var objective
 var combat_state
 var flight_state
 
@@ -20,15 +22,21 @@ var angle_to_target
 const pi = 3.14159
 
 func _ready():
-	pass
+	objective = objective_type.retreat
+	flight_state = flight_action.straight_ahead
+	combat_state = combat_action.idle
 
 func set_target(t):
-	target = t
-	target.connect("destroyed", self, "_on_target_destroyed")
+	if t:
+		target = t
+		target.connect("destroyed", self, "_on_target_destroyed")
+		flight_state = flight_action.straight_ahead
+		combat_state = combat_action.heading_to_target
+		objective = objective_type.fight
 
 func _process(delta):
 	var target_position
-	if flight_state != flight_action.returning_to_base:
+	if objective != objective_type.retreat:
 		target_position = target.global_position
 	else:
 		target_position = Vector2(100000, -10000)
@@ -81,6 +89,5 @@ func update_weapons():
 				fire_machinegun()
 
 func _on_target_destroyed():
-	target = self #to avoid accessing null values
-	flight_state = flight_action.returning_to_base
+	objective = objective_type.retreat
 	combat_state = combat_action.idle

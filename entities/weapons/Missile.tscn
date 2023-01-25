@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://textures/missile.png" type="Texture" id=1]
 [ext_resource path="res://entities/weapons/Missile.gd" type="Script" id=2]
@@ -55,15 +55,11 @@ tracks/0/keys = {
 } ]
 }
 
-[sub_resource type="CapsuleShape2D" id=23]
-radius = 8763.0
-height = 16012.0
-
 [sub_resource type="CircleShape2D" id=22]
 radius = 128.004
 
 [node name="Missile" type="RigidBody2D"]
-position = Vector2( 6, -1 )
+position = Vector2( -90, 0 )
 script = ExtResource( 2 )
 
 [node name="Missile" type="Sprite" parent="."]
@@ -101,17 +97,16 @@ anims/explode = SubResource( 21 )
 input_pickable = false
 monitorable = false
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HeatDetector"]
-position = Vector2( 17137, -483 )
-rotation = 1.5708
-shape = SubResource( 23 )
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="HeatDetector"]
+position = Vector2( 86, 0 )
+polygon = PoolVector2Array( 0, 0, 500, -1000, 10000, -5000, 10000, 5000, 500, 1000 )
 
 [node name="ArmingDistance" type="Area2D" parent="."]
 input_pickable = false
 monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ArmingDistance"]
-position = Vector2( 172, -9 )
+position = Vector2( 172, 0 )
 shape = SubResource( 22 )
 
 [node name="Timer" type="Timer" parent="."]

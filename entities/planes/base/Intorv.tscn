@@ -203,7 +203,7 @@ show_behind_parent = true
 texture = ExtResource( 6 )
 
 [node name="Engine" type="Particles2D" parent="Plane"]
-position = Vector2( -144, -3 )
+position = Vector2( -144, 1 )
 amount = 500
 speed_scale = 2.76
 process_material = SubResource( 30 )

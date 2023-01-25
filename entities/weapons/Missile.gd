@@ -15,13 +15,12 @@ onready var detector = $HeatDetector
 onready var arming_distance = $ArmingDistance
 onready var timer = $Timer
 onready var fuse_safety = $FuseSafety
-onready var rocket_start = $RocketStart
 
 export(float) var weight_tons : float = 10
 export(int) var damage : int = 500
 export(float) var max_speed = 5000.0
 export(float) var engine_power : float = 1500
-export(float) var torque_strength : float = 500
+export(float) var torque_strength : float = 750
 export(float) var wind_resistance_factor : float = 1
 export(float) var lifespan : float = 10
 
@@ -40,13 +39,10 @@ var vertical_speed
 var speed_vector
 var relative_speed
 
-var target_rotation
-var new_target_rot = false
-
 func _ready():
 	gravity_scale = 0
 	arming_distance.get_child(0).disabled = true
-	fuse_safety.start(2)
+	fuse_safety.start(1)
 	add_to_group("sound_emitter")
 	add_to_group("damageable")
 	weight = weight_tons
@@ -68,11 +64,7 @@ func _process(_delta):
 	vertical_speed = relative_speed.y #the sign is important for air resistance calculations
 	speed_vector  = sqrt(pow(forward_speed, 2) + pow(vertical_speed, 2))
 
-func _integrate_forces(state):
-	if new_target_rot:
-		var xform = state.get_transform().rotated(target_rotation)
-		state.set_transform(xform)
-		new_target_rot = false
+func _integrate_forces(_state):
 	apply_pitch()
 	apply_wind_resistance()
 
@@ -85,8 +77,8 @@ func apply_thrust():
 	engine_thrust = Vector2(engine_power, 0.0)
 	
 	var forward_thrust = engine_thrust.rotated(get_rotation())
-	final_thrust = forward_thrust - applied_force
-		
+	final_thrust = forward_thrust
+	
 	add_central_force(final_thrust)
 
 func apply_pitch():
@@ -113,12 +105,10 @@ func update_pitch():
 
 func pitch_up():
 	pitch = -torque_strength
-	print(pitch)
 	pitching = true
 
 func pitch_down():
 	pitch = torque_strength
-	print(pitch)
 	pitching = true
 
 func explode():
@@ -174,7 +164,3 @@ func _on_Timer_timeout():
 
 func _on_FuseSafety_timeout():
 	arming_distance.get_child(0).disabled = false
-
-func set_target_rotation(rot):
-	target_rotation = rot
-	new_target_rot = true

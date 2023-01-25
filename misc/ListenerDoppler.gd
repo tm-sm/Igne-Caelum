@@ -22,7 +22,9 @@ func _on_ListeningArea_body_entered(body):
 		body.connect("destroyed", self, "_on_emitter_destroyed", [body])
 
 func _on_ListeningArea_body_exited(body):
-	active_sounds.erase(body)
+	if body.is_in_group("sound_emitter"):
+		active_sounds.erase(body)
+		body.disconnect("destroyed", self, "_on_emitter_destroyed")
 
 func _on_emitter_destroyed(body):
 	active_sounds.erase(body)
