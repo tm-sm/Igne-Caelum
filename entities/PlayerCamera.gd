@@ -66,10 +66,11 @@ func hold():
 func next_target():
 	if targets.size() == 0:
 		status = mode.PLAYER
-	elif targets_index >= targets.size():
-		targets_index = 0
-	target = targets[targets_index]
-	targets_index += 1
+	else:
+		if targets_index >= targets.size():
+			targets_index = 0
+		target = targets[targets_index]
+		targets_index += 1
 
 func next_camera_mode():
 	match status:

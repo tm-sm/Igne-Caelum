@@ -6,9 +6,11 @@ export(float) var cooldown : float = 5
 
 onready var ammo = load(ammo_path)
 onready var timer = $Timer
+onready var reciever = $TargetReciever
 
 var can_fire = true
 
+var targetting = false
 var attached_body
 
 func initialize(body):
@@ -27,6 +29,13 @@ func fire():
 		can_fire = false
 		timer.start(cooldown)
 
+func _process(_delta):
+	targetting = false
+	var targets = reciever.get_overlapping_bodies()
+	for t in targets:
+		if t.is_in_group("heat_emitter"):
+			targetting = true
+			break
 
 func _on_Timer_timeout():
 	can_fire = true

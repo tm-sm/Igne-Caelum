@@ -18,7 +18,6 @@ onready var fuse_safety = $FuseSafety
 
 export(float) var weight_tons : float = 10
 export(int) var damage : int = 500
-export(float) var max_speed = 5000.0
 export(float) var engine_power : float = 1500
 export(float) var torque_strength : float = 750
 export(float) var wind_resistance_factor : float = 1
@@ -89,7 +88,7 @@ func apply_pitch():
 func apply_wind_resistance():
 	#this adds an impulse on the y direction of the plane, this is done by
 	var wind_resistance = Vector2(0, 0)
-	wind_resistance.y = vertical_speed * wind_resistance_factor * abs(forward_speed/max_speed)
+	wind_resistance.y = vertical_speed * wind_resistance_factor
 	wind_resistance = wind_resistance.rotated(get_rotation())
 	apply_central_impulse(-wind_resistance)
 

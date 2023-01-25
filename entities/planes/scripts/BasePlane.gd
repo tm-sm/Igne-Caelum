@@ -219,3 +219,6 @@ func explode():
 
 func get_sounds():
 	return $JetSound
+
+func get_missile_sensor():
+	return missile_launcher.targetting

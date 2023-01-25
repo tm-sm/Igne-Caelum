@@ -56,7 +56,7 @@ tracks/0/keys = {
 }
 
 [sub_resource type="CircleShape2D" id=22]
-radius = 128.004
+radius = 206.039
 
 [node name="Missile" type="RigidBody2D"]
 position = Vector2( -90, 0 )
@@ -99,14 +99,14 @@ monitorable = false
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="HeatDetector"]
 position = Vector2( 86, 0 )
-polygon = PoolVector2Array( 0, 0, 500, -1000, 10000, -5000, 10000, 5000, 500, 1000 )
+polygon = PoolVector2Array( 0, 0, 500, -500, 10000, -5000, 10000, 5000, 500, 500 )
 
 [node name="ArmingDistance" type="Area2D" parent="."]
 input_pickable = false
 monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ArmingDistance"]
-position = Vector2( 172, 0 )
+position = Vector2( 253, 0 )
 shape = SubResource( 22 )
 
 [node name="Timer" type="Timer" parent="."]

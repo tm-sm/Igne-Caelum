@@ -23,13 +23,13 @@ shader_param/blue = 0.888
 shader_param/red = 0.605
 shader_param/green = 0.375
 
-[sub_resource type="OpenSimplexNoise" id=39]
+[sub_resource type="OpenSimplexNoise" id=41]
 
 [sub_resource type="NoiseTexture" id=40]
 width = 2042
 height = 2042
 seamless = true
-noise = SubResource( 39 )
+noise = SubResource( 41 )
 
 [node name="SkyParallax" type="ParallaxBackground"]
 scroll_ignore_camera_zoom = true
