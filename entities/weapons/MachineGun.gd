@@ -1,5 +1,5 @@
 extends Position2D
-class_name machine_gun
+class_name MachineGun
 
 export(float) var power : float = 10000
 export(String) var ammo_path : String = "res://entities/weapons/BaseBullet.tscn"

@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=2]
+[gd_scene load_steps=26 format=2]
 
 [ext_resource path="res://entities/planes/scripts/BasePlane.gd" type="Script" id=1]
 [ext_resource path="res://entities/particles/Fire.tres" type="Material" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://textures/intorv_color.png" type="Texture" id=6]
 [ext_resource path="res://textures/smoke.png" type="Texture" id=7]
 [ext_resource path="res://sounds/jet_engine.ogg" type="AudioStream" id=8]
+[ext_resource path="res://entities/weapons/MissileLauncher.tscn" type="PackedScene" id=9]
 
 [sub_resource type="PhysicsMaterial" id=16]
 
@@ -250,6 +251,9 @@ texture = ExtResource( 7 )
 [node name="MachineGun" parent="Plane" instance=ExtResource( 4 )]
 position = Vector2( 82, 0 )
 fire_rate_seconds = 0.05
+
+[node name="MissileLauncher" parent="Plane" instance=ExtResource( 9 )]
+position = Vector2( 0, 30 )
 
 [node name="HitBox" type="CollisionShape2D" parent="."]
 position = Vector2( -27, 1 )

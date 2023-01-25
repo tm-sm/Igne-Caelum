@@ -15,6 +15,11 @@ _global_script_classes=[ {
 "path": "res://entities/weapons/BaseBullet.gd"
 }, {
 "base": "RigidBody2D",
+"class": "BaseMissile",
+"language": "GDScript",
+"path": "res://entities/weapons/Missile.gd"
+}, {
+"base": "RigidBody2D",
 "class": "BasePlane",
 "language": "GDScript",
 "path": "res://entities/planes/scripts/BasePlane.gd"
@@ -23,6 +28,16 @@ _global_script_classes=[ {
 "class": "Explosion",
 "language": "GDScript",
 "path": "res://entities/particles/Explosion.gd"
+}, {
+"base": "Position2D",
+"class": "MachineGun",
+"language": "GDScript",
+"path": "res://entities/weapons/MachineGun.gd"
+}, {
+"base": "Position2D",
+"class": "MissileLauncher",
+"language": "GDScript",
+"path": "res://entities/weapons/MissileLauncher.gd"
 }, {
 "base": "BasePlane",
 "class": "PlaneAI",
@@ -53,23 +68,20 @@ _global_script_classes=[ {
 "class": "SfxrStreamPlayerInterface",
 "language": "GDScript",
 "path": "res://addons/godot_sfxr/SfxrStreamPlayerInterface.gd"
-}, {
-"base": "Position2D",
-"class": "machine_gun",
-"language": "GDScript",
-"path": "res://entities/weapons/MachineGun.gd"
 } ]
 _global_script_class_icons={
 "BaseBullet": "",
+"BaseMissile": "",
 "BasePlane": "",
 "Explosion": "",
+"MachineGun": "",
+"MissileLauncher": "",
 "PlaneAI": "",
 "PlanePlayer": "",
 "PlayerCamera": "",
 "SfxrGenerator": "",
 "SfxrGlobals": "",
-"SfxrStreamPlayerInterface": "",
-"machine_gun": ""
+"SfxrStreamPlayerInterface": ""
 }
 
 [application]
@@ -143,7 +155,7 @@ thrust_decrease={
 }
 brake={
 "deadzone": 0.5,
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":32,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":81,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
  ]
 }
 flip_plane={
@@ -151,14 +163,44 @@ flip_plane={
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777237,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
  ]
 }
-fire_machineguns={
+fire_weapon={
 "deadzone": 0.5,
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777232,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":32,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
  ]
 }
 debug_destroy_self={
 "deadzone": 0.5,
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777358,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+ ]
+}
+zoom_out={
+"deadzone": 0.5,
+"events": [ Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":5,"pressed":false,"doubleclick":false,"script":null)
+ ]
+}
+zoom_in={
+"deadzone": 0.5,
+"events": [ Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":4,"pressed":false,"doubleclick":false,"script":null)
+ ]
+}
+change_camera_type={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":67,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+ ]
+}
+switch_target={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":88,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+ ]
+}
+weapon_selection_1={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777232,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+ ]
+}
+weapon_selection_2={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777233,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
  ]
 }
 

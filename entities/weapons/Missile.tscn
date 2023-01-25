@@ -1,0 +1,127 @@
+[gd_scene load_steps=14 format=2]
+
+[ext_resource path="res://textures/missile.png" type="Texture" id=1]
+[ext_resource path="res://entities/weapons/Missile.gd" type="Script" id=2]
+[ext_resource path="res://textures/smoke.png" type="Texture" id=3]
+[ext_resource path="res://sounds/jet_engine.ogg" type="AudioStream" id=4]
+
+[sub_resource type="CapsuleShape2D" id=13]
+radius = 5.0
+height = 74.0
+
+[sub_resource type="Gradient" id=17]
+offsets = PoolRealArray( 0, 0.180645, 0.632075, 0.948387, 0.987097 )
+colors = PoolColorArray( 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0 )
+
+[sub_resource type="GradientTexture" id=18]
+gradient = SubResource( 17 )
+
+[sub_resource type="Curve" id=9]
+max_value = 6.0
+_data = [ Vector2( 0, 0.504545 ), 0.0, 0.0, 0, 0, Vector2( 0.966292, 1.92273 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=19]
+curve = SubResource( 9 )
+
+[sub_resource type="ParticlesMaterial" id=20]
+lifetime_randomness = 1.0
+flag_disable_z = true
+gravity = Vector3( 1, 2, 0 )
+initial_velocity = 2.0
+initial_velocity_random = 1.0
+angular_velocity = 33.57
+orbit_velocity = 0.01
+orbit_velocity_random = 0.0
+scale_curve = SubResource( 19 )
+color_ramp = SubResource( 18 )
+
+[sub_resource type="Animation" id=21]
+resource_name = "explode"
+tracks/0/type = "method"
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"values": [ {
+"args": [  ],
+"method": "explode"
+}, {
+"args": [  ],
+"method": "queue_free"
+} ]
+}
+
+[sub_resource type="CapsuleShape2D" id=23]
+radius = 8763.0
+height = 16012.0
+
+[sub_resource type="CircleShape2D" id=22]
+radius = 128.004
+
+[node name="Missile" type="RigidBody2D"]
+position = Vector2( 6, -1 )
+script = ExtResource( 2 )
+
+[node name="Missile" type="Sprite" parent="."]
+texture = ExtResource( 1 )
+offset = Vector2( 0, -0.848 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 3, 0 )
+rotation = 1.5708
+shape = SubResource( 13 )
+
+[node name="Rocket" type="Position2D" parent="."]
+position = Vector2( -35, 0 )
+
+[node name="Vapor" type="Particles2D" parent="."]
+position = Vector2( -87, 0 )
+amount = 500
+lifetime = 10.0
+visibility_rect = Rect2( -10000, -10000, 20000, 20000 )
+local_coords = false
+process_material = SubResource( 20 )
+texture = ExtResource( 3 )
+
+[node name="RocketSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 4 )
+volume_db = -20.0
+pitch_scale = 5.0
+autoplay = true
+max_distance = 5000.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/explode = SubResource( 21 )
+
+[node name="HeatDetector" type="Area2D" parent="."]
+input_pickable = false
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HeatDetector"]
+position = Vector2( 17137, -483 )
+rotation = 1.5708
+shape = SubResource( 23 )
+
+[node name="ArmingDistance" type="Area2D" parent="."]
+input_pickable = false
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ArmingDistance"]
+position = Vector2( 172, -9 )
+shape = SubResource( 22 )
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+
+[node name="FuseSafety" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="body_entered" from="HeatDetector" to="." method="_on_HeatDetector_body_entered"]
+[connection signal="body_exited" from="HeatDetector" to="." method="_on_HeatDetector_body_exited"]
+[connection signal="body_entered" from="ArmingDistance" to="." method="_on_ArmingDistance_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
+[connection signal="timeout" from="FuseSafety" to="." method="_on_FuseSafety_timeout"]

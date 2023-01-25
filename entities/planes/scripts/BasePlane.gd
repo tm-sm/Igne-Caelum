@@ -10,6 +10,7 @@ onready var world = self
 onready var engine = $Plane/EnginePosition
 onready var engine_sound = $JetSound
 onready var machinegun = $Plane/MachineGun
+onready var missile_launcher = $Plane/MissileLauncher
 onready var sprite = $Plane
 onready var color = $Plane/Color
 onready var stall_vapor = $Plane/StallVapor
@@ -53,6 +54,7 @@ var target_speed = 0 #the maximum speed reachable by the current engine configur
 func _ready():
 	add_to_group("sound_emitter")
 	add_to_group("damageable")
+	add_to_group("heat_emitter")
 	health = max_health
 	controls_enabled = true
 	stall_vapor.emitting = false
@@ -64,6 +66,7 @@ func _ready():
 	vertical_speed = relative_speed.y
 	speed_vector  = sqrt(pow(forward_speed, 2) + pow(vertical_speed, 2))
 	machinegun.initialize(self)
+	missile_launcher.initialize(self)
 	color.modulate = plane_color
 
 func _process(_delta):
@@ -200,6 +203,9 @@ func set_throttle(throttle):
 
 func fire_machinegun():
 	machinegun.fire()
+
+func fire_missile():
+	missile_launcher.fire()
 
 func update_engine_visuals():
 	engine_sound.pitch_scale = engine_thrust_percentage * 3 + 1

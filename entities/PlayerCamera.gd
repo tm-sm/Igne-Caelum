@@ -5,9 +5,13 @@ enum mode {PLAYER_AND_TARGET, PLAYER, STILL}
 
 var status
 var targets
+var targets_index = 0
 
 var target
 var player
+
+var zoom_multiplier = 1
+
 
 func _ready():
 	# Initialization here
@@ -35,33 +39,50 @@ func _process(_delta):
 
 func player_and_target_follow():
 	var p1_pos = player.global_position
-	var closest = null
-	var closest_dist
-	for t in targets:
-		var new_dist = p1_pos.distance_to(t.global_position)
-		if not closest or new_dist < closest_dist:
-			closest = t
-			closest_dist = new_dist
-	target = closest
+	
+	if target == null:
+		next_target()
 	
 	var p2_pos = target.global_position
-	var newpos = (p1_pos+p2_pos) * 0.5
+	var newpos = (p1_pos + p2_pos) * 0.5
 	global_position = newpos
 	var distance = p1_pos.distance_to(p2_pos) * 2
-	var zoom_factor = distance * 0.002 / 3
+	var zoom_factor = distance * 0.002 / 3 
 
 	if zoom_factor < 4:
 		zoom_factor = 4
-	set_zoom(Vector2(1,1) * zoom_factor)
+	set_zoom(Vector2(1,1) * zoom_factor * zoom_multiplier)
 
 func player_follow():
-	global_position = player.global_position
-	set_zoom(Vector2(5,5))
+	if player:
+		global_position = player.global_position
+		set_zoom(Vector2(5,5) * zoom_multiplier)
+	else:
+		status = mode.STILL
 
 func hold():
-	set_zoom(Vector2(10, 10))
+	set_zoom(Vector2(10, 10) * zoom_multiplier)
+
+func next_target():
+	if targets.size() == 0:
+		status = mode.PLAYER
+	elif targets_index >= targets.size():
+		targets_index = 0
+	target = targets[targets_index]
+	targets_index += 1
+
+func next_camera_mode():
+	match status:
+		mode.STILL:
+			status = mode.PLAYER
+		mode.PLAYER:
+			status = mode.PLAYER_AND_TARGET
+		mode.PLAYER_AND_TARGET:
+			status = mode.STILL
 
 func _on_target_destroyed(t):
+	if t == target:
+		next_target()
 	targets.erase(t)
 	if targets.size()==0 and status != mode.STILL:
 		status = mode.PLAYER
@@ -69,3 +90,13 @@ func _on_target_destroyed(t):
 func _on_player_destroyed():
 	player = null
 	status = mode.STILL
+
+func _input(event):
+	if event.is_action_pressed("zoom_in"):
+		zoom_multiplier -= 0.1
+	if event.is_action_pressed("zoom_out"):
+		zoom_multiplier += 0.1
+	if event.is_action_released("switch_target"):
+		next_target()
+	if event.is_action_released("change_camera_type"):
+		next_camera_mode()
