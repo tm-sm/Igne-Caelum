@@ -111,6 +111,7 @@ sleeping = true
 script = ExtResource( 2 )
 
 [node name="Explosion" type="Particles2D" parent="."]
+emitting = false
 amount = 100
 lifetime = 10.0
 one_shot = true
@@ -162,8 +163,7 @@ anims/explode = SubResource( 17 )
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 5 )
-volume_db = -10.0
-pitch_scale = 1.5
+volume_db = -15.0
 autoplay = true
 max_distance = 15000.0
 

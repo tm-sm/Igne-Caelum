@@ -52,6 +52,7 @@ var target_speed = 0 #the maximum speed reachable by the current engine configur
 
 func _ready():
 	add_to_group("sound_emitter")
+	add_to_group("damageable")
 	health = max_health
 	controls_enabled = true
 	stall_vapor.emitting = false

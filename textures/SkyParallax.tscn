@@ -1,0 +1,58 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://textures/shaders/SkyParallax.tres" type="Material" id=1]
+
+[sub_resource type="Shader" id=37]
+code = "shader_type canvas_item;
+
+uniform float blue = 1.0;
+uniform float red = 1.0;
+uniform float green = 1.0;
+
+void fragment() {
+	COLOR = texture(TEXTURE, UV);
+	COLOR.b = blue;
+	COLOR.r = red;
+	COLOR.g = green;
+}
+"
+
+[sub_resource type="ShaderMaterial" id=38]
+shader = SubResource( 37 )
+shader_param/blue = 0.888
+shader_param/red = 0.605
+shader_param/green = 0.375
+
+[sub_resource type="OpenSimplexNoise" id=39]
+
+[sub_resource type="NoiseTexture" id=40]
+width = 2042
+height = 2042
+seamless = true
+noise = SubResource( 39 )
+
+[node name="SkyParallax" type="ParallaxBackground"]
+scroll_ignore_camera_zoom = true
+
+[node name="Sky" type="ColorRect" parent="."]
+material = SubResource( 38 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="FarawayClouds" type="ParallaxLayer" parent="."]
+motion_scale = Vector2( 0.01, 0.01 )
+motion_mirroring = Vector2( 2042, 2042 )
+
+[node name="Sprite" type="Sprite" parent="FarawayClouds"]
+material = ExtResource( 1 )
+texture = SubResource( 40 )
+centered = false
+
+[node name="NearClouds" type="ParallaxLayer" parent="."]
+motion_scale = Vector2( 0.1, 0.1 )
+motion_mirroring = Vector2( 2042, 2042 )
+
+[node name="Sprite" type="Sprite" parent="NearClouds"]
+material = ExtResource( 1 )
+texture = SubResource( 40 )
+centered = false

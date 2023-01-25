@@ -7,6 +7,9 @@ onready var timer = $Timer
 export(int) var damage : int = 20
 export(float) var bullet_weight : float = 0.1
 
+func _ready():
+	add_to_group("damageable")
+
 func fire(impulse):
 	weight = bullet_weight
 	apply_central_impulse(impulse)
@@ -14,7 +17,8 @@ func fire(impulse):
 
 func _on_Bullet_body_entered(body):
 	add_collision_exception_with(body)
-	body.recieve_damage(damage)
+	if body.is_in_group("damageable"):
+		body.recieve_damage(damage)
 	anim.play("explode")
 
 func recieve_damage(_dmg):

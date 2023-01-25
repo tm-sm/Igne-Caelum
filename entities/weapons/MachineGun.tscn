@@ -12,6 +12,7 @@ power = 7500.0
 
 [node name="Gunshot" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 2 )
+volume_db = -10.0
 max_distance = 7500.0
 
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
