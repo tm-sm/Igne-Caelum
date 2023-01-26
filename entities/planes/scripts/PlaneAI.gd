@@ -15,8 +15,6 @@ var flight_state
 
 var missile_in_the_air = false
 
-var passed_time_delta = 0.0
-
 var throttle_target = 1
 var target
 #target info
@@ -39,11 +37,6 @@ func set_target(t):
 		combat_state = combat_action.heading_to_target
 		objective = objective_type.fight
 
-func _process(delta):
-	passed_time_delta += delta
-	if passed_time_delta >= 2.0:
-		passed_time_delta = 0
-		locked_on_by_missile = false
 
 func _physics_process(delta):
 	var target_position

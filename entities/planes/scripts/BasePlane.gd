@@ -33,7 +33,7 @@ export(float) var wind_resistance_factor : float = 0.06 #value between 0.01 and 
 
 var health
 
-var engine_thrust_percentage = 0
+var engine_thrust_percentage = 1
 var engine_thrust = Vector2(engine_thrust_percentage * engine_power, 0.0)
 
 var pitch = 0.0
@@ -54,6 +54,8 @@ var speed_vector
 var relative_speed
 var target_speed = 0 #the maximum speed reachable by the current engine configuration
 
+var passed_time_delta = 0.0
+
 func _ready():
 	add_to_group("sound_emitter")
 	add_to_group("damageable")
@@ -72,6 +74,13 @@ func _ready():
 	missile_launcher.initialize(self)
 	flare_dispenser.initialize(self)
 	color.modulate = plane_color
+
+func _process(delta):
+	#this lets the lock_on_alarm stay on the screen for a while longer
+	passed_time_delta += delta
+	if passed_time_delta >= 1.29:
+		passed_time_delta = 0
+		locked_on_by_missile = false
 
 func _physics_process(_delta):
 	if controls_enabled:

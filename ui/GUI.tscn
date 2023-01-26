@@ -255,7 +255,7 @@ text = "WARNING MISSILE"
 script = SubResource( 43 )
 
 [node name="Timer" type="Timer" parent="Warning/WarningSensors/LockedOnLabel"]
-wait_time = 0.2
+wait_time = 0.258
 autostart = true
 
 [node name="Screen" type="ColorRect" parent="."]

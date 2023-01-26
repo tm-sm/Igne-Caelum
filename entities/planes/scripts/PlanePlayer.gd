@@ -5,13 +5,11 @@ enum weapons {machinegun, missile}
 
 var selected_weapon
 
+
 func _ready():
 	._ready()
 	engine_sound.volume_db = -15
 	selected_weapon = weapons.machinegun
-
-func _process(_delta):
-	locked_on_by_missile = false
 
 func update_thrust():
 	if Input.is_action_pressed("thrust_increase"):
