@@ -7,7 +7,7 @@ resource_name = "Compressor"
 resource_name = "Distortion"
 
 [resource]
-bus/0/volume_db = -31.0758
+bus/0/volume_db = -11.952
 bus/1/name = "Distortion"
 bus/1/solo = false
 bus/1/mute = false

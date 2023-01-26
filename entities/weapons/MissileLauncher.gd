@@ -38,8 +38,8 @@ func fire():
 			timer.start(cooldown)
 
 func _process(_delta):
+	targeting = false
 	if can_fire:
-		targeting = false
 		var targets = reciever.get_overlapping_bodies()
 		for t in targets:
 			if t.is_in_group("heat_emitter"):
