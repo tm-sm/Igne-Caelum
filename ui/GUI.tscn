@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://ui/VHS_shader.tres" type="Material" id=1]
 [ext_resource path="res://ui/GUI_theme.tres" type="Theme" id=2]
@@ -21,8 +21,13 @@ onready var mg_ammo_value = $InfoWeapons/InfoWeapons/MachineGun/Value
 onready var msl_ammo_value = $InfoWeapons/InfoWeapons/Missile/Value
 onready var flr_ammo_value = $InfoWeapons/InfoWeapons/Flares/Value
 
+#Weapons
+onready var mg_img = $WeaponSelection/Weapons/MG
+onready var msl_img = $WeaponSelection/Weapons/MSL
+onready var wpn_chng_sound = $WeaponChangeSound
+
 #Weapon states
-onready var lock_warning = $Weapons/WeaponSensors/TargetLockLabel
+onready var lock_warning = $WeaponStatus/WeaponSensors/TargetLockLabel
 onready var lock_sound = $LockOnSound
 
 #Warnings
@@ -39,13 +44,28 @@ func initialize(dt):
 
 func _process(_delta):
 	if gathering_data:
+		#Labels
 		speed_value.text = str(stepify(data.forward_speed / 2, 0.01)) + \"km/h\"
 		thrust_value.text = str(data.engine_thrust_percentage * 100) + \"%\"
 		mg_ammo_value.text = str(data.get_machinegun().ammo)
 		msl_ammo_value.text = str(data.get_missile_launcher().ammo)
 		flr_ammo_value.text = str(data.get_flare_dispenser().ammo)
 		
+		#Weapon visuals
+		match data.selected_weapon:
+			PlanePlayer.weapons.machinegun:
+				if mg_img.modulate != Color.white:
+					wpn_chng_sound.play(0)
+					mg_img.modulate = Color.white
+					msl_img.modulate = Color.black
+			PlanePlayer.weapons.missile:
+				if msl_img.modulate != Color.white:
+					wpn_chng_sound.play(0)
+					msl_img.modulate = Color.white
+					mg_img.modulate = Color.black
 		
+		
+		#Warnings and sounds
 		if data.get_missile_sensor():
 			lock_warning.text = \"TRGT LOCK\"
 			if not lock_sound.playing:
@@ -80,6 +100,17 @@ outline_color = Color( 0, 0, 0, 1 )
 use_filter = true
 extra_spacing_char = 2
 font_data = ExtResource( 3 )
+
+[sub_resource type="StreamTexture" id=44]
+load_path = "res://.import/weapon_icons.png-5ea3131ff54103cb5709621a61dc6c1d.stex"
+
+[sub_resource type="AtlasTexture" id=45]
+atlas = SubResource( 44 )
+region = Rect2( 0, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=46]
+atlas = SubResource( 44 )
+region = Rect2( 128, 0, 64, 64 )
 
 [sub_resource type="DynamicFont" id=42]
 size = 30
@@ -206,7 +237,7 @@ margin_right = 98.0
 margin_bottom = 18.0
 text = "N/A"
 
-[node name="Weapons" type="PanelContainer" parent="."]
+[node name="WeaponStatus" type="PanelContainer" parent="."]
 anchor_left = 0.5
 anchor_right = 0.5
 margin_left = -67.0
@@ -216,12 +247,12 @@ margin_bottom = 65.0
 grow_horizontal = 2
 theme = ExtResource( 2 )
 
-[node name="WeaponSensors" type="VBoxContainer" parent="Weapons"]
+[node name="WeaponSensors" type="VBoxContainer" parent="WeaponStatus"]
 margin_right = 134.0
 margin_bottom = 27.0
 grow_horizontal = 2
 
-[node name="TargetLockLabel" type="Label" parent="Weapons/WeaponSensors"]
+[node name="TargetLockLabel" type="Label" parent="WeaponStatus/WeaponSensors"]
 margin_right = 134.0
 margin_bottom = 27.0
 grow_horizontal = 2
@@ -229,6 +260,46 @@ custom_colors/font_color = Color( 0.0196078, 0.219608, 1, 1 )
 custom_fonts/font = SubResource( 41 )
 align = 1
 uppercase = true
+
+[node name="WeaponSelection" type="PanelContainer" parent="."]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -192.0
+margin_top = -194.0
+margin_right = 20.0
+margin_bottom = -62.0
+grow_horizontal = 0
+grow_vertical = 0
+theme = ExtResource( 2 )
+
+[node name="Weapons" type="GridContainer" parent="WeaponSelection"]
+margin_right = 212.0
+margin_bottom = 132.0
+columns = 2
+
+[node name="MG" type="TextureRect" parent="WeaponSelection/Weapons"]
+margin_right = 64.0
+margin_bottom = 64.0
+texture = SubResource( 45 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="WeaponSelection/Weapons"]
+margin_left = 68.0
+margin_right = 132.0
+margin_bottom = 64.0
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="WeaponSelection/Weapons"]
+margin_top = 68.0
+margin_right = 64.0
+margin_bottom = 132.0
+
+[node name="MSL" type="TextureRect" parent="WeaponSelection/Weapons"]
+margin_left = 68.0
+margin_top = 68.0
+margin_right = 132.0
+margin_bottom = 132.0
+texture = SubResource( 46 )
 
 [node name="Warning" type="PanelContainer" parent="."]
 anchor_left = 0.5
@@ -270,5 +341,7 @@ stream = ExtResource( 5 )
 [node name="LockOnSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 4 )
 volume_db = -10.0
+
+[node name="WeaponChangeSound" type="AudioStreamPlayer" parent="."]
 
 [connection signal="timeout" from="Warning/WarningSensors/LockedOnLabel/Timer" to="Warning/WarningSensors/LockedOnLabel" method="_on_Timer_timeout"]
