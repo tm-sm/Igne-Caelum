@@ -62,10 +62,15 @@ func _process(_delta):
 
 func _on_data_source_destroyed():
 	gathering_data = false
+	missile_warning_sound.stop()
+	lock_sound.stop()
 	speed_value.text = \"N/A\"
 	thrust_value.text = \"N/A\"
 	lock_warning.text = \"\"
 	missile_warning.text = \"CONNECTION LOST\"
+	mg_ammo_value.text = \"N/A\"
+	msl_ammo_value.text = \"N/A\"
+	flr_ammo_value.text = \"N/A\"
 "
 
 [sub_resource type="DynamicFont" id=41]

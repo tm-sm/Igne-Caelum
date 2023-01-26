@@ -1,0 +1,10 @@
+v0.1:
+-menus, plane v plane game mode, free flight
+v0.2
+-levels
+v0.3
+-adaptive music
+v0.4
+-story
+v0.5
+-eh
