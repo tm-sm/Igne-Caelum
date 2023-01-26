@@ -1,8 +1,10 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://ui/VHS_font.tres" type="DynamicFont" id=1]
 [ext_resource path="res://ui/GUI_theme.tres" type="Theme" id=2]
 [ext_resource path="res://fonts/VCR_OSD_MONO_1.001.ttf" type="DynamicFontData" id=3]
+[ext_resource path="res://sounds/lock_on.ogg" type="AudioStream" id=4]
+[ext_resource path="res://sounds/missile_warning.ogg" type="AudioStream" id=5]
 
 [sub_resource type="GDScript" id=7]
 script/source = "extends CanvasLayer
@@ -13,6 +15,8 @@ onready var speed_value = $Info/FlightInfo/Speed/Value
 onready var thrust_value = $Info/FlightInfo/Thrust/Value
 onready var lock_warning = $Weapons/WeaponSensors/TargetLockLabel
 onready var missile_warning = $Warning/WarningSensors/LockedOnLabel
+onready var missile_warning_sound = $MissileWarning
+onready var lock_sound = $LockOnSound
 
 var gathering_data
 
@@ -27,12 +31,18 @@ func _process(_delta):
 		thrust_value.text = str(data.engine_thrust_percentage * 100) + \"%\"
 		if data.get_missile_sensor():
 			lock_warning.text = \"TRGT LOCK\"
+			if not lock_sound.playing:
+				lock_sound.play(0)
 		else:
 			lock_warning.text = \"\"
+			lock_sound.stop()
 		if data.locked_on_by_missile:
 			missile_warning.text = \"WARNING MISSILE\"
+			if not missile_warning_sound.playing:
+				missile_warning_sound.play(0)
 		else:
 			missile_warning.text = \"\"
+			missile_warning_sound.stop()
 
 func _on_data_source_destroyed():
 	gathering_data = false
@@ -391,7 +401,6 @@ grow_horizontal = 2
 margin_right = 134.0
 margin_bottom = 27.0
 grow_horizontal = 2
-custom_colors/font_color = Color( 1, 1, 1, 1 )
 custom_fonts/font = SubResource( 41 )
 align = 1
 uppercase = true
@@ -424,3 +433,10 @@ material = SubResource( 40 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 color = Color( 0, 0, 0, 1 )
+
+[node name="MissileWarning" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 5 )
+
+[node name="LockOnSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 4 )
+volume_db = -10.0

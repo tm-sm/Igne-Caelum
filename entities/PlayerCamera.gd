@@ -22,11 +22,9 @@ func initialize(trgts, p):
 	player = p
 	player.connect("destroyed", self, "_on_player_destroyed")
 	if targets.size() > 0:
-		status = mode.PLAYER_AND_TARGET
 		for t in targets:
 			t.connect("destroyed", self, "_on_target_destroyed", [t])
-	else:
-		status = mode.PLAYER
+	status = mode.PLAYER
 	
 func _process(_delta):
 	match status:

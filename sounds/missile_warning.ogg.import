@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/missile_warning.ogg-24fd083d30d2105f4e54293188df36dd.oggstr"
+
+[deps]
+
+source_file="res://sounds/missile_warning.ogg"
+dest_files=[ "res://.import/missile_warning.ogg-24fd083d30d2105f4e54293188df36dd.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

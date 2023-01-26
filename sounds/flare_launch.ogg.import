@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/flare_launch.ogg-21b8c6325a45f69a44ad4c177e5c09ba.oggstr"
+
+[deps]
+
+source_file="res://sounds/flare_launch.ogg"
+dest_files=[ "res://.import/flare_launch.ogg-21b8c6325a45f69a44ad4c177e5c09ba.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

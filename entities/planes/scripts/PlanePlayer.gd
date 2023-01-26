@@ -13,11 +13,7 @@ func _ready():
 	selected_weapon = weapons.machinegun
 
 func _process(_delta):
-	if missile_launcher.targeting:
-		if not lock_on_sound.playing:
-			lock_on_sound.play(0)
-	else:
-		lock_on_sound.stop()
+	locked_on_by_missile = false
 
 func update_thrust():
 	if Input.is_action_pressed("thrust_increase"):
@@ -43,6 +39,8 @@ func fire_selected_weapon():
 			fire_missile()
 
 func update_weapons():
+	if Input.is_action_pressed("launch_flare"):
+		fire_flares()
 	if Input.is_action_pressed("fire_weapon"):
 		fire_selected_weapon()
 	if Input.is_action_pressed("weapon_selection_1"):

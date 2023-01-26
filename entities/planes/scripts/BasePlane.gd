@@ -11,6 +11,7 @@ onready var engine = $Plane/EnginePosition
 onready var engine_sound = $JetSound
 onready var machinegun = $Plane/MachineGun
 onready var missile_launcher = $Plane/MissileLauncher
+onready var flare_dispenser = $Plane/FlareDispenser
 onready var sprite = $Plane
 onready var color = $Plane/Color
 onready var vapor = $Plane/Vapor
@@ -69,6 +70,7 @@ func _ready():
 	speed_vector  = sqrt(pow(forward_speed, 2) + pow(vertical_speed, 2))
 	machinegun.initialize(self)
 	missile_launcher.initialize(self)
+	flare_dispenser.initialize(self)
 	color.modulate = plane_color
 
 func _physics_process(_delta):
@@ -209,6 +211,9 @@ func fire_machinegun():
 
 func fire_missile():
 	missile_launcher.fire()
+
+func fire_flares():
+	flare_dispenser.fire()
 
 func update_engine_visuals():
 	engine_sound.pitch_scale = engine_thrust_percentage * 3 + 1
