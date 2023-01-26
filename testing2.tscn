@@ -10,6 +10,7 @@
 [sub_resource type="GDScript" id=2]
 script/source = "extends Node2D
 
+onready var pause_menu = preload(\"res://ui/menus/PauseMenu.tscn\")
 onready var AI = $AI.get_children()
 onready var player = $Player
 onready var stats = $GUI
@@ -26,6 +27,12 @@ func _ready():
 	stats.initialize(player)
 	camera.initialize(AI, player)
 	player.world = self
+
+func _input(event):
+	if event.is_action_pressed(\"pause\"):
+		var pause = pause_menu.instance()
+		add_child(pause)
+		get_tree().paused = true
 "
 
 [node name="testing2" type="Node2D"]
@@ -64,7 +71,8 @@ script = ExtResource( 4 )
 scale = Vector2( 5, 5 )
 transform = Transform2D( 5, 0, 0, 5, 0, 0 )
 
-[node name="GUI" parent="." instance=ExtResource( 2 )]
-
 [node name="Player" parent="." instance=ExtResource( 3 )]
 position = Vector2( 2497, 791 )
+
+[node name="GUI" parent="." instance=ExtResource( 2 )]
+layer = 100

@@ -1,10 +1,46 @@
-[gd_resource type="Theme" load_steps=3 format=2]
+[gd_resource type="Theme" load_steps=11 format=2]
 
 [ext_resource path="res://ui/VHS_font.tres" type="DynamicFont" id=1]
+[ext_resource path="res://fonts/VCR_OSD_MONO_1.001.ttf" type="DynamicFontData" id=2]
+
+[sub_resource type="DynamicFont" id=35]
+size = 30
+outline_color = Color( 0, 0, 0, 1 )
+use_filter = true
+extra_spacing_char = 2
+font_data = ExtResource( 2 )
+
+[sub_resource type="StyleBoxFlat" id=36]
+bg_color = Color( 0, 0, 0, 1 )
+
+[sub_resource type="StyleBoxEmpty" id=37]
+
+[sub_resource type="StyleBoxLine" id=38]
+color = Color( 0.00784314, 1, 0, 1 )
+vertical = true
+
+[sub_resource type="StyleBoxEmpty" id=39]
+
+[sub_resource type="StyleBoxEmpty" id=40]
+
+[sub_resource type="StyleBoxLine" id=41]
+color = Color( 1, 1, 1, 1 )
 
 [sub_resource type="StyleBoxEmpty" id=34]
 
 [resource]
+Button/colors/font_color = Color( 1, 1, 1, 1 )
+Button/colors/font_color_disabled = Color( 0.901961, 0.901961, 0.901961, 0 )
+Button/colors/font_color_hover = Color( 0.00784314, 1, 0, 1 )
+Button/colors/font_color_pressed = Color( 0.898039, 1, 0, 1 )
+Button/fonts/font = SubResource( 35 )
+Button/styles/disabled = SubResource( 36 )
+Button/styles/focus = SubResource( 37 )
+Button/styles/hover = SubResource( 38 )
+Button/styles/normal = SubResource( 39 )
+Button/styles/pressed = SubResource( 40 )
+HSeparator/constants/separation = 20
+HSeparator/styles/separator = SubResource( 41 )
 Label/colors/font_color = Color( 0.00784314, 1, 0, 1 )
 Label/fonts/font = ExtResource( 1 )
 PanelContainer/styles/panel = SubResource( 34 )
