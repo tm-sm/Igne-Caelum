@@ -100,7 +100,7 @@ monitorable = false
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="HeatDetector"]
 position = Vector2( 86, 0 )
-polygon = PoolVector2Array( 0, 0, 500, -500, 10000, -5000, 10000, 5000, 500, 500 )
+polygon = PoolVector2Array( 0, 0, 500, -500, 15000, -5000, 15000, 5000, 500, 500 )
 
 [node name="ArmingDistance" type="Area2D" parent="."]
 input_pickable = false

@@ -8,16 +8,17 @@
 [ext_resource path="res://ui/GUI.tscn" type="PackedScene" id=6]
 [ext_resource path="res://entities/PlayerCamera.gd" type="Script" id=7]
 
-[sub_resource type="GDScript" id=2]
+[sub_resource type="GDScript" id=1]
 script/source = "extends Node2D
 
 onready var pause_menu = preload(\"res://ui/menus/PauseMenu.tscn\")
 onready var game_over_menu = preload(\"res://ui/menus/GameOverMenu.tscn\")
 onready var AI = $AI.get_children()
-onready var player = $Player
+onready var player = $Player.get_child(0)
 onready var stats = $GUI
 onready var camera = $PlayerCamera
 onready var markers = $InterfaceMarkers
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -46,7 +47,13 @@ func game_over():
 "
 
 [node name="Ambush" type="Node2D"]
-script = SubResource( 2 )
+script = SubResource( 1 )
+
+[node name="Player" type="Node2D" parent="."]
+
+[node name="Player" parent="Player" instance=ExtResource( 2 )]
+position = Vector2( 2497, 791 )
+plane_color = Color( 0.388235, 0.509804, 0.219608, 1 )
 
 [node name="AI" type="Node2D" parent="."]
 
@@ -78,10 +85,6 @@ script = ExtResource( 7 )
 [node name="SkyParallax" parent="." instance=ExtResource( 4 )]
 scale = Vector2( 5, 5 )
 transform = Transform2D( 5, 0, 0, 5, 0, 0 )
-
-[node name="Player" parent="." instance=ExtResource( 2 )]
-position = Vector2( 2497, 791 )
-plane_color = Color( 0.388235, 0.509804, 0.219608, 1 )
 
 [node name="InterfaceMarkers" parent="." instance=ExtResource( 5 )]
 

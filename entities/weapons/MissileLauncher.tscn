@@ -13,6 +13,6 @@ monitorable = false
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="TargetReciever"]
 position = Vector2( 86, 0 )
-polygon = PoolVector2Array( 0, 0, 500, -500, 10000, -5000, 10000, 5000, 500, 500 )
+polygon = PoolVector2Array( 0, 0, 500, -500, 15000, -5000, 15000, 5000, 500, 500 )
 
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

@@ -17,6 +17,7 @@ var data
 #Info tab
 onready var speed_value = $Info/FlightInfo/Speed/Value
 onready var thrust_value = $Info/FlightInfo/Thrust/Value
+onready var health_value = $Info/FlightInfo/Health/Value
 
 #Weapons Info
 onready var mg_ammo_value = $InfoWeapons/InfoWeapons/MachineGun/Value
@@ -47,7 +48,9 @@ func initialize(dt):
 func _process(_delta):
 	if gathering_data:
 		#Labels
-		speed_value.text = str(stepify(data.forward_speed / 2, 0.01)) + \"km/h\"
+		var health_percentage = float(data.health / data.max_health) * 100
+		health_value.text = str(stepify(health_percentage, 1.0)) + \"%\"
+		speed_value.text = str(stepify(data.forward_speed / 2, 0.1)) + \"km/h\"
 		thrust_value.text = str(data.engine_thrust_percentage * 100) + \"%\"
 		mg_ammo_value.text = str(data.get_machinegun().ammo)
 		msl_ammo_value.text = str(data.get_missile_launcher().ammo)
@@ -92,6 +95,7 @@ func _on_data_source_destroyed():
 	gathering_data = false
 	missile_warning_sound.stop()
 	lock_sound.stop()
+	health_value = \"DANGER\"
 	speed_value.text = \"N/A\"
 	thrust_value.text = \"N/A\"
 	lock_warning.text = \"\"
@@ -149,9 +153,25 @@ theme = ExtResource( 2 )
 margin_right = 250.0
 margin_bottom = 150.0
 
-[node name="Speed" type="HBoxContainer" parent="Info/FlightInfo"]
+[node name="Health" type="HBoxContainer" parent="Info/FlightInfo"]
 margin_right = 250.0
 margin_bottom = 18.0
+
+[node name="Type" type="Label" parent="Info/FlightInfo/Health"]
+margin_right = 68.0
+margin_bottom = 18.0
+text = "HLTH:"
+
+[node name="Value" type="Label" parent="Info/FlightInfo/Health"]
+margin_left = 72.0
+margin_right = 112.0
+margin_bottom = 18.0
+text = "N/A"
+
+[node name="Speed" type="HBoxContainer" parent="Info/FlightInfo"]
+margin_top = 22.0
+margin_right = 250.0
+margin_bottom = 40.0
 
 [node name="Type" type="Label" parent="Info/FlightInfo/Speed"]
 margin_right = 54.0
@@ -165,9 +185,9 @@ margin_bottom = 18.0
 text = "N/A"
 
 [node name="Thrust" type="HBoxContainer" parent="Info/FlightInfo"]
-margin_top = 22.0
+margin_top = 44.0
 margin_right = 250.0
-margin_bottom = 40.0
+margin_bottom = 62.0
 
 [node name="Type" type="Label" parent="Info/FlightInfo/Thrust"]
 margin_right = 54.0

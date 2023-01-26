@@ -13,15 +13,19 @@ script/source = "extends Node2D
 onready var pause_menu = preload(\"res://ui/menus/PauseMenu.tscn\")
 onready var game_over_menu = preload(\"res://ui/menus/GameOverMenu.tscn\")
 onready var AI = $AI.get_children()
-onready var player = $Player
+onready var player = $Player.get_child(0)
 onready var stats = $GUI
 onready var camera = $PlayerCamera
 onready var markers = $InterfaceMarkers
+onready var attackers_objective = $AttackersObjective
+
+
+var attackers_alert = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	for ai in AI:
-		ai.set_target(player)
+		ai.set_target(attackers_objective)
 		ai.initialize(self, Teams.group.b)
 		markers.add_marker(ai, Color.red, 4)
 		for ai2 in AI:
@@ -39,6 +43,14 @@ func _input(event):
 		add_child(pause)
 		get_tree().paused = true
 
+func _process(delta):
+	if not attackers_alert:
+		if player.get_missile_launcher().targeting:
+			#the player is close enough
+			for ai in AI:
+				ai.target = player
+			attackers_alert = true
+
 func game_over():
 	var game_over = game_over_menu.instance()
 	add_child(game_over)
@@ -47,15 +59,23 @@ func game_over():
 [node name="Interception" type="Node2D"]
 script = SubResource( 2 )
 
+[node name="Player" type="Node2D" parent="."]
+
+[node name="Player" parent="Player" instance=ExtResource( 2 )]
+position = Vector2( 321, -26601 )
+plane_color = Color( 0.388235, 0.509804, 0.219608, 1 )
+
 [node name="AI" type="Node2D" parent="."]
 
 [node name="IntorvAI" parent="AI" instance=ExtResource( 1 )]
 position = Vector2( 77807, 17482 )
 rotation = 3.14159
+plane_color = Color( 0, 0, 0, 1 )
 
 [node name="IntorvAI2" parent="AI" instance=ExtResource( 1 )]
 position = Vector2( 88510, 7730 )
 rotation = 3.14159
+plane_color = Color( 0, 0, 0, 1 )
 
 [node name="PlayerCamera" type="Camera2D" parent="."]
 show_behind_parent = true
@@ -74,11 +94,10 @@ script = ExtResource( 6 )
 scale = Vector2( 5, 5 )
 transform = Transform2D( 5, 0, 0, 5, 0, 0 )
 
-[node name="Player" parent="." instance=ExtResource( 2 )]
-position = Vector2( 2497, 791 )
-plane_color = Color( 0.388235, 0.509804, 0.219608, 1 )
-
 [node name="InterfaceMarkers" parent="." instance=ExtResource( 4 )]
 
 [node name="GUI" parent="." instance=ExtResource( 5 )]
 layer = 100
+
+[node name="AttackersObjective" type="Node2D" parent="."]
+position = Vector2( -81792, -11392 )
