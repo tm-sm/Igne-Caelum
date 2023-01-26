@@ -62,6 +62,7 @@ func hold():
 	set_zoom(Vector2(10, 10) * zoom_multiplier)
 
 func next_target():
+	zoom_multiplier = 1
 	if targets.size() == 0:
 		status = mode.PLAYER
 	else:
@@ -97,6 +98,7 @@ func _input(event):
 	if event.is_action_pressed("zoom_out"):
 		zoom_multiplier += 0.1
 	if event.is_action_released("switch_target"):
+		status = mode.PLAYER_AND_TARGET
 		next_target()
 	if event.is_action_released("change_camera_type"):
 		next_camera_mode()

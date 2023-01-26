@@ -5,8 +5,6 @@ enum weapons {machinegun, missile}
 
 var selected_weapon
 
-onready var lock_on_sound = $TargetLockSound
-
 func _ready():
 	._ready()
 	engine_sound.volume_db = -15

@@ -128,9 +128,10 @@ func get_sounds():
 func _on_HeatDetector_body_entered(body):
 	if body.is_in_group("heat_emitter"):
 		if not target or global_position.distance_to(target.global_position) > global_position.distance_to(body.global_position):
-			if target:
+			if target and target.is_in_group("damageable"):
 				target.disconnect("destroyed", self, "_on_target_destroyed")
-			body.connect("destroyed", self, "_on_target_destroyed")
+			if body.is_in_group("damageable"):
+				body.connect("destroyed", self, "_on_target_destroyed")
 			target = body
 
 func _on_target_destroyed():
@@ -147,13 +148,14 @@ func _on_target_destroyed():
 			closest_target = t
 			closest_dist = dist
 	target = closest_target
-	if target:
+	if target and target.is_in_group("damageable"):
 		target.connect("destroyed", self, "_on_target_destroyed")
 
 
 func _on_HeatDetector_body_exited(body):
 	if body == target:
-		target.disconnect("destroyed", self, "_on_target_destroyed")
+		if target.is_in_group("damageable"):
+			target.disconnect("destroyed", self, "_on_target_destroyed")
 		_on_target_destroyed()
 
 

@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://textures/SkyParallax.tscn" type="PackedScene" id=1]
 [ext_resource path="res://ui/GUI.tscn" type="PackedScene" id=2]
 [ext_resource path="res://entities/planes/InterzkiPlayer.tscn" type="PackedScene" id=3]
 [ext_resource path="res://entities/PlayerCamera.gd" type="Script" id=4]
 [ext_resource path="res://entities/planes/IntorvAI.tscn" type="PackedScene" id=5]
+[ext_resource path="res://entities/planes/InterzkiAI.tscn" type="PackedScene" id=6]
 
 [sub_resource type="GDScript" id=2]
 script/source = "extends Node2D
@@ -36,17 +37,15 @@ script = SubResource( 2 )
 position = Vector2( 26148, -11151 )
 plane_color = Color( 0.411765, 0.411765, 0.411765, 1 )
 
-[node name="IntorvAI2" parent="AI" instance=ExtResource( 5 )]
-position = Vector2( -13691, -8209 )
-plane_color = Color( 0.411765, 0.411765, 0.411765, 1 )
+[node name="InterzkiAI" parent="AI" instance=ExtResource( 6 )]
+position = Vector2( 4656, 14594 )
+tight_turn_thrust = 0.2
+wide_turn_thrust = 0.8
 
-[node name="IntorvAI3" parent="AI" instance=ExtResource( 5 )]
-position = Vector2( 3886, 327 )
-plane_color = Color( 0.411765, 0.411765, 0.411765, 1 )
-
-[node name="IntorvAI4" parent="AI" instance=ExtResource( 5 )]
-position = Vector2( 21464, 10143 )
-plane_color = Color( 0.411765, 0.411765, 0.411765, 1 )
+[node name="InterzkiAI2" parent="AI" instance=ExtResource( 6 )]
+position = Vector2( -13648, -9026 )
+tight_turn_thrust = 0.2
+wide_turn_thrust = 0.8
 
 [node name="PlayerCamera" type="Camera2D" parent="."]
 show_behind_parent = true
