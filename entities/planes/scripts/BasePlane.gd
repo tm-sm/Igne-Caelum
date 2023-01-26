@@ -75,6 +75,7 @@ func _ready():
 	missile_launcher.initialize(self)
 	flare_dispenser.initialize(self)
 	color.modulate = plane_color
+	set_throttle(1)
 
 func _process(delta):
 	#this lets the lock_on_alarm stay on the screen for a while longer

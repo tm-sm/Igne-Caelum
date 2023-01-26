@@ -51,16 +51,15 @@ script = SubResource( 2 )
 [node name="AI" type="Node2D" parent="."]
 
 [node name="IntorvAI" parent="AI" instance=ExtResource( 1 )]
-position = Vector2( 3573, 969 )
-rotation = -1.5708
+position = Vector2( -21224, -815 )
 plane_color = Color( 0, 0, 0, 1 )
 
 [node name="InterzkiAI" parent="AI" instance=ExtResource( 3 )]
-position = Vector2( 4656, 14594 )
+position = Vector2( -17030, 13688 )
 plane_color = Color( 0, 0, 0, 1 )
 
 [node name="InterzkiAI2" parent="AI" instance=ExtResource( 3 )]
-position = Vector2( -13648, -9026 )
+position = Vector2( -842, -19779 )
 plane_color = Color( 0, 0, 0, 1 )
 
 [node name="PlayerCamera" type="Camera2D" parent="."]

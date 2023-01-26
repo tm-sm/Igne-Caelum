@@ -21,10 +21,8 @@ func load_scene(current_scene, next_scene):
 		var error = loader.poll()
 		
 		if error == OK:
-			#data was loaded correctly, updating the progress bar
-			print("loading...")
-			var progress_bar = loading_screen_ins.get_node("PanelContainer/VBoxContainer/ProgressBar")
-			progress_bar.value = float(loader.get_stage() / loader.get_stage_count() * 100)
+			#data was loaded correctly
+			pass
 		
 		elif error == ERR_FILE_EOF:
 			#scene finished loading
