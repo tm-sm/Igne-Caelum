@@ -220,6 +220,7 @@ pitch_scale = 1.5
 autoplay = true
 max_distance = 10000.0
 attenuation = 1.46409
+bus = "Environment"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/die = SubResource( 29 )

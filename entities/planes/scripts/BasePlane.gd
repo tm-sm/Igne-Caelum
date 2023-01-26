@@ -43,6 +43,7 @@ var stalling = false
 var flipped = false
 var locked_on_by_missile = false
 export var controls_enabled = true
+var missile_in_the_air = false
 
 var sprite_angle_offset = 0
 
@@ -219,6 +220,7 @@ func fire_machinegun():
 	machinegun.fire()
 
 func fire_missile():
+	missile_in_the_air = true
 	missile_launcher.fire()
 
 func fire_flares():
@@ -248,3 +250,6 @@ func get_missile_launcher()->MissileLauncher:
 
 func get_flare_dispenser()->FlareDispenser:
 	return flare_dispenser
+
+func _on_missile_destroyed():
+	missile_in_the_air = false

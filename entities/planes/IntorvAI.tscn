@@ -14,3 +14,6 @@ position = Vector2( 85, 0 )
 
 [node name="MissileLauncher" parent="Plane" index="8"]
 position = Vector2( 40, 28 )
+
+[node name="JetSound" parent="." index="2"]
+bus = "Master"

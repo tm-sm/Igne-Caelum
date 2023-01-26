@@ -116,7 +116,7 @@ config/icon="res://icon.png"
 
 [audio]
 
-default_bus_layout=""
+default_bus_layout="res://AudioBus.tres"
 
 [display]
 

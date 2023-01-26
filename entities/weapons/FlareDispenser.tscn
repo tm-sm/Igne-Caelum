@@ -13,5 +13,6 @@ stream = ExtResource( 2 )
 volume_db = -15.0
 pitch_scale = 0.5
 max_distance = 1000.0
+bus = "Environment"
 
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

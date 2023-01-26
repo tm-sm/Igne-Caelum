@@ -6,6 +6,7 @@
 [ext_resource path="res://sounds/lock_on.ogg" type="AudioStream" id=4]
 [ext_resource path="res://sounds/missile_warning.ogg" type="AudioStream" id=5]
 [ext_resource path="res://sounds/ui_select.ogg" type="AudioStream" id=6]
+[ext_resource path="res://textures/weapon_icons.png" type="Texture" id=7]
 
 [sub_resource type="GDScript" id=7]
 script/source = "extends CanvasLayer
@@ -35,15 +36,13 @@ onready var lock_sound = $LockOnSound
 onready var missile_warning = $Warning/WarningSensors/LockedOnLabel
 onready var missile_warning_sound = $MissileWarning
 
-
+var selected_weapon = 0
 var gathering_data
 
 func initialize(dt):
 	data = dt
 	data.connect(\"destroyed\", self, \"_on_data_source_destroyed\")
 	gathering_data = true
-	mg_img.modulate = Color.black
-	msl_img.modulate = Color.black
 
 func _process(_delta):
 	if gathering_data:
@@ -55,17 +54,22 @@ func _process(_delta):
 		flr_ammo_value.text = str(data.get_flare_dispenser().ammo)
 		
 		#Weapon visuals
+		msl_img.modulate = Color.black
+		mg_img.modulate = Color.black
 		match data.selected_weapon:
 			PlanePlayer.weapons.machinegun:
-				if mg_img.modulate != Color.white:
+				if selected_weapon != data.selected_weapon:
 					wpn_chng_sound.play(0)
-					mg_img.modulate = Color.white
-					msl_img.modulate = Color.black
+					selected_weapon = data.selected_weapon
+				mg_img.modulate = Color.green
 			PlanePlayer.weapons.missile:
-				if msl_img.modulate != Color.white:
+				if selected_weapon != data.selected_weapon:
 					wpn_chng_sound.play(0)
-					msl_img.modulate = Color.white
-					mg_img.modulate = Color.black
+					selected_weapon = data.selected_weapon
+				if data.get_missile_launcher().can_fire:
+					msl_img.modulate = Color.green
+				else:
+					msl_img.modulate = Color.red
 		
 		
 		#Warnings and sounds
@@ -104,16 +108,13 @@ use_filter = true
 extra_spacing_char = 2
 font_data = ExtResource( 3 )
 
-[sub_resource type="StreamTexture" id=44]
-load_path = "res://.import/weapon_icons.png-5ea3131ff54103cb5709621a61dc6c1d.stex"
-
 [sub_resource type="AtlasTexture" id=45]
-atlas = SubResource( 44 )
+atlas = ExtResource( 7 )
 region = Rect2( 0, 0, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=46]
-atlas = SubResource( 44 )
-region = Rect2( 128, 0, 64, 64 )
+atlas = ExtResource( 7 )
+region = Rect2( 64, 0, 64, 64 )
 
 [sub_resource type="DynamicFont" id=42]
 size = 30
@@ -340,14 +341,17 @@ color = Color( 0, 0, 0, 1 )
 
 [node name="MissileWarning" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 5 )
+bus = "Effects"
 
 [node name="LockOnSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 4 )
 volume_db = -10.0
+bus = "Effects"
 
 [node name="WeaponChangeSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 6 )
 volume_db = -20.0
 pitch_scale = 0.9
+bus = "Effects"
 
 [connection signal="timeout" from="Warning/WarningSensors/LockedOnLabel/Timer" to="Warning/WarningSensors/LockedOnLabel" method="_on_Timer_timeout"]

@@ -13,8 +13,6 @@ var objective
 var combat_state
 var flight_state
 
-var missile_in_the_air = false
-
 var throttle_target = 1
 var target
 #target info
@@ -98,7 +96,6 @@ func update_weapons():
 			if flight_state == flight_action.straight_ahead and not missile_in_the_air:
 				if missile_launcher.targeting and missile_launcher.get_most_likely_target() == target:
 					fire_missile()
-					missile_in_the_air = true
 				else:
 					fire_machinegun()
 
@@ -106,6 +103,3 @@ func _on_target_destroyed():
 	print(self, "'s target destroyed")
 	objective = objective_type.retreat
 	combat_state = combat_action.idle
-
-func _on_missile_destroyed():
-	missile_in_the_air = false
