@@ -35,12 +35,12 @@ grow_vertical = 2
 theme = ExtResource( 2 )
 
 [node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
-margin_right = 123.0
-margin_bottom = 122.0
+margin_right = 138.0
+margin_bottom = 153.0
 
 [node name="Label" type="Label" parent="PanelContainer/VBoxContainer"]
 pause_mode = 2
-margin_right = 123.0
+margin_right = 138.0
 margin_bottom = 36.0
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 custom_fonts/font = SubResource( 1 )
@@ -49,22 +49,30 @@ align = 1
 
 [node name="HSeparator" type="HSeparator" parent="PanelContainer/VBoxContainer"]
 margin_top = 40.0
-margin_right = 123.0
+margin_right = 138.0
 margin_bottom = 60.0
 
 [node name="Resume" type="Button" parent="PanelContainer/VBoxContainer"]
 pause_mode = 2
 margin_top = 64.0
-margin_right = 123.0
+margin_right = 138.0
 margin_bottom = 91.0
 text = "RESUME"
 
-[node name="Quit" type="Button" parent="PanelContainer/VBoxContainer"]
+[node name="Restart" type="Button" parent="PanelContainer/VBoxContainer"]
 pause_mode = 2
 margin_top = 95.0
-margin_right = 123.0
+margin_right = 138.0
 margin_bottom = 122.0
+text = "RESTART"
+
+[node name="Quit" type="Button" parent="PanelContainer/VBoxContainer"]
+pause_mode = 2
+margin_top = 126.0
+margin_right = 138.0
+margin_bottom = 153.0
 text = "QUIT"
 
 [connection signal="pressed" from="PanelContainer/VBoxContainer/Resume" to="." method="_on_Resume_pressed"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/Restart" to="." method="_on_Restart_pressed"]
 [connection signal="pressed" from="PanelContainer/VBoxContainer/Quit" to="." method="_on_Quit_pressed"]

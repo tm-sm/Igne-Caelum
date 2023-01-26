@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=11 format=2]
+[gd_resource type="Theme" load_steps=13 format=2]
 
 [ext_resource path="res://ui/VHS_font.tres" type="DynamicFont" id=1]
 [ext_resource path="res://fonts/VCR_OSD_MONO_1.001.ttf" type="DynamicFontData" id=2]
@@ -28,6 +28,11 @@ color = Color( 1, 1, 1, 1 )
 
 [sub_resource type="StyleBoxEmpty" id=34]
 
+[sub_resource type="StyleBoxEmpty" id=42]
+
+[sub_resource type="StyleBoxFlat" id=43]
+bg_color = Color( 0, 0, 0, 1 )
+
 [resource]
 Button/colors/font_color = Color( 1, 1, 1, 1 )
 Button/colors/font_color_disabled = Color( 0.901961, 0.901961, 0.901961, 0 )
@@ -44,3 +49,7 @@ HSeparator/styles/separator = SubResource( 41 )
 Label/colors/font_color = Color( 0.00784314, 1, 0, 1 )
 Label/fonts/font = ExtResource( 1 )
 PanelContainer/styles/panel = SubResource( 34 )
+ProgressBar/colors/font_color = Color( 0.00784314, 1, 0, 1 )
+ProgressBar/fonts/font = ExtResource( 1 )
+ProgressBar/styles/bg = SubResource( 42 )
+ProgressBar/styles/fg = SubResource( 43 )
