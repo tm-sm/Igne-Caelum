@@ -56,7 +56,7 @@ tracks/0/keys = {
 }
 
 [sub_resource type="CircleShape2D" id=22]
-radius = 206.039
+radius = 158.051
 
 [node name="Missile" type="RigidBody2D"]
 position = Vector2( -90, 0 )
@@ -106,7 +106,7 @@ input_pickable = false
 monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ArmingDistance"]
-position = Vector2( 253, 0 )
+position = Vector2( 209, 0 )
 shape = SubResource( 22 )
 
 [node name="Timer" type="Timer" parent="."]

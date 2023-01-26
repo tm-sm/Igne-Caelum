@@ -225,8 +225,17 @@ func explode():
 	expl.global_position = global_position
 	expl.explode(linear_velocity)
 
-func get_sounds():
-	return $JetSound
+func get_sounds()->AudioStreamPlayer2D:
+	return engine_sound
 
-func get_missile_sensor():
+func get_missile_sensor()->bool:
 	return missile_launcher.targeting
+
+func get_machinegun()->MachineGun:
+	return machinegun
+
+func get_missile_launcher()->MissileLauncher:
+	return missile_launcher
+
+func get_flare_dispenser()->FlareDispenser:
+	return flare_dispenser

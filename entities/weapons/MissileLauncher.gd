@@ -3,11 +3,13 @@ class_name MissileLauncher
 
 export(String) var ammo_path : String = "res://entities/weapons/Missile.tscn"
 export(float) var cooldown : float = 5
+export(int) var max_ammo : int = 10
 
-onready var ammo = load(ammo_path)
+onready var ammo_type = load(ammo_path)
 onready var timer = $Timer
 onready var reciever = $TargetReciever
 
+var ammo = max_ammo
 var can_fire = true
 
 var targeting = false
@@ -18,31 +20,37 @@ func initialize(body):
 
 func fire():
 	if can_fire:
-		var missile_ins = ammo.instance()
-		missile_ins.rotation = attached_body.get_rotation()
-		attached_body.world.add_child(missile_ins)
-		missile_ins.global_position = global_position
-		missile_ins.apply_central_impulse(attached_body.linear_velocity)
-		missile_ins.add_collision_exception_with(attached_body)
-		missile_ins.fire()
-		missile_ins.world = attached_body.world
-		missile_ins.connect("destroyed", attached_body, "_on_missile_destroyed")
-		can_fire = false
-		timer.start(cooldown)
+		if ammo <= 0:
+			timer.stop()
+			can_fire = false
+		else:
+			var missile_ins = ammo_type.instance()
+			missile_ins.rotation = attached_body.get_rotation()
+			attached_body.world.add_child(missile_ins)
+			missile_ins.global_position = global_position
+			missile_ins.apply_central_impulse(attached_body.linear_velocity)
+			missile_ins.add_collision_exception_with(attached_body)
+			missile_ins.fire()
+			missile_ins.world = attached_body.world
+			missile_ins.connect("destroyed", attached_body, "_on_missile_destroyed")
+			ammo -= 1
+			can_fire = false
+			timer.start(cooldown)
 
 func _process(_delta):
-	targeting = false
-	var targets = reciever.get_overlapping_bodies()
-	for t in targets:
-		if t.is_in_group("heat_emitter"):
-			targeting = true
-			break
+	if can_fire:
+		targeting = false
+		var targets = reciever.get_overlapping_bodies()
+		for t in targets:
+			if t.is_in_group("heat_emitter"):
+				targeting = true
+				break
 
 func _on_Timer_timeout():
 	can_fire = true
 
-func get_most_likely_target():
-	if targeting:
+func get_most_likely_target()->Object:
+	if targeting and can_fire:
 		var targets = reciever.get_overlapping_bodies()
 		var closest_target = null
 		var closest_dist
@@ -53,4 +61,5 @@ func get_most_likely_target():
 				closest_target = t
 				closest_dist = dist
 		return closest_target
+	return null
 

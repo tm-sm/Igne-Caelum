@@ -1,6 +1,5 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=11 format=2]
 
-[ext_resource path="res://ui/VHS_font.tres" type="DynamicFont" id=1]
 [ext_resource path="res://ui/GUI_theme.tres" type="Theme" id=2]
 [ext_resource path="res://fonts/VCR_OSD_MONO_1.001.ttf" type="DynamicFontData" id=3]
 [ext_resource path="res://sounds/lock_on.ogg" type="AudioStream" id=4]
@@ -11,12 +10,24 @@ script/source = "extends CanvasLayer
 
 
 var data
+
+#Info tab
 onready var speed_value = $Info/FlightInfo/Speed/Value
 onready var thrust_value = $Info/FlightInfo/Thrust/Value
+
+#Weapons Info
+onready var mg_ammo_value = $InfoWeapons/InfoWeapons/MachineGun/Value
+onready var msl_ammo_value = $InfoWeapons/InfoWeapons/Missile/Value
+onready var flr_ammo_value = $InfoWeapons/InfoWeapons/Flares/Value
+
+#Weapon states
 onready var lock_warning = $Weapons/WeaponSensors/TargetLockLabel
+onready var lock_sound = $LockOnSound
+
+#Warnings
 onready var missile_warning = $Warning/WarningSensors/LockedOnLabel
 onready var missile_warning_sound = $MissileWarning
-onready var lock_sound = $LockOnSound
+
 
 var gathering_data
 
@@ -29,6 +40,11 @@ func _process(_delta):
 	if gathering_data:
 		speed_value.text = str(stepify(data.forward_speed / 2, 0.01)) + \"km/h\"
 		thrust_value.text = str(data.engine_thrust_percentage * 100) + \"%\"
+		mg_ammo_value.text = str(data.get_machinegun().ammo)
+		msl_ammo_value.text = str(data.get_missile_launcher().ammo)
+		flr_ammo_value.text = str(data.get_flare_dispenser().ammo)
+		
+		
 		if data.get_missile_sensor():
 			lock_warning.text = \"TRGT LOCK\"
 			if not lock_sound.playing:
@@ -51,20 +67,6 @@ func _on_data_source_destroyed():
 	lock_warning.text = \"\"
 	missile_warning.text = \"CONNECTION LOST\"
 "
-
-[sub_resource type="StyleBoxEmpty" id=36]
-
-[sub_resource type="BitmapFont" id=31]
-ascent = 2.0
-
-[sub_resource type="BitmapFont" id=32]
-fallback = SubResource( 31 )
-
-[sub_resource type="Theme" id=6]
-default_font = SubResource( 32 )
-Label/colors/font_color = Color( 0.34902, 0.858824, 0.0627451, 1 )
-Label/fonts/font = ExtResource( 1 )
-PanelContainer/styles/panel = SubResource( 36 )
 
 [sub_resource type="DynamicFont" id=41]
 size = 30
@@ -351,19 +353,18 @@ layer = 0
 script = SubResource( 7 )
 
 [node name="Info" type="PanelContainer" parent="."]
-margin_left = 34.0
-margin_top = 38.0
-margin_right = 303.0
-margin_bottom = 180.0
+margin_left = 50.0
+margin_top = 50.0
+margin_right = 300.0
+margin_bottom = 200.0
 theme = ExtResource( 2 )
 
 [node name="FlightInfo" type="VBoxContainer" parent="Info"]
-margin_right = 269.0
-margin_bottom = 142.0
-theme = SubResource( 6 )
+margin_right = 250.0
+margin_bottom = 150.0
 
 [node name="Speed" type="HBoxContainer" parent="Info/FlightInfo"]
-margin_right = 269.0
+margin_right = 250.0
 margin_bottom = 18.0
 
 [node name="Type" type="Label" parent="Info/FlightInfo/Speed"]
@@ -379,7 +380,7 @@ text = "N/A"
 
 [node name="Thrust" type="HBoxContainer" parent="Info/FlightInfo"]
 margin_top = 22.0
-margin_right = 269.0
+margin_right = 250.0
 margin_bottom = 40.0
 
 [node name="Type" type="Label" parent="Info/FlightInfo/Thrust"]
@@ -388,6 +389,67 @@ margin_bottom = 18.0
 text = "THR:"
 
 [node name="Value" type="Label" parent="Info/FlightInfo/Thrust"]
+margin_left = 58.0
+margin_right = 98.0
+margin_bottom = 18.0
+text = "N/A"
+
+[node name="InfoWeapons" type="PanelContainer" parent="."]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -50.0
+margin_top = 50.0
+margin_right = -50.0
+margin_bottom = -300.0
+grow_horizontal = 0
+theme = ExtResource( 2 )
+
+[node name="InfoWeapons" type="VBoxContainer" parent="InfoWeapons"]
+margin_right = 98.0
+margin_bottom = 62.0
+
+[node name="MachineGun" type="HBoxContainer" parent="InfoWeapons/InfoWeapons"]
+margin_right = 98.0
+margin_bottom = 18.0
+
+[node name="Type" type="Label" parent="InfoWeapons/InfoWeapons/MachineGun"]
+margin_right = 54.0
+margin_bottom = 18.0
+text = "MGN:"
+
+[node name="Value" type="Label" parent="InfoWeapons/InfoWeapons/MachineGun"]
+margin_left = 58.0
+margin_right = 98.0
+margin_bottom = 18.0
+text = "N/A"
+
+[node name="Missile" type="HBoxContainer" parent="InfoWeapons/InfoWeapons"]
+margin_top = 22.0
+margin_right = 98.0
+margin_bottom = 40.0
+
+[node name="Type" type="Label" parent="InfoWeapons/InfoWeapons/Missile"]
+margin_right = 54.0
+margin_bottom = 18.0
+text = "MSL:"
+
+[node name="Value" type="Label" parent="InfoWeapons/InfoWeapons/Missile"]
+margin_left = 58.0
+margin_right = 98.0
+margin_bottom = 18.0
+text = "N/A"
+
+[node name="Flares" type="HBoxContainer" parent="InfoWeapons/InfoWeapons"]
+margin_top = 44.0
+margin_right = 98.0
+margin_bottom = 62.0
+
+[node name="Type" type="Label" parent="InfoWeapons/InfoWeapons/Flares"]
+margin_right = 54.0
+margin_bottom = 18.0
+text = "FLR:"
+
+[node name="Value" type="Label" parent="InfoWeapons/InfoWeapons/Flares"]
 margin_left = 58.0
 margin_right = 98.0
 margin_bottom = 18.0
@@ -412,6 +474,7 @@ grow_horizontal = 2
 margin_right = 134.0
 margin_bottom = 27.0
 grow_horizontal = 2
+custom_colors/font_color = Color( 0.0196078, 0.219608, 1, 1 )
 custom_fonts/font = SubResource( 41 )
 align = 1
 uppercase = true
