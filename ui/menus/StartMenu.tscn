@@ -286,28 +286,65 @@ margin_bottom = -42.0
 grow_vertical = 0
 theme = ExtResource( 1 )
 
-[node name="VBoxContainer" type="VBoxContainer" parent="ColorRect/PanelContainer"]
-margin_right = 177.0
-margin_bottom = 115.0
+[node name="Main" type="VBoxContainer" parent="ColorRect/PanelContainer"]
+margin_right = 238.0
+margin_bottom = 144.0
 grow_vertical = 0
 
-[node name="Start" type="Button" parent="ColorRect/PanelContainer/VBoxContainer"]
-margin_right = 177.0
+[node name="Start" type="Button" parent="ColorRect/PanelContainer/Main"]
+margin_right = 238.0
 margin_bottom = 27.0
 text = "START"
 
-[node name="Options" type="Button" parent="ColorRect/PanelContainer/VBoxContainer"]
+[node name="Options" type="Button" parent="ColorRect/PanelContainer/Main"]
 margin_top = 31.0
-margin_right = 177.0
+margin_right = 238.0
 margin_bottom = 58.0
 text = "OPTIONS"
 
-[node name="Exit" type="Button" parent="ColorRect/PanelContainer/VBoxContainer"]
+[node name="Exit" type="Button" parent="ColorRect/PanelContainer/Main"]
 margin_top = 62.0
-margin_right = 177.0
+margin_right = 238.0
 margin_bottom = 89.0
 text = "EXIT"
 
-[connection signal="pressed" from="ColorRect/PanelContainer/VBoxContainer/Start" to="." method="_on_Start_pressed"]
-[connection signal="pressed" from="ColorRect/PanelContainer/VBoxContainer/Options" to="." method="_on_Options_pressed"]
-[connection signal="pressed" from="ColorRect/PanelContainer/VBoxContainer/Exit" to="." method="_on_Exit_pressed"]
+[node name="Levels" type="VBoxContainer" parent="ColorRect/PanelContainer"]
+margin_right = 238.0
+margin_bottom = 144.0
+grow_vertical = 0
+
+[node name="Intercept" type="Button" parent="ColorRect/PanelContainer/Levels"]
+margin_right = 238.0
+margin_bottom = 27.0
+text = "INTERCEPTION"
+
+[node name="Duel" type="Button" parent="ColorRect/PanelContainer/Levels"]
+margin_top = 31.0
+margin_right = 238.0
+margin_bottom = 58.0
+text = "DOGFIGHT"
+
+[node name="Ambush" type="Button" parent="ColorRect/PanelContainer/Levels"]
+margin_top = 62.0
+margin_right = 238.0
+margin_bottom = 89.0
+text = "AMBUSH"
+
+[node name="HSeparator" type="HSeparator" parent="ColorRect/PanelContainer/Levels"]
+margin_top = 93.0
+margin_right = 238.0
+margin_bottom = 113.0
+
+[node name="Return" type="Button" parent="ColorRect/PanelContainer/Levels"]
+margin_top = 117.0
+margin_right = 238.0
+margin_bottom = 144.0
+text = "RETURN"
+
+[connection signal="pressed" from="ColorRect/PanelContainer/Main/Start" to="." method="_on_Start_pressed"]
+[connection signal="pressed" from="ColorRect/PanelContainer/Main/Options" to="." method="_on_Options_pressed"]
+[connection signal="pressed" from="ColorRect/PanelContainer/Main/Exit" to="." method="_on_Exit_pressed"]
+[connection signal="pressed" from="ColorRect/PanelContainer/Levels/Intercept" to="." method="_on_Intercept_pressed"]
+[connection signal="pressed" from="ColorRect/PanelContainer/Levels/Duel" to="." method="_on_Duel_pressed"]
+[connection signal="pressed" from="ColorRect/PanelContainer/Levels/Ambush" to="." method="_on_Ambush_pressed"]
+[connection signal="pressed" from="ColorRect/PanelContainer/Levels/Return" to="." method="_on_Return_pressed"]
