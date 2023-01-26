@@ -11,6 +11,7 @@
 script/source = "extends Node2D
 
 onready var pause_menu = preload(\"res://ui/menus/PauseMenu.tscn\")
+onready var game_over_menu = preload(\"res://ui/menus/GameOverMenu.tscn\")
 onready var AI = $AI.get_children()
 onready var player = $Player
 onready var stats = $GUI
@@ -27,12 +28,17 @@ func _ready():
 	stats.initialize(player)
 	camera.initialize(AI, player)
 	player.world = self
+	player.connect(\"destroyed\", self, \"game_over\")
 
 func _input(event):
 	if event.is_action_pressed(\"pause\"):
 		var pause = pause_menu.instance()
 		add_child(pause)
 		get_tree().paused = true
+
+func game_over():
+	var game_over = game_over_menu.instance()
+	add_child(game_over)
 "
 
 [node name="Ambush" type="Node2D"]
