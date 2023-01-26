@@ -1,10 +1,11 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://ui/VHS_shader.tres" type="Material" id=1]
 [ext_resource path="res://ui/GUI_theme.tres" type="Theme" id=2]
 [ext_resource path="res://fonts/VCR_OSD_MONO_1.001.ttf" type="DynamicFontData" id=3]
 [ext_resource path="res://sounds/lock_on.ogg" type="AudioStream" id=4]
 [ext_resource path="res://sounds/missile_warning.ogg" type="AudioStream" id=5]
+[ext_resource path="res://sounds/ui_select.ogg" type="AudioStream" id=6]
 
 [sub_resource type="GDScript" id=7]
 script/source = "extends CanvasLayer
@@ -41,6 +42,8 @@ func initialize(dt):
 	data = dt
 	data.connect(\"destroyed\", self, \"_on_data_source_destroyed\")
 	gathering_data = true
+	mg_img.modulate = Color.black
+	msl_img.modulate = Color.black
 
 func _process(_delta):
 	if gathering_data:
@@ -343,5 +346,8 @@ stream = ExtResource( 4 )
 volume_db = -10.0
 
 [node name="WeaponChangeSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 6 )
+volume_db = -20.0
+pitch_scale = 0.9
 
 [connection signal="timeout" from="Warning/WarningSensors/LockedOnLabel/Timer" to="Warning/WarningSensors/LockedOnLabel" method="_on_Timer_timeout"]
