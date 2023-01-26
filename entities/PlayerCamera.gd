@@ -40,16 +40,16 @@ func player_and_target_follow():
 	
 	if target == null:
 		next_target()
-	
-	var p2_pos = target.global_position
-	var newpos = (p1_pos + p2_pos) * 0.5
-	global_position = newpos
-	var distance = p1_pos.distance_to(p2_pos) * 2
-	var zoom_factor = distance * 0.002 / 3 
+	if target:
+		var p2_pos = target.global_position
+		var newpos = (p1_pos + p2_pos) * 0.5
+		global_position = newpos
+		var distance = p1_pos.distance_to(p2_pos) * 2
+		var zoom_factor = distance * 0.002 / 3 
 
-	if zoom_factor < 4:
-		zoom_factor = 4
-	set_zoom(Vector2(1,1) * zoom_factor * zoom_multiplier)
+		if zoom_factor < 4:
+			zoom_factor = 4
+		set_zoom(Vector2(1,1) * zoom_factor * zoom_multiplier)
 
 func player_follow():
 	if player:
@@ -59,7 +59,7 @@ func player_follow():
 		status = mode.STILL
 
 func hold():
-	set_zoom(Vector2(10, 10) * zoom_multiplier)
+	set_zoom(Vector2(1, 1) * zoom_multiplier)
 
 func next_target():
 	zoom_multiplier = 1

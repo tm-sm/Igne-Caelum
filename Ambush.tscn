@@ -48,17 +48,17 @@ script = SubResource( 2 )
 
 [node name="IntorvAI" parent="AI" instance=ExtResource( 4 )]
 position = Vector2( 26148, -11151 )
-plane_color = Color( 1, 1, 1, 1 )
+plane_color = Color( 0, 0, 0, 1 )
 
 [node name="InterzkiAI" parent="AI" instance=ExtResource( 2 )]
 position = Vector2( 4656, 14594 )
-plane_color = Color( 1, 1, 1, 1 )
+plane_color = Color( 0, 0, 0, 1 )
 tight_turn_thrust = 0.2
 wide_turn_thrust = 0.8
 
 [node name="InterzkiAI2" parent="AI" instance=ExtResource( 2 )]
 position = Vector2( -13648, -9026 )
-plane_color = Color( 1, 1, 1, 1 )
+plane_color = Color( 0, 0, 0, 1 )
 tight_turn_thrust = 0.2
 wide_turn_thrust = 0.8
 
