@@ -9,6 +9,8 @@ onready var panel = $ColorRect/PanelContainer
 onready var ui_sound = $UISelect
 
 var ambush_scene = "res://levels/Ambush.tscn"
+var duel_scene = "res://levels/Duel.tscn"
+var interception_scene = "res://levels/Interception.tscn"
 
 func _ready():
 	set_visible_menu(main_menu)
@@ -26,10 +28,12 @@ func _on_Exit_pressed():
 
 func _on_Intercept_pressed():
 	on_button_press()
+	global.load_scene(self, interception_scene)
 
 
 func _on_Duel_pressed():
 	on_button_press()
+	global.load_scene(self, duel_scene)
 
 
 func _on_Ambush_pressed():
