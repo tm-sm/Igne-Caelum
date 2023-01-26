@@ -13,6 +13,13 @@ func add_marker(body, color, mrk_scale):
 	body.add_child(marker)
 	markers.append(marker)
 
+func set_marker_scale(value):
+	for m in markers:
+		if is_instance_valid(m):
+			m.scale = Vector2(value, value)
+		else:
+			markers.erase(m)
+
 func set_marker_visibility(value):
 	for m in markers:
 		if is_instance_valid(m):

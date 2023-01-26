@@ -53,19 +53,22 @@ func player_and_target_follow():
 		if zoom_factor < 4:
 			zoom_factor = 4
 		set_zoom(Vector2(1,1) * zoom_factor * zoom_multiplier)
-		toggle_marker_visibility(zoom_multiplier * zoom_factor)
+		if markers:
+			toggle_marker_visibility(zoom_multiplier * zoom_factor)
 
 func player_follow():
 	if player:
 		global_position = player.global_position
 		set_zoom(Vector2(5,5) * zoom_multiplier)
-		toggle_marker_visibility(zoom_multiplier * 5)
+		if markers:
+			toggle_marker_visibility(zoom_multiplier * 5)
 	else:
 		status = mode.STILL
 
 func hold():
 	set_zoom(Vector2(1, 1) * zoom_multiplier)
-	toggle_marker_visibility(zoom_multiplier)
+	if markers:
+		toggle_marker_visibility(zoom_multiplier)
 
 func next_target():
 	zoom_multiplier = 1
@@ -110,7 +113,9 @@ func _input(event):
 		next_camera_mode()
 
 func toggle_marker_visibility(current_zoom):
-	if current_zoom < 20:
+	if current_zoom < 15:
 		markers.set_marker_visibility(false)
 	else:
 		markers.set_marker_visibility(true)
+		markers.set_marker_scale(current_zoom / 5)
+	

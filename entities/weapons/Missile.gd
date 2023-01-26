@@ -19,7 +19,7 @@ onready var fuse_safety = $FuseSafety
 export(float) var weight_tons : float = 10
 export(int) var damage : int = 500
 export(float) var engine_power : float = 1500
-export(float) var torque_strength : float = 1000
+export(float) var torque_strength : float = 700
 export(float) var wind_resistance_factor : float = 1
 export(float) var lifespan : float = 10
 
@@ -41,7 +41,7 @@ var relative_speed
 func _ready():
 	gravity_scale = 0
 	arming_distance.get_child(0).disabled = true
-	fuse_safety.start(1)
+	fuse_safety.start(0.5)
 	add_to_group("sound_emitter")
 	add_to_group("damageable")
 	weight = weight_tons
@@ -101,7 +101,7 @@ func update_pitch():
 	pitch = 0
 	if target:
 		#this is the only place where it checks if there's a target available in runtime
-		var angle_to_target = get_angle_to(target.global_position)
+		var angle_to_target = get_angle_to(target.global_position + Vector2(50, 0).rotated(target.get_rotation()))
 		if angle_to_target > pi/180 * 5:
 			#for some reason this works better than just using degrees
 			pitch_down()
