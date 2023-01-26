@@ -11,9 +11,6 @@ script = ExtResource( 2 )
 position = Vector2( 0, 2 )
 offset = Vector2( 0.003, 0 )
 
-[node name="Engine" parent="Plane" index="1"]
-position = Vector2( -144, -4 )
-
 [node name="Vapor" parent="Plane" index="2"]
 position = Vector2( -172, -1 )
 

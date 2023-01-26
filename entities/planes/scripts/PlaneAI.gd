@@ -2,6 +2,8 @@ extends BasePlane
 class_name PlaneAI
 
 onready var shot_range = $ShotRange
+onready var missile_safe_zone = $MissileSafeZone
+#used to avoid the plane shooting its own missile
 
 export(int) var machinegun_range : int = 10000
 export(float) var tight_turn_thrust : float = 0.2
@@ -20,6 +22,8 @@ var target
 #target info
 var distance_to_target
 var angle_to_target
+
+var missile_in_safe_zone = true
 
 const pi = 3.14159
 
@@ -95,11 +99,13 @@ func update_weapons():
 		fire_flares()
 	match combat_state:
 		combat_action.target_in_range:
-			if flight_state == flight_action.straight_ahead and not missile_in_the_air:
+			if flight_state == flight_action.straight_ahead:
 				#looking at the target, and it won't destroy its own missile
-				if missile_launcher.targeting and missile_launcher.get_most_likely_target() == target:
+				if not missile_in_the_air and missile_launcher.targeting and missile_launcher.get_most_likely_target() == target:
 					fire_missile()
-				elif has_clear_shot():
+					missile_in_safe_zone = false
+					missile_safe_zone.start(2)
+				elif has_clear_shot() and missile_in_safe_zone:
 					fire_machinegun()
 
 func _on_target_destroyed():
@@ -110,7 +116,10 @@ func _on_target_destroyed():
 func has_clear_shot()->bool:
 	var obstacles = shot_range.get_overlapping_bodies()
 	for o in obstacles:
-		if o.is_in_group("bogey") and o.team == team:
+		if (o.is_in_group("bogey") and o.team == team):
 			#shooting risks damaging a friendly
 			return false
 	return true
+
+func _on_MissileSafeZone_timeout():
+	missile_in_safe_zone = true

@@ -53,6 +53,7 @@ script = SubResource( 1 )
 [node name="Player" parent="Player" instance=ExtResource( 1 )]
 position = Vector2( 941, 160 )
 plane_color = Color( 0.282353, 0.454902, 0.501961, 1 )
+controls_enabled = true
 
 [node name="AI" type="Node2D" parent="."]
 

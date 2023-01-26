@@ -71,11 +71,13 @@ plane_color = Color( 0.388235, 0.509804, 0.219608, 1 )
 position = Vector2( 77807, 17482 )
 rotation = 3.14159
 plane_color = Color( 0, 0, 0, 1 )
+controls_enabled = true
 
 [node name="IntorvAI2" parent="AI" instance=ExtResource( 1 )]
 position = Vector2( 88510, 7730 )
 rotation = 3.14159
 plane_color = Color( 0, 0, 0, 1 )
+controls_enabled = true
 
 [node name="PlayerCamera" type="Camera2D" parent="."]
 show_behind_parent = true

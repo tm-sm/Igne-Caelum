@@ -60,6 +60,7 @@ plane_color = Color( 0.388235, 0.509804, 0.219608, 1 )
 [node name="IntorvAI" parent="AI" instance=ExtResource( 1 )]
 position = Vector2( -21224, -815 )
 plane_color = Color( 0, 0, 0, 1 )
+controls_enabled = true
 
 [node name="InterzkiAI" parent="AI" instance=ExtResource( 3 )]
 position = Vector2( -17030, 13688 )
