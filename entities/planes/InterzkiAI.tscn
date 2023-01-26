@@ -8,3 +8,9 @@ script = ExtResource( 2 )
 machinegun_range = 10000
 tight_turn_thrust = 0.2
 wide_turn_thrust = 0.8
+
+[node name="ShotRange" type="Area2D" parent="." index="4"]
+position = Vector2( 138, 0 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="ShotRange" index="0"]
+polygon = PoolVector2Array( 0, 0, 10000, -875, 10000, 875 )

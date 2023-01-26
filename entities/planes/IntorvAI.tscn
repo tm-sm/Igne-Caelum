@@ -17,3 +17,9 @@ position = Vector2( 40, 28 )
 
 [node name="JetSound" parent="." index="2"]
 bus = "Master"
+
+[node name="ShotRange" type="Area2D" parent="." index="4"]
+position = Vector2( 138, 0 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="ShotRange" index="0"]
+polygon = PoolVector2Array( 0, 0, 10000, -875, 10000, 875 )

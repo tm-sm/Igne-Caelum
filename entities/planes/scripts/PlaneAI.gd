@@ -1,6 +1,8 @@
 extends BasePlane
 class_name PlaneAI
 
+onready var shot_range = $ShotRange
+
 export(int) var machinegun_range : int = 10000
 export(float) var tight_turn_thrust : float = 0.2
 export(float) var wide_turn_thrust : float = 0.8
@@ -94,12 +96,21 @@ func update_weapons():
 	match combat_state:
 		combat_action.target_in_range:
 			if flight_state == flight_action.straight_ahead and not missile_in_the_air:
+				#looking at the target, and it won't destroy its own missile
 				if missile_launcher.targeting and missile_launcher.get_most_likely_target() == target:
 					fire_missile()
-				else:
+				elif has_clear_shot():
 					fire_machinegun()
 
 func _on_target_destroyed():
 	print(self, "'s target destroyed")
 	objective = objective_type.retreat
 	combat_state = combat_action.idle
+
+func has_clear_shot()->bool:
+	var obstacles = shot_range.get_overlapping_bodies()
+	for o in obstacles:
+		if o.is_in_group("bogey") and o.team == team:
+			#shooting risks damaging a friendly
+			return false
+	return true

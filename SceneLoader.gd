@@ -15,14 +15,15 @@ func load_scene(current_scene, next_scene):
 		return
 	
 	
-	yield(get_tree().create_timer(0.5), "timeout")
+	yield(get_tree().create_timer(0.1), "timeout")
 	
 	while true:
 		var error = loader.poll()
 		
 		if error == OK:
 			#data was loaded correctly
-			pass
+			var progress_bar = loading_screen_ins.get_node("PanelContainer/VBoxContainer/ProgressBar")
+			progress_bar.value = float(loader.get_stage()) / loader.get_stage_count() * 100
 		
 		elif error == ERR_FILE_EOF:
 			#scene finished loading

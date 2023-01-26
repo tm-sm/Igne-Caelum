@@ -23,14 +23,14 @@ onready var markers = $InterfaceMarkers
 func _ready():
 	for ai in AI:
 		ai.set_target(player)
-		ai.world = self
+		ai.initialize(self, Teams.group.b)
 		markers.add_marker(ai, Color.red, 4)
 		for ai2 in AI:
 			if ai != ai2:
 				ai.add_collision_exception_with(ai2)
 	stats.initialize(player)
 	camera.initialize(AI, player, markers)
-	player.world = self
+	player.initialize(self, Teams.group.a)
 	player.connect(\"destroyed\", self, \"game_over\")
 	markers.add_marker(player, Color.green, 4)
 

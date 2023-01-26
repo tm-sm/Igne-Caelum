@@ -20,6 +20,8 @@ onready var smoke = $Plane/FireSmoke
 onready var engine_particles = $Plane/Engine
 onready var anim = $AnimationPlayer
 
+export(Teams.group) var team
+
 export(Color) var plane_color = Color.dimgray
 export(float) var weight_tons : float = 20
 export(int) var max_health : int = 100
@@ -61,6 +63,7 @@ func _ready():
 	add_to_group("sound_emitter")
 	add_to_group("damageable")
 	add_to_group("heat_emitter")
+	add_to_group("bogey")
 	health = max_health
 	controls_enabled = true
 	stall_vapor.emitting = false
@@ -76,6 +79,10 @@ func _ready():
 	flare_dispenser.initialize(self)
 	color.modulate = plane_color
 	set_throttle(1)
+
+func initialize(wrld, tm):
+	world = wrld
+	team = tm
 
 func _process(delta):
 	#this lets the lock_on_alarm stay on the screen for a while longer

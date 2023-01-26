@@ -103,6 +103,11 @@ _global_script_classes=[ {
 "class": "SfxrStreamPlayerInterface",
 "language": "GDScript",
 "path": "res://addons/godot_sfxr/SfxrStreamPlayerInterface.gd"
+}, {
+"base": "Reference",
+"class": "Teams",
+"language": "GDScript",
+"path": "res://Team.gd"
 } ]
 _global_script_class_icons={
 "BaseBullet": "",
@@ -123,7 +128,8 @@ _global_script_class_icons={
 "SceneLoader": "",
 "SfxrGenerator": "",
 "SfxrGlobals": "",
-"SfxrStreamPlayerInterface": ""
+"SfxrStreamPlayerInterface": "",
+"Teams": ""
 }
 
 [application]
