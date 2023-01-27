@@ -29,17 +29,18 @@ func _on_Exit_pressed():
 func _on_Intercept_pressed():
 	on_button_press()
 	global.load_scene(self, interception_scene)
+	set_visible_menu(null)
 
 
 func _on_Duel_pressed():
 	on_button_press()
 	global.load_scene(self, duel_scene)
-
+	set_visible_menu(null)
 
 func _on_Ambush_pressed():
 	on_button_press()
 	global.load_scene(self, ambush_scene)
-
+	set_visible_menu(null)
 
 func _on_Return_pressed():
 	on_button_press()

@@ -274,11 +274,11 @@ func update_engine_visuals():
 func explode():
 	#spawns two explosion
 	for n in 2:
-		yield(get_tree().create_timer(0.25), "timeout")
 		var expl = explosion.instance()
 		world.add_child(expl)
 		expl.global_position = global_position
 		expl.explode(linear_velocity)
+		yield(get_tree().create_timer(0.24), "timeout")
 
 func get_sounds()->AudioStreamPlayer2D:
 	return engine_sound
@@ -298,14 +298,16 @@ func get_flare_dispenser()->FlareDispenser:
 func _on_missile_destroyed():
 	missile_in_the_air = false
 
-func _on_body_entered(_body):
-	#check if there's any collision happening
-	#bullets will get included in this, but it will help in randomizing damage, bullets have low weight, so they shoulnd't affect that much
-	var collision_force_vector = Vector2(0,0)
-	var collision_force = 0.0
-	var velocity_difference : Vector2 = linear_velocity - previous_linear_velocity
-	collision_force_vector = velocity_difference
-	collision_force = sqrt(pow(collision_force_vector.x, 2.0) + pow(collision_force_vector.y, 2.0))
-	#a bullet collision will give a collision force of 8 - 40
-	#a plane collision will give >300
-	recieve_damage(collision_force / 2)
+func _on_body_entered(body):
+	if body is RigidBody2D:
+		#to prevent crashing into smoke
+		#check if there's any collision happening
+		#bullets will get included in this, but it will help in randomizing damage, bullets have low weight, so they shoulnd't affect that much
+		var collision_force_vector = Vector2(0,0)
+		var collision_force = 0.0
+		var velocity_difference : Vector2 = linear_velocity - previous_linear_velocity
+		collision_force_vector = velocity_difference
+		collision_force = sqrt(pow(collision_force_vector.x, 2.0) + pow(collision_force_vector.y, 2.0))
+		#a bullet collision will give a collision force of 8 - 40
+		#a plane collision will give >300
+		recieve_damage(collision_force * body.mass / 2)

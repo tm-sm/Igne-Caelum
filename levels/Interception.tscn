@@ -25,7 +25,7 @@ var attackers_alert = false
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	for ai in AI:
-		ai.set_target(player)
+		ai.set_target(attackers_objective)
 		ai.initialize(self, Teams.group.b)
 		ai.get_missile_launcher().connect(\"missile_launched\", spawn_signal, \"_on_entity_spawned\")
 		markers.add_arrow_marker(ai, Color.red, 4)

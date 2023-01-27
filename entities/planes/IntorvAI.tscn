@@ -22,7 +22,7 @@ bus = "Master"
 position = Vector2( 138, 0 )
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="ShotRange" index="0"]
-polygon = PoolVector2Array( 0, 0, 10000, -875, 10000, 875 )
+polygon = PoolVector2Array( 0, 0, 10000, -1500, 10000, 1500 )
 
 [node name="MissileSafeZone" type="Timer" parent="." index="5"]
 one_shot = true
