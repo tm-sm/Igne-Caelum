@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=12 format=2]
+[gd_resource type="Theme" load_steps=13 format=2]
 
 [ext_resource path="res://ui/VHS_font.tres" type="DynamicFont" id=1]
 [ext_resource path="res://fonts/VCR_OSD_MONO_1.001.ttf" type="DynamicFontData" id=2]
@@ -14,6 +14,9 @@ font_data = ExtResource( 2 )
 bg_color = Color( 0, 0, 0, 1 )
 
 [sub_resource type="StyleBoxEmpty" id=37]
+
+[sub_resource type="StyleBoxEmpty" id=44]
+content_margin_bottom = 5.0
 
 [sub_resource type="StyleBoxEmpty" id=39]
 
@@ -36,6 +39,7 @@ Button/colors/font_color_pressed = Color( 0.898039, 1, 0, 1 )
 Button/fonts/font = SubResource( 35 )
 Button/styles/disabled = SubResource( 36 )
 Button/styles/focus = SubResource( 37 )
+Button/styles/hover = SubResource( 44 )
 Button/styles/normal = SubResource( 39 )
 Button/styles/pressed = SubResource( 40 )
 GridContainer/constants/hseparation = 15
