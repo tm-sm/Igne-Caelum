@@ -29,7 +29,7 @@ func initialize(trgts, p, mrk):
 	status = mode.PLAYER
 	markers = mrk
 	
-func _process(delta):
+func _physics_process(delta):
 	match status:
 		mode.PLAYER_AND_TARGET:
 			player_and_target_follow(delta)

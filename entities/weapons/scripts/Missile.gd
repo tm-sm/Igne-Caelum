@@ -68,15 +68,16 @@ func _physics_process(_delta):
 	forward_speed = abs(relative_speed.x)
 	vertical_speed = relative_speed.y #the sign is important for air resistance calculations
 
-func _integrate_forces(_state):
-	apply_pitch()
-	apply_wind_resistance()
+func _integrate_forces(state):
+	apply_pitch(state)
+	apply_wind_resistance(state)
 
 func recieve_damage(_dmg):
 	emit_signal("destroyed")
 	anim.play("explode")
 
 func apply_thrust():
+	#I don't use state here because its only used once in this case
 	var final_thrust = Vector2(0,0)
 	engine_thrust = Vector2(engine_power, 0.0)
 	
@@ -85,17 +86,17 @@ func apply_thrust():
 	
 	add_central_force(final_thrust)
 
-func apply_pitch():
-	add_torque(-applied_torque)
+func apply_pitch(state):
+	state.add_torque(-applied_torque)
 	if pitching:
-		add_torque(pitch)
+		state.add_torque(pitch)
 
-func apply_wind_resistance():
+func apply_wind_resistance(state):
 	#this adds an impulse on the y direction of the plane, this is done by
 	var wind_resistance = Vector2(0, 0)
 	wind_resistance.y = vertical_speed * wind_resistance_factor
 	wind_resistance = wind_resistance.rotated(get_rotation())
-	apply_central_impulse(-wind_resistance)
+	state.apply_central_impulse(-wind_resistance)
 
 func update_pitch():
 	pitch = 0
