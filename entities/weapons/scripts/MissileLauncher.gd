@@ -1,6 +1,8 @@
 extends Position2D
 class_name MissileLauncher
 
+signal missile_launched(missile)
+
 export(String) var ammo_path : String = "res://entities/weapons/Missile.tscn"
 export(float) var cooldown : float = 5
 export(int) var max_ammo : int = 10
@@ -17,6 +19,7 @@ var attached_body
 
 func initialize(body):
 	attached_body = body
+	connect("missile_launched", spawn_signal, "_on_entity_spawned")
 
 func fire():
 	if can_fire:
@@ -33,6 +36,7 @@ func fire():
 			missile_ins.fire()
 			missile_ins.world = attached_body.world
 			missile_ins.connect("destroyed", attached_body, "_on_missile_destroyed")
+			emit_signal("missile_launched", missile_ins)
 			ammo -= 1
 			can_fire = false
 			timer.start(cooldown)

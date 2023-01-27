@@ -1,9 +1,13 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://textures/shapes/circle.png" type="Texture" id=1]
 [ext_resource path="res://ui/scripts/CircleMarker.gd" type="Script" id=2]
 
+[sub_resource type="CanvasItemMaterial" id=1]
+blend_mode = 1
+
 [node name="Circle" type="Sprite"]
+material = SubResource( 1 )
 position = Vector2( 498, 280 )
 texture = ExtResource( 1 )
 script = ExtResource( 2 )

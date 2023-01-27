@@ -307,5 +307,3 @@ func _on_body_entered(_body):
 	#a bullet collision will give a collision force of 8 - 40
 	#a plane collision will give >300
 	recieve_damage(collision_force / 2)
-
-
