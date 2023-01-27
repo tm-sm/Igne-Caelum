@@ -212,7 +212,6 @@ process_material = SubResource( 30 )
 
 [node name="Vapor" type="Particles2D" parent="Plane"]
 position = Vector2( -190, -2 )
-emitting = false
 amount = 500
 lifetime = 15.0
 visibility_rect = Rect2( -10000, -10000, 20000, 20000 )

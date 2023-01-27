@@ -46,6 +46,8 @@ var flipped = false
 var locked_on_by_missile = false
 export var controls_enabled = true
 var missile_in_the_air = false
+var dead = false
+
 
 var sprite_angle_offset = 0
 
@@ -126,10 +128,11 @@ func _integrate_forces(_state):
 
 func recieve_damage(dmg):
 	health = health - dmg
-	if health <= 0:
+	if health <= 0 and not dead:
 		smoke.emitting = true
 		emit_signal("destroyed")
 		anim.play("die")
+		dead = true
 
 func apply_thrust():
 	#calculating the force needed to mantain the desired speed

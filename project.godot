@@ -145,6 +145,7 @@ default_bus_layout="res://AudioBus.tres"
 [autoload]
 
 global="*res://ui/scripts/SceneLoader.gd"
+plane="*res://SelectedPlane.gd"
 
 [display]
 
