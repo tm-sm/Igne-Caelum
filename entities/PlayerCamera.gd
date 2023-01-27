@@ -43,7 +43,8 @@ func player_and_target_follow():
 	
 	if target == null:
 		next_target()
-	if target:
+	if target and is_instance_valid(target):
+		#either the target got freed, or next_target returned null
 		var p2_pos = target.global_position
 		var newpos = (p1_pos + p2_pos) * 0.5
 		global_position = newpos

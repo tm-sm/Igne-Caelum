@@ -19,9 +19,9 @@ void fragment() {
 
 [sub_resource type="ShaderMaterial" id=38]
 shader = SubResource( 37 )
-shader_param/blue = 0.888
-shader_param/red = 0.605
-shader_param/green = 0.375
+shader_param/blue = 0.763
+shader_param/red = 0.429
+shader_param/green = 0.46
 
 [sub_resource type="OpenSimplexNoise" id=41]
 

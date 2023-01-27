@@ -72,9 +72,9 @@ void fragment() {
 
 [sub_resource type="ShaderMaterial" id=52]
 shader = SubResource( 37 )
-shader_param/blue = 0.54
-shader_param/red = 0.872
-shader_param/green = 0.673
+shader_param/blue = 0.243
+shader_param/red = 0.11
+shader_param/green = 0.07
 
 [sub_resource type="OpenSimplexNoise" id=41]
 
@@ -102,8 +102,8 @@ void fragment() {
 }"
 
 [sub_resource type="Gradient" id=46]
-offsets = PoolRealArray( 0.135484, 0.174194, 0.232258, 0.303226, 0.819355, 0.948387 )
-colors = PoolColorArray( 1, 1, 1, 0.0833334, 1, 1, 1, 0.0173794, 1, 1, 1, 0.0742575, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1 )
+offsets = PoolRealArray( 0.364706, 0.576471, 0.623529 )
+colors = PoolColorArray( 1, 1, 1, 0.0173794, 1, 1, 1, 1, 1, 1, 1, 0 )
 
 [sub_resource type="GradientTexture" id=47]
 gradient = SubResource( 46 )
@@ -141,20 +141,10 @@ plane_color = Color( 0.388235, 0.509804, 0.219608, 1 )
 
 [node name="AI" type="Node2D" parent="."]
 
-[node name="IntorvAI" parent="AI" groups=["sound_emitters"] instance=ExtResource( 1 )]
+[node name="IntorvAI" parent="AI" instance=ExtResource( 1 )]
 position = Vector2( -21224, -815 )
 physics_material_override = SubResource( 53 )
-__meta__ = {
-"_edit_group_": true
-}
 plane_color = Color( 0, 0, 0, 1 )
-weight_tons = 25.0
-max_health = 150
-max_speed = 2500.0
-agility = 60.0
-engine_power = 1000.0
-torque_strength = 5500.0
-wind_resistance_factor = 0.1
 
 [node name="InterzkiAI" parent="AI" instance=ExtResource( 3 )]
 position = Vector2( -17030, 13688 )
