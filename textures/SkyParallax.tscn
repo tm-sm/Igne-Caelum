@@ -1,6 +1,6 @@
 [gd_scene load_steps=13 format=2]
 
-[ext_resource path="res://textures/shaders/SkyParallax.tres" type="Material" id=1]
+[ext_resource path="res://shaders/SkyParallax.tres" type="Material" id=1]
 
 [sub_resource type="Shader" id=37]
 code = "shader_type canvas_item;

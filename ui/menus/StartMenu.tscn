@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://ui/GUI_theme.tres" type="Theme" id=1]
-[ext_resource path="res://ui/menus/StartMenu.gd" type="Script" id=2]
+[ext_resource path="res://ui/scripts/StartMenu.gd" type="Script" id=2]
 [ext_resource path="res://sounds/ui_select.ogg" type="AudioStream" id=3]
 
 [sub_resource type="Shader" id=39]

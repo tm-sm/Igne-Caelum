@@ -12,12 +12,12 @@ _global_script_classes=[ {
 "base": "RigidBody2D",
 "class": "BaseBullet",
 "language": "GDScript",
-"path": "res://entities/weapons/BaseBullet.gd"
+"path": "res://entities/weapons/scripts/BaseBullet.gd"
 }, {
 "base": "RigidBody2D",
 "class": "BaseMissile",
 "language": "GDScript",
-"path": "res://entities/weapons/Missile.gd"
+"path": "res://entities/weapons/scripts/Missile.gd"
 }, {
 "base": "RigidBody2D",
 "class": "BasePlane",
@@ -27,7 +27,7 @@ _global_script_classes=[ {
 "base": "Sprite",
 "class": "CircleMarker",
 "language": "GDScript",
-"path": "res://ui/CircleMarker.gd"
+"path": "res://ui/scripts/CircleMarker.gd"
 }, {
 "base": "RigidBody2D",
 "class": "Explosion",
@@ -37,37 +37,37 @@ _global_script_classes=[ {
 "base": "RigidBody2D",
 "class": "Flare",
 "language": "GDScript",
-"path": "res://entities/weapons/Flare.gd"
+"path": "res://entities/weapons/scripts/Flare.gd"
 }, {
 "base": "Position2D",
 "class": "FlareDispenser",
 "language": "GDScript",
-"path": "res://entities/weapons/FlareDispenser.gd"
+"path": "res://entities/weapons/scripts/FlareDispenser.gd"
 }, {
 "base": "CanvasLayer",
 "class": "GameOverMenu",
 "language": "GDScript",
-"path": "res://ui/menus/GameOverMenu.gd"
+"path": "res://ui/scripts/GameOverMenu.gd"
 }, {
 "base": "Node2D",
 "class": "InterfaceMarkers",
 "language": "GDScript",
-"path": "res://ui/InterfaceMarkers.gd"
+"path": "res://ui/scripts/InterfaceMarkers.gd"
 }, {
 "base": "Position2D",
 "class": "MachineGun",
 "language": "GDScript",
-"path": "res://entities/weapons/MachineGun.gd"
+"path": "res://entities/weapons/scripts/MachineGun.gd"
 }, {
 "base": "Position2D",
 "class": "MissileLauncher",
 "language": "GDScript",
-"path": "res://entities/weapons/MissileLauncher.gd"
+"path": "res://entities/weapons/scripts/MissileLauncher.gd"
 }, {
 "base": "CanvasLayer",
 "class": "PauseMenu",
 "language": "GDScript",
-"path": "res://ui/menus/PauseMenu.gd"
+"path": "res://ui/scripts/PauseMenu.gd"
 }, {
 "base": "BasePlane",
 "class": "PlaneAI",
@@ -87,7 +87,7 @@ _global_script_classes=[ {
 "base": "Node",
 "class": "SceneLoader",
 "language": "GDScript",
-"path": "res://SceneLoader.gd"
+"path": "res://ui/scripts/SceneLoader.gd"
 }, {
 "base": "Reference",
 "class": "SfxrGenerator",
@@ -144,7 +144,7 @@ default_bus_layout="res://AudioBus.tres"
 
 [autoload]
 
-global="*res://SceneLoader.gd"
+global="*res://ui/scripts/SceneLoader.gd"
 
 [display]
 

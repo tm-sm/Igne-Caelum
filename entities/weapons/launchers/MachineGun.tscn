@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://entities/weapons/scripts/MachineGun.gd" type="Script" id=1]
+[ext_resource path="res://sounds/30mm.ogg" type="AudioStream" id=2]
+
+[node name="MachineGun" type="Position2D"]
+position = Vector2( 95, -2 )
+script = ExtResource( 1 )
+power = 7500.0
+
+[node name="Timer" type="Timer" parent="."]
+
+[node name="Gunshot" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 2 )
+volume_db = -10.0
+max_distance = 7500.0
+bus = "Environment"
+
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

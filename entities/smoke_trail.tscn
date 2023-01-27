@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=2]
 
-[ext_resource path="res://textures/smoke.png" type="Texture" id=1]
+[ext_resource path="res://textures/entities/smoke.png" type="Texture" id=1]
 
 [sub_resource type="Gradient" id=6]
 offsets = PoolRealArray( 0.270968, 0.645161, 0.767742, 0.987097, 1 )

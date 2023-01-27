@@ -1,9 +1,9 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://entities/planes/IntorvAI.tscn" type="PackedScene" id=1]
 [ext_resource path="res://entities/planes/InterzkiPlayer.tscn" type="PackedScene" id=2]
 [ext_resource path="res://entities/planes/InterzkiAI.tscn" type="PackedScene" id=3]
-[ext_resource path="res://textures/SkyParallax.tscn" type="PackedScene" id=4]
+[ext_resource path="res://shaders/SkyParallax.tres" type="Material" id=4]
 [ext_resource path="res://ui/menus/InterfaceMarkers.tscn" type="PackedScene" id=5]
 [ext_resource path="res://ui/GUI.tscn" type="PackedScene" id=6]
 [ext_resource path="res://entities/PlayerCamera.gd" type="Script" id=7]
@@ -18,6 +18,9 @@ onready var player = $Player.get_child(0)
 onready var stats = $GUI
 onready var camera = $PlayerCamera
 onready var markers = $InterfaceMarkers
+
+
+var is_game_over = false
 
 
 # Called when the node enters the scene tree for the first time.
@@ -42,9 +45,89 @@ func _input(event):
 		get_tree().paused = true
 
 func game_over():
-	var game_over = game_over_menu.instance()
-	add_child(game_over)
+	if not is_game_over:
+		var game_over = game_over_menu.instance()
+		add_child(game_over)
+		is_game_over = true
 "
+
+[sub_resource type="PhysicsMaterial" id=16]
+
+[sub_resource type="PhysicsMaterial" id=53]
+
+[sub_resource type="Shader" id=37]
+code = "shader_type canvas_item;
+
+uniform float blue = 1.0;
+uniform float red = 1.0;
+uniform float green = 1.0;
+
+void fragment() {
+	COLOR = texture(TEXTURE, UV);
+	COLOR.b = blue;
+	COLOR.r = red;
+	COLOR.g = green;
+}
+"
+
+[sub_resource type="ShaderMaterial" id=52]
+shader = SubResource( 37 )
+shader_param/blue = 0.54
+shader_param/red = 0.872
+shader_param/green = 0.673
+
+[sub_resource type="OpenSimplexNoise" id=41]
+
+[sub_resource type="NoiseTexture" id=40]
+width = 2042
+height = 2042
+seamless = true
+noise = SubResource( 41 )
+
+[sub_resource type="Shader" id=39]
+code = "shader_type canvas_item;
+
+uniform sampler2D texture2;
+uniform sampler2D colorTexture;
+
+uniform vec2 scroll = vec2(0.1, 0.1);
+uniform vec2 scroll2 = vec2(0.1, 0.1);
+
+void fragment() {
+	float textureColor1 = texture(TEXTURE, UV + scroll * TIME).r;
+	float textureColor2 = texture(texture2, UV + scroll2 * TIME).r;
+	float energy = textureColor1 * textureColor2;
+	vec4 color = texture(colorTexture, vec2(energy));
+	COLOR = color;
+}"
+
+[sub_resource type="Gradient" id=46]
+offsets = PoolRealArray( 0.135484, 0.174194, 0.232258, 0.303226, 0.819355, 0.948387 )
+colors = PoolColorArray( 1, 1, 1, 0.0833334, 1, 1, 1, 0.0173794, 1, 1, 1, 0.0742575, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1 )
+
+[sub_resource type="GradientTexture" id=47]
+gradient = SubResource( 46 )
+
+[sub_resource type="OpenSimplexNoise" id=45]
+
+[sub_resource type="NoiseTexture" id=51]
+width = 325
+height = 1
+seamless = true
+noise = SubResource( 45 )
+
+[sub_resource type="ShaderMaterial" id=49]
+shader = SubResource( 39 )
+shader_param/scroll = Vector2( 0.002, 0.001 )
+shader_param/scroll2 = Vector2( 0, 0 )
+shader_param/texture2 = SubResource( 51 )
+shader_param/colorTexture = SubResource( 47 )
+
+[sub_resource type="NoiseTexture" id=50]
+width = 2042
+height = 2042
+seamless = true
+noise = SubResource( 41 )
 
 [node name="Ambush" type="Node2D"]
 script = SubResource( 1 )
@@ -53,21 +136,34 @@ script = SubResource( 1 )
 
 [node name="Player" parent="Player" instance=ExtResource( 2 )]
 position = Vector2( 2497, 791 )
+physics_material_override = SubResource( 16 )
 plane_color = Color( 0.388235, 0.509804, 0.219608, 1 )
 
 [node name="AI" type="Node2D" parent="."]
 
-[node name="IntorvAI" parent="AI" instance=ExtResource( 1 )]
+[node name="IntorvAI" parent="AI" groups=["sound_emitters"] instance=ExtResource( 1 )]
 position = Vector2( -21224, -815 )
+physics_material_override = SubResource( 53 )
+__meta__ = {
+"_edit_group_": true
+}
 plane_color = Color( 0, 0, 0, 1 )
-controls_enabled = true
+weight_tons = 25.0
+max_health = 150
+max_speed = 2500.0
+agility = 60.0
+engine_power = 1000.0
+torque_strength = 5500.0
+wind_resistance_factor = 0.1
 
 [node name="InterzkiAI" parent="AI" instance=ExtResource( 3 )]
 position = Vector2( -17030, 13688 )
+physics_material_override = SubResource( 16 )
 plane_color = Color( 0, 0, 0, 1 )
 
 [node name="InterzkiAI2" parent="AI" instance=ExtResource( 3 )]
 position = Vector2( -842, -19779 )
+physics_material_override = SubResource( 16 )
 plane_color = Color( 0, 0, 0, 1 )
 
 [node name="PlayerCamera" type="Camera2D" parent="."]
@@ -83,9 +179,33 @@ drag_margin_right = 0.5
 drag_margin_bottom = 0.5
 script = ExtResource( 7 )
 
-[node name="SkyParallax" parent="." instance=ExtResource( 4 )]
+[node name="SkyParallax" type="ParallaxBackground" parent="."]
 scale = Vector2( 5, 5 )
 transform = Transform2D( 5, 0, 0, 5, 0, 0 )
+scroll_ignore_camera_zoom = true
+
+[node name="Sky" type="ColorRect" parent="SkyParallax"]
+material = SubResource( 52 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="FarawayClouds" type="ParallaxLayer" parent="SkyParallax"]
+motion_scale = Vector2( 0.001, 0.001 )
+motion_mirroring = Vector2( 2042, 2042 )
+
+[node name="Sprite" type="Sprite" parent="SkyParallax/FarawayClouds"]
+material = ExtResource( 4 )
+texture = SubResource( 40 )
+centered = false
+
+[node name="NearClouds" type="ParallaxLayer" parent="SkyParallax"]
+motion_scale = Vector2( 0.01, 0.01 )
+motion_mirroring = Vector2( 2042, 2042 )
+
+[node name="Sprite" type="Sprite" parent="SkyParallax/NearClouds"]
+material = SubResource( 49 )
+texture = SubResource( 50 )
+centered = false
 
 [node name="InterfaceMarkers" parent="." instance=ExtResource( 5 )]
 

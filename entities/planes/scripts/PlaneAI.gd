@@ -35,10 +35,12 @@ func _ready():
 func set_target(t):
 	if t:
 		print(self, " set target to: ", t)
-		if target:
+		if target and target.is_in_group("damageable"):
 			target.disconnect("destroyed", self, "_on_target_destroyed")
+		
 		target = t
-		target.connect("destroyed", self, "_on_target_destroyed")
+		if t.is_in_group("damageable"):
+			target.connect("destroyed", self, "_on_target_destroyed")
 		flight_state = flight_action.straight_ahead
 		combat_state = combat_action.heading_to_target
 		objective = objective_type.fight
@@ -106,7 +108,7 @@ func update_weapons():
 				if not missile_in_the_air and missile_launcher.targeting and missile_launcher.get_most_likely_target() == target:
 					fire_missile()
 					missile_in_safe_zone = false
-					missile_safe_zone.start(2)
+					missile_safe_zone.start(3)
 				elif has_clear_shot() and missile_in_safe_zone:
 					fire_machinegun()
 
