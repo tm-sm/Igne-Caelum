@@ -10,6 +10,7 @@ export(float) var bullet_weight : float = 0.1
 
 func _ready():
 	add_to_group("ammunition")
+	add_to_group("damageable")
 
 func fire(impulse):
 	weight = bullet_weight
