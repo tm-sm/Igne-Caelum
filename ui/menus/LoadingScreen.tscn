@@ -29,6 +29,7 @@ tracks/0/keys = {
 }
 
 [node name="LoadingScreen" type="CanvasLayer"]
+layer = 128
 script = SubResource( 1 )
 
 [node name="PanelContainer" type="PanelContainer" parent="."]

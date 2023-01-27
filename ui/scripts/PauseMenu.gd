@@ -10,11 +10,13 @@ func _on_Resume_pressed():
 func _on_Restart_pressed():
 	get_tree().paused = false
 	global.load_scene(current_scene, current_scene.filename)
+	queue_free()
 
 
 func _on_Quit_pressed():
 	get_tree().paused = false
 	global.load_scene(current_scene, "res://ui/menus/StartMenu.tscn")
+	queue_free()
 
 
 func _input(event):

@@ -9,7 +9,7 @@ export(int) var machinegun_range : int = 10000
 export(float) var tight_turn_thrust : float = 0.2
 export(float) var wide_turn_thrust : float = 0.8
 
-enum combat_action { idle, heading_to_target, target_in_range}
+enum combat_action { idle, heading_to_target, target_in_range, dodge_up, dodge_down}
 enum flight_action { stalling, straight_ahead, wide_turn, sharp_turn}
 enum objective_type { fight, retreat}
 
@@ -24,6 +24,8 @@ var distance_to_target
 var angle_to_target
 
 var missile_in_safe_zone = true
+var dodging = false
+#this will eventually also be used to avoid collisions
 
 const pi = 3.14159
 
@@ -48,39 +50,52 @@ func set_target(t):
 
 func _physics_process(delta):
 	var target_position
-	if objective != objective_type.retreat:
-		target_position = target.global_position
-	else:
-#		print(self, " retreating")
-		target_position = Vector2(100000, -10000)
-	angle_to_target = get_angle_to(target_position)
-	distance_to_target = global_position.distance_to(target_position)
-	
-	if stalling:
-		flight_state = flight_action.stalling
-	elif abs(angle_to_target) < pi/180 * 5:
-		flight_state = flight_action.straight_ahead
-	elif abs(angle_to_target) > pi/180 * 90:
-		flight_state = flight_action.sharp_turn
-	else:
-		flight_state = flight_action.wide_turn
-	
-	if combat_state != combat_action.idle:
-		if distance_to_target < machinegun_range:
-			combat_state = combat_action.target_in_range
+	if not locked_on_by_missile:
+		dodging = false
+		if objective != objective_type.retreat:
+			target_position = target.global_position
 		else:
-			combat_state = combat_action.heading_to_target
+	#		print(self, " retreating")
+			target_position = Vector2(100000, -10000)
+		angle_to_target = get_angle_to(target_position)
+		distance_to_target = global_position.distance_to(target_position)
+		
+		if stalling:
+			flight_state = flight_action.stalling
+		elif abs(angle_to_target) < pi/180 * 5:
+			flight_state = flight_action.straight_ahead
+		elif abs(angle_to_target) > pi/180 * 90:
+			flight_state = flight_action.sharp_turn
+		else:
+			flight_state = flight_action.wide_turn
+		
+		if combat_state != combat_action.idle:
+			if distance_to_target < machinegun_range:
+				combat_state = combat_action.target_in_range
+			else:
+				combat_state = combat_action.heading_to_target
+	else:
+		if not dodging:
+			var rng = RandomNumberGenerator.new()
+			rng.randomize()
+			if rng.randf_range(0, 1) > 0.5:
+				combat_state = combat_action.dodge_up
+			else:
+				combat_state = combat_action.dodge_down
+		dodging = true
+		print("dodging")
+		flight_state = flight_action.wide_turn
 	
 #	print(self, " | ", flight_state, " | ", combat_state, " : ", target, " | ", distance_to_target, " | ", angle_to_target)
 	._physics_process(delta)
 
 func update_pitch():
 	pitch = 0
-	if angle_to_target > pi/180 * 2:
+	if combat_state == combat_action.dodge_down or (not dodging and angle_to_target > pi/180 * 2):
 #		print(self, " pitching down")
 		#for some reason this works better than just using degrees
 		pitch_down()
-	elif angle_to_target < -pi/180 * 2:
+	elif combat_state == combat_action.dodge_up or (not dodging and angle_to_target < -pi/180 * 2):
 #		print(self, " pitching up")
 		pitch_up()
 
