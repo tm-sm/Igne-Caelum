@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://textures/entities/Interzki_shape.png" type="Texture" id=1]
 [ext_resource path="res://textures/entities/Interzki_color.png" type="Texture" id=2]
@@ -12,6 +12,7 @@
 [ext_resource path="res://entities/weapons/launchers/MissileLauncher.tscn" type="PackedScene" id=10]
 [ext_resource path="res://entities/weapons/launchers/FlareDispenser.tscn" type="PackedScene" id=11]
 [ext_resource path="res://anims/basedie.tres" type="Animation" id=12]
+[ext_resource path="res://sounds/hit.ogg" type="AudioStream" id=13]
 
 [sub_resource type="PhysicsMaterial" id=16]
 
@@ -141,7 +142,6 @@ texture = ExtResource( 4 )
 [node name="Fire" type="Particles2D" parent="Plane"]
 material = SubResource( 30 )
 position = Vector2( 3, 2 )
-emitting = false
 amount = 50
 local_coords = false
 process_material = SubResource( 23 )
@@ -169,6 +169,12 @@ autoplay = true
 max_distance = 10000.0
 attenuation = 1.46409
 bus = "Environment"
+
+[node name="Hit" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 13 )
+volume_db = -5.0
+pitch_scale = 0.8
+bus = "Effects"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/die = ExtResource( 12 )

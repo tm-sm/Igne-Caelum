@@ -9,6 +9,7 @@ var explosion = preload("res://entities/particles/Explosion.tscn")
 onready var world = self
 onready var engine = $Plane/EnginePosition
 onready var engine_sound = $JetSound
+onready var hit_sound = $Hit
 onready var machinegun = $Plane/MachineGun
 onready var missile_launcher = $Plane/MissileLauncher
 onready var flare_dispenser = $Plane/FlareDispenser
@@ -148,6 +149,7 @@ func _integrate_forces(state):
 
 func recieve_damage(dmg):
 	health = health - dmg
+	hit_sound.play(0)
 	if health <= 0 and not dead:
 		smoke.emitting = true
 		emit_signal("destroyed")
@@ -272,11 +274,11 @@ func update_engine_visuals():
 func explode():
 	#spawns two explosion
 	for n in 2:
+		yield(get_tree().create_timer(0.25), "timeout")
 		var expl = explosion.instance()
 		world.add_child(expl)
 		expl.global_position = global_position
 		expl.explode(linear_velocity)
-		yield(get_tree().create_timer(0.4), "timeout")
 
 func get_sounds()->AudioStreamPlayer2D:
 	return engine_sound

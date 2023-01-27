@@ -39,23 +39,26 @@ func _physics_process(delta):
 			hold()
 
 func player_and_target_follow(delta):
-	var p1_pos = player.global_position
-	
-	if target == null:
-		next_target()
-	if target and is_instance_valid(target):
-		#either the target got freed, or next_target returned null
-		var p2_pos = target.global_position
-		var newpos = (p1_pos + p2_pos) * 0.5
-		set_global_position(lerp(get_global_position(), newpos, delta * smoothing_speed))
-		var distance = p1_pos.distance_to(p2_pos) * 2
-		var zoom_factor = distance * 0.002 / 3 
+	var p1_pos
+	if player:
+		p1_pos = player.global_position
+		if not target:
+			next_target()
+		if target and is_instance_valid(target):
+			#either the target got freed, or next_target returned null
+			var p2_pos = target.global_position
+			var newpos = (p1_pos + p2_pos) * 0.5
+			set_global_position(lerp(get_global_position(), newpos, delta * smoothing_speed))
+			var distance = p1_pos.distance_to(p2_pos) * 2
+			var zoom_factor = distance * 0.002 / 3 
 
-		if zoom_factor < 4:
-			zoom_factor = 4
-		set_zoom(Vector2(1,1) * zoom_factor * zoom_multiplier)
-		if markers:
-			toggle_marker_visibility(zoom_multiplier * zoom_factor)
+			if zoom_factor < 4:
+				zoom_factor = 4
+			set_zoom(Vector2(1,1) * zoom_factor * zoom_multiplier)
+			if markers:
+				toggle_marker_visibility(zoom_multiplier * zoom_factor)
+	else:
+		status = mode.STILL
 
 func player_follow(delta):
 	if player:

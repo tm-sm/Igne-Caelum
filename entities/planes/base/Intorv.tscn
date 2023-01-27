@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=2]
+[gd_scene load_steps=28 format=2]
 
 [ext_resource path="res://entities/planes/scripts/BasePlane.gd" type="Script" id=1]
 [ext_resource path="res://entities/particles/Fire.tres" type="Material" id=2]
@@ -11,6 +11,7 @@
 [ext_resource path="res://entities/weapons/launchers/MissileLauncher.tscn" type="PackedScene" id=9]
 [ext_resource path="res://entities/weapons/launchers/FlareDispenser.tscn" type="PackedScene" id=10]
 [ext_resource path="res://anims/basedie.tres" type="Animation" id=11]
+[ext_resource path="res://sounds/hit.ogg" type="AudioStream" id=12]
 
 [sub_resource type="PhysicsMaterial" id=16]
 
@@ -209,6 +210,12 @@ autoplay = true
 max_distance = 10000.0
 attenuation = 1.46409
 bus = "Environment"
+
+[node name="Hit" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 12 )
+volume_db = -5.0
+pitch_scale = 0.8
+bus = "Effects"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/die = ExtResource( 11 )
