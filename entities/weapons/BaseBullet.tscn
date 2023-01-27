@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://textures/entities/bullet.png" type="Texture" id=1]
 [ext_resource path="res://textures/entities/smoke.png" type="Texture" id=2]
@@ -95,6 +95,9 @@ tracks/3/keys = {
 "values": [ true ]
 }
 
+[sub_resource type="CanvasItemMaterial" id=18]
+blend_mode = 1
+
 [node name="BaseBullet" type="RigidBody2D"]
 contacts_reported = 2
 contact_monitor = true
@@ -120,10 +123,12 @@ texture = ExtResource( 2 )
 anims/explode = SubResource( 11 )
 
 [node name="Sprite" type="Sprite" parent="."]
-modulate = Color( 0.937255, 0.72549, 0, 1 )
-scale = Vector2( 20, 1 )
+modulate = Color( 53.18, 43.02, 0, 0.79 )
+material = SubResource( 18 )
+scale = Vector2( 25, 3 )
 texture = ExtResource( 1 )
 centered = false
+offset = Vector2( 0, -4 )
 
 [node name="Light2D" type="Light2D" parent="Sprite"]
 position = Vector2( -0.7, 4 )
@@ -131,8 +136,8 @@ scale = Vector2( 0.5, 1 )
 texture = ExtResource( 1 )
 offset = Vector2( 10, 0 )
 texture_scale = 2.45
-color = Color( 1, 0.121569, 0.00392157, 1 )
-energy = 13.12
+color = Color( 1, 0, 0, 1 )
+energy = 6.66
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 10.0
