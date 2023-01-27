@@ -8,6 +8,7 @@ func _on_Resume_pressed():
 	queue_free()
 
 func _on_Restart_pressed():
+	get_tree().paused = false
 	global.load_scene(current_scene, current_scene.filename)
 
 

@@ -17,9 +17,10 @@ func fire(impulse):
 
 func _on_Bullet_body_entered(body):
 	add_collision_exception_with(body)
+	#this prevents the same bullet impacting multiple times
 	if body.is_in_group("damageable"):
 		body.recieve_damage(damage)
-		anim.play("explode")
+	anim.play("explode")
 
 func recieve_damage(_dmg):
 	anim.play("explode")

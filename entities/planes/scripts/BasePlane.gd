@@ -51,6 +51,7 @@ var dead = false
 
 var sprite_angle_offset = 0
 
+var previous_linear_velocity
 var ideal_speed
 var climb_angle
 var forward_speed
@@ -100,6 +101,7 @@ func _physics_process(_delta):
 		update_weapons()
 		update_engine_visuals()
 	
+	previous_linear_velocity = linear_velocity
 	relative_speed = linear_velocity.rotated(-get_rotation())
 	forward_speed = abs(relative_speed.x)
 	vertical_speed = relative_speed.y #the sign is important for air resistance calculations
@@ -120,7 +122,7 @@ func _physics_process(_delta):
 		else:
 			stall_vapor.emitting = false
 
-func _integrate_forces(_state):
+func _integrate_forces(state):
 	apply_thrust()
 	apply_pitch()
 	apply_gravity_effects()
@@ -131,8 +133,15 @@ func recieve_damage(dmg):
 	if health <= 0 and not dead:
 		smoke.emitting = true
 		emit_signal("destroyed")
-		anim.play("die")
 		dead = true
+		#50/50 chance it explodes immediatly
+		var rng = RandomNumberGenerator.new()
+		rng.randomize()
+		if rng.randf_range(0.0, 1.0) > 0.5:
+			explode()
+			queue_free()
+		else:
+			anim.play("die")
 
 func apply_thrust():
 	#calculating the force needed to mantain the desired speed
@@ -143,7 +152,7 @@ func apply_thrust():
 		var forward_thrust = engine_thrust.rotated(get_rotation())
 		final_thrust = forward_thrust - applied_force #if it was at 40 and I wanted it at 20, it adds -20
 	else:
-		final_thrust = -applied_force*0.1
+		final_thrust = -applied_force*0.1 #the aircraft will start slowing down gradually
 		
 	add_force(engine.position, final_thrust)
 
@@ -194,6 +203,7 @@ func pitch_up():
 	pitch = -torque_strength
 	pitching = true
 	if flipped:
+		#this way the aircraft completely flips, not just the sprites
 		for c in sprite.get_children():
 			if not c is Sprite:
 				c.position.y = -c.position.y
@@ -264,3 +274,17 @@ func get_flare_dispenser()->FlareDispenser:
 
 func _on_missile_destroyed():
 	missile_in_the_air = false
+
+func _on_body_entered(body):
+	#check if there's any collision happening
+	#bullets will get included in this, but it will help in randomizing damage, bullets have low weight, so they shoulnd't affect that much
+	var collision_force_vector = Vector2(0,0)
+	var collision_force = 0.0
+	var velocity_difference : Vector2 = linear_velocity - previous_linear_velocity
+	collision_force_vector = velocity_difference
+	collision_force = sqrt(pow(collision_force_vector.x, 2.0) + pow(collision_force_vector.y, 2.0))
+	#a bullet collision will give a collision force of 8 - 40
+	#a plane collision will give >300
+	recieve_damage(collision_force / 2)
+
+

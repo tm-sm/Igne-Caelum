@@ -140,6 +140,8 @@ tracks/0/keys = {
 [node name="Interzki" type="RigidBody2D" groups=["sound_emitters"]]
 position = Vector2( 575, 178 )
 physics_material_override = SubResource( 16 )
+contacts_reported = 2
+contact_monitor = true
 script = ExtResource( 3 )
 __meta__ = {
 "_edit_group_": true
@@ -225,3 +227,5 @@ bus = "Environment"
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/die = SubResource( 29 )
 anims/empty = SubResource( 18 )
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

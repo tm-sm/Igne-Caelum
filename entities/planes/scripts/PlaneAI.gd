@@ -34,7 +34,7 @@ func _ready():
 
 func set_target(t):
 	if t:
-		print(self, " set target to: ", t)
+#		print(self, " set target to: ", t)
 		if target and target.is_in_group("damageable"):
 			target.disconnect("destroyed", self, "_on_target_destroyed")
 		
@@ -51,7 +51,7 @@ func _physics_process(delta):
 	if objective != objective_type.retreat:
 		target_position = target.global_position
 	else:
-		print(self, " retreating")
+#		print(self, " retreating")
 		target_position = Vector2(100000, -10000)
 	angle_to_target = get_angle_to(target_position)
 	distance_to_target = global_position.distance_to(target_position)
@@ -71,17 +71,17 @@ func _physics_process(delta):
 		else:
 			combat_state = combat_action.heading_to_target
 	
-	print(self, " | ", flight_state, " | ", combat_state, " : ", target, " | ", distance_to_target, " | ", angle_to_target)
+#	print(self, " | ", flight_state, " | ", combat_state, " : ", target, " | ", distance_to_target, " | ", angle_to_target)
 	._physics_process(delta)
 
 func update_pitch():
 	pitch = 0
 	if angle_to_target > pi/180 * 2:
-		print(self, " pitching down")
+#		print(self, " pitching down")
 		#for some reason this works better than just using degrees
 		pitch_down()
 	elif angle_to_target < -pi/180 * 2:
-		print(self, " pitching up")
+#		print(self, " pitching up")
 		pitch_up()
 
 func update_thrust():
@@ -104,16 +104,18 @@ func update_weapons():
 	match combat_state:
 		combat_action.target_in_range:
 			if flight_state == flight_action.straight_ahead:
-				#looking at the target, and it won't destroy its own missile
+				#looking at the target
 				if not missile_in_the_air and missile_launcher.targeting and missile_launcher.get_most_likely_target() == target:
 					fire_missile()
 					missile_in_safe_zone = false
 					missile_safe_zone.start(3)
+					#now it won't shoot its own missile off the sky the moment it fires it
 				elif has_clear_shot() and missile_in_safe_zone:
+					#there's little risk of hitting a friendly
 					fire_machinegun()
 
 func _on_target_destroyed():
-	print(self, "'s target destroyed")
+#	print(self, "'s target destroyed")
 	objective = objective_type.retreat
 	combat_state = combat_action.idle
 
