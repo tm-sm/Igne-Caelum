@@ -35,6 +35,8 @@ func _ready():
 func set_target(t):
 	if t:
 		print(self, " set target to: ", t)
+		if target:
+			target.disconnect("destroyed", self, "_on_target_destroyed")
 		target = t
 		target.connect("destroyed", self, "_on_target_destroyed")
 		flight_state = flight_action.straight_ahead

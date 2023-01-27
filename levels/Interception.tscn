@@ -48,8 +48,8 @@ func _process(delta):
 		if player.get_missile_launcher().targeting:
 			#the player is close enough
 			for ai in AI:
-				ai.target = player
-			attackers_alert = true
+				ai.set_target(player)
+				attackers_alert = true
 
 func game_over():
 	var game_over = game_over_menu.instance()
