@@ -46,4 +46,4 @@ func update_weapons():
 
 func _input(event):
 	if event.is_action_pressed("debug_destroy_self"):
-		explode()
+		explode(3)

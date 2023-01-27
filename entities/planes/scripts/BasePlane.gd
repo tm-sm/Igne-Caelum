@@ -154,11 +154,11 @@ func recieve_damage(dmg):
 		smoke.emitting = true
 		emit_signal("destroyed")
 		dead = true
-		#50/50 chance it explodes immediatly
+		#50/50 chance it explodes immediately
 		var rng = RandomNumberGenerator.new()
 		rng.randomize()
 		if rng.randf_range(0.0, 1.0) > 0.5:
-			explode()
+			explode(1)
 			queue_free()
 		else:
 			anim.play("die")
@@ -271,14 +271,20 @@ func update_engine_visuals():
 	engine_sound.pitch_scale = engine_thrust_percentage * 3 + 1
 	engine_particles.process_material.set("gravity", Vector3(-100 * engine_thrust_percentage - 40, 0, 0))
 
-func explode():
-	#spawns two explosion
-	for n in 2:
-		var expl = explosion.instance()
-		world.add_child(expl)
-		expl.global_position = global_position
-		expl.explode(linear_velocity)
-		yield(get_tree().create_timer(0.24), "timeout")
+func spawn_explosion():
+	var expl = explosion.instance()
+	world.call_deferred("add_child", expl)
+	yield(expl, "ready")
+	expl.global_position = global_position
+	expl.explode(linear_velocity)
+
+func explode(number):
+	if number == 1:
+		spawn_explosion()
+	else:
+		for n in number:
+			spawn_explosion()
+			yield(get_tree().create_timer(0.24), "timeout")
 
 func get_sounds()->AudioStreamPlayer2D:
 	return engine_sound

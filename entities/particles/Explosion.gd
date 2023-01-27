@@ -5,13 +5,13 @@ onready var explosion = $Explosion
 onready var shader = $ExplosionShader
 onready var timer = $Timer
 onready var debris = $DebrisGroup.get_children()
-onready var anim_player = $AnimationPlayer
+onready var animation_player = $AnimationPlayer
 
 func _ready():
 	sleeping = true
 
 func explode(impulse):
-	anim_player.play("explode")
+	animation_player.play("explode")
 	timer.start(15.0)
 	var modifier = -45
 	apply_central_impulse(impulse)

@@ -119,7 +119,8 @@ func pitch_down():
 
 func explode():
 	var expl = explosion.instance()
-	world.add_child(expl)
+	world.call_deferred("add_child", expl)
+	yield(expl, "ready")
 	expl.global_position = global_position
 	expl.explode(linear_velocity)
 

@@ -108,11 +108,9 @@ tracks/1/keys = {
 
 [node name="Explosion" type="RigidBody2D"]
 mass = 0.0510204
-sleeping = true
 script = ExtResource( 2 )
 
 [node name="Explosion" type="Particles2D" parent="."]
-emitting = false
 amount = 100
 lifetime = 10.0
 one_shot = true

@@ -180,7 +180,6 @@ texture = ExtResource( 7 )
 [node name="Fire" type="Particles2D" parent="Plane"]
 material = SubResource( 32 )
 position = Vector2( -46, 0 )
-emitting = false
 amount = 50
 local_coords = false
 process_material = SubResource( 23 )
