@@ -28,6 +28,7 @@ func _ready():
 	for ai in AI:
 		ai.set_target(player)
 		ai.initialize(self, Teams.group.b)
+		ai.get_missile_launcher().connect(\"missile_launched\", spawn_signal, \"_on_entity_spawned\")
 		markers.add_arrow_marker(ai, Color.red, 4)
 		for ai2 in AI:
 			if ai != ai2:
@@ -36,6 +37,7 @@ func _ready():
 	camera.initialize(AI, player, markers)
 	player.initialize(self, Teams.group.a)
 	player.connect(\"destroyed\", self, \"game_over\")
+	player.get_missile_launcher().connect(\"missile_launched\", spawn_signal, \"_on_entity_spawned\")
 	markers.add_arrow_marker(player, Color.green, 4)
 
 func _input(event):

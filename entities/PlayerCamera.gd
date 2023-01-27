@@ -115,7 +115,7 @@ func _input(event):
 		next_camera_mode()
 
 func toggle_marker_visibility(current_zoom):
-	if current_zoom < 15:
+	if current_zoom < 10:
 		markers.set_marker_visibility(false)
 	else:
 		markers.set_marker_visibility(true)

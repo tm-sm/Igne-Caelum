@@ -129,10 +129,8 @@ func get_sounds():
 func _on_HeatDetector_body_entered(body):
 	if body.is_in_group("heat_emitter"):
 		if not target or global_position.distance_to(target.global_position) > global_position.distance_to(body.global_position):
-			if target and target.is_in_group("damageable"):
-				target.disconnect("destroyed", self, "_on_target_destroyed")
-			if body.is_in_group("damageable"):
-				body.connect("destroyed", self, "_on_target_destroyed")
+			disconnect_from(target)
+			connect_to(body)
 			target = body
 
 func _on_target_destroyed():
@@ -148,13 +146,12 @@ func _on_target_destroyed():
 		if t.is_in_group("heat_emitter") and (not closest_target or dist < closest_dist):
 			closest_target = t
 			closest_dist = dist
+	disconnect_from(target)
 	target = closest_target
 
 
 func _on_HeatDetector_body_exited(body):
 	if body == target:
-		if target.is_in_group("damageable"):
-			target.disconnect("destroyed", self, "_on_target_destroyed")
 		_on_target_destroyed()
 
 
@@ -170,3 +167,11 @@ func _on_Timer_timeout():
 
 func _on_FuseSafety_timeout():
 	arming_distance.get_child(0).disabled = false
+
+func connect_to(t):
+	if t and t.is_in_group("damageable") and not t.is_connected("destroyed", self, "_on_target_destroyed"):
+		t.connect("destroyed", self, "_on_target_destroyed")
+
+func disconnect_from(t):
+	if t and t.is_in_group("damageable") and t.is_connected("destroyed", self, "_on_target_destroyed"):
+		t.disconnect("destroyed", self, "_on_target_destroyed")

@@ -19,7 +19,6 @@ var attached_body
 
 func initialize(body):
 	attached_body = body
-	connect("missile_launched", spawn_signal, "_on_entity_spawned")
 
 func fire():
 	if can_fire:
