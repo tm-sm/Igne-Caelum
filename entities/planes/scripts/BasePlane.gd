@@ -17,6 +17,7 @@ onready var color = $Plane/Color
 onready var vapor = $Plane/Vapor
 onready var stall_vapor = $Plane/StallVapor
 onready var smoke = $Plane/FireSmoke
+onready var fire = $Plane/Fire
 onready var engine_particles = $Plane/Engine
 onready var anim = $AnimationPlayer
 
@@ -63,25 +64,42 @@ var target_speed = 0 #the maximum speed reachable by the current engine configur
 var passed_time_delta = 0.0
 
 func _ready():
+	#the doppler effect gets applied
 	add_to_group("sound_emitter")
+	#has the function recieve_damage
 	add_to_group("damageable")
+	#can be targeted by missiles
 	add_to_group("heat_emitter")
+	#is a valid target and has a team
 	add_to_group("bogey")
 	health = max_health
 	controls_enabled = true
+	#which particles should be emitting and which don't
 	stall_vapor.emitting = false
+	fire.emitting = false
+	smoke.emitting = false
+	vapor.emitting = true
+	
 	weight = weight_tons
+	
 	#between the stalling speed and ideal speed there's no agility loss
 	ideal_speed = stall_speed + (stall_speed + max_speed) / 2
 	relative_speed = linear_velocity.rotated(-get_rotation())
 	forward_speed = abs(relative_speed.x)
 	vertical_speed = relative_speed.y
 	speed_vector  = sqrt(pow(forward_speed, 2) + pow(vertical_speed, 2))
+	
+	#weapon initializations
 	machinegun.initialize(self)
 	missile_launcher.initialize(self)
 	flare_dispenser.initialize(self)
+	
+	#plane color
 	color.modulate = plane_color
+	
+	#this way the plane starts with momentum
 	set_throttle(1)
+	apply_impulse(engine.position, engine_thrust.rotated(get_rotation()))
 
 func initialize(wrld, tm):
 	world = wrld
@@ -123,10 +141,10 @@ func _physics_process(_delta):
 			stall_vapor.emitting = false
 
 func _integrate_forces(state):
-	apply_thrust()
-	apply_pitch()
+	apply_thrust(state)
+	apply_pitch(state)
 	apply_gravity_effects()
-	apply_wind_resistance()
+	apply_wind_resistance(state)
 
 func recieve_damage(dmg):
 	health = health - dmg
@@ -143,7 +161,7 @@ func recieve_damage(dmg):
 		else:
 			anim.play("die")
 
-func apply_thrust():
+func apply_thrust(state):
 	#calculating the force needed to mantain the desired speed
 	var final_thrust = Vector2(0,0)
 	engine_thrust = Vector2(engine_thrust_percentage * engine_power, 0.0)
@@ -154,12 +172,12 @@ func apply_thrust():
 	else:
 		final_thrust = -applied_force*0.1 #the aircraft will start slowing down gradually
 		
-	add_force(engine.position, final_thrust)
+	state.add_force(engine.position, final_thrust)
 
-func apply_pitch():
+func apply_pitch(state):
 	#calculating the torque needed to mantain the desired pitch and reduce mobility at high/low speeds
 	var final_pitch
-	add_torque(-applied_torque)
+	state.add_torque(-applied_torque)
 	if pitching:
 		var pitch_lost_percentage = 0
 		if stalling:
@@ -168,7 +186,7 @@ func apply_pitch():
 			pitch_lost_percentage = (speed_vector / max_speed) * (1 - agility / 100)
 		
 		final_pitch = pitch * (1 - pitch_lost_percentage)
-		add_torque(final_pitch)
+		state.add_torque(final_pitch)
 
 func apply_gravity_effects():
 	gravity_scale = 0
@@ -182,13 +200,13 @@ func apply_gravity_effects():
 	else:
 		gravity_scale += 0.1
 
-func apply_wind_resistance():
+func apply_wind_resistance(state):
 	#this adds an impulse on the y direction of the plane, this is done by
 	if not stalling:
 		var wind_resistance = Vector2(0, 0)
 		wind_resistance.y = vertical_speed * wind_resistance_factor * abs(forward_speed/max_speed)
 		wind_resistance = wind_resistance.rotated(get_rotation())
-		apply_central_impulse(-wind_resistance)
+		state.apply_central_impulse(-wind_resistance)
 
 func update_thrust():
 	pass
@@ -252,10 +270,13 @@ func update_engine_visuals():
 	engine_particles.process_material.set("gravity", Vector3(-100 * engine_thrust_percentage - 40, 0, 0))
 
 func explode():
-	var expl = explosion.instance()
-	world.add_child(expl)
-	expl.global_position = global_position
-	expl.explode(linear_velocity)
+	#spawns two explosion
+	for n in 2:
+		var expl = explosion.instance()
+		world.add_child(expl)
+		expl.global_position = global_position
+		expl.explode(linear_velocity)
+		yield(get_tree().create_timer(0.4), "timeout")
 
 func get_sounds()->AudioStreamPlayer2D:
 	return engine_sound
@@ -275,7 +296,7 @@ func get_flare_dispenser()->FlareDispenser:
 func _on_missile_destroyed():
 	missile_in_the_air = false
 
-func _on_body_entered(body):
+func _on_body_entered(_body):
 	#check if there's any collision happening
 	#bullets will get included in this, but it will help in randomizing damage, bullets have low weight, so they shoulnd't affect that much
 	var collision_force_vector = Vector2(0,0)

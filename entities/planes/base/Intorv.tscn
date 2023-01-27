@@ -10,6 +10,7 @@
 [ext_resource path="res://sounds/jet_engine.ogg" type="AudioStream" id=8]
 [ext_resource path="res://entities/weapons/launchers/MissileLauncher.tscn" type="PackedScene" id=9]
 [ext_resource path="res://entities/weapons/launchers/FlareDispenser.tscn" type="PackedScene" id=10]
+[ext_resource path="res://anims/basedie.tres" type="Animation" id=11]
 
 [sub_resource type="PhysicsMaterial" id=16]
 
@@ -93,75 +94,6 @@ color_ramp = SubResource( 20 )
 radius = 15.0
 height = 220.0
 
-[sub_resource type="Animation" id=29]
-resource_name = "die"
-length = 10.0
-tracks/0/type = "value"
-tracks/0/path = NodePath("Plane/FireSmoke:emitting")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 7.1 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ true, true ]
-}
-tracks/1/type = "method"
-tracks/1/path = NodePath(".")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 9.9, 10 ),
-"transitions": PoolRealArray( 1, 1 ),
-"values": [ {
-"args": [  ],
-"method": "explode"
-}, {
-"args": [  ],
-"method": "queue_free"
-} ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath(".:controls_enabled")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ false ]
-}
-tracks/3/type = "value"
-tracks/3/path = NodePath("Plane/Fire:emitting")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ true ]
-}
-tracks/4/type = "value"
-tracks/4/path = NodePath("Plane/Vapor:emitting")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ false ]
-}
-
 [sub_resource type="Animation" id=18]
 resource_name = "empty"
 length = 3.0
@@ -214,6 +146,7 @@ process_material = SubResource( 30 )
 
 [node name="Vapor" type="Particles2D" parent="Plane"]
 position = Vector2( -190, -2 )
+emitting = false
 amount = 500
 lifetime = 15.0
 visibility_rect = Rect2( -10000, -10000, 20000, 20000 )
@@ -278,7 +211,7 @@ attenuation = 1.46409
 bus = "Environment"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/die = SubResource( 29 )
+anims/die = ExtResource( 11 )
 anims/empty = SubResource( 18 )
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

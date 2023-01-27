@@ -12,7 +12,7 @@ func _ready():
 
 func explode(impulse):
 	anim_player.play("explode")
-	timer.start(15)
+	timer.start(15.0)
 	var modifier = -45
 	apply_central_impulse(impulse)
 	for d in debris:

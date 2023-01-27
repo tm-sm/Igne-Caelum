@@ -148,8 +148,6 @@ func _on_target_destroyed():
 			closest_target = t
 			closest_dist = dist
 	target = closest_target
-	if target and target.is_in_group("damageable"):
-		target.connect("destroyed", self, "_on_target_destroyed")
 
 
 func _on_HeatDetector_body_exited(body):

@@ -29,16 +29,16 @@ func initialize(trgts, p, mrk):
 	status = mode.PLAYER
 	markers = mrk
 	
-func _process(_delta):
+func _process(delta):
 	match status:
 		mode.PLAYER_AND_TARGET:
-			player_and_target_follow()
+			player_and_target_follow(delta)
 		mode.PLAYER:
-			player_follow()
+			player_follow(delta)
 		mode.STILL:
 			hold()
 
-func player_and_target_follow():
+func player_and_target_follow(delta):
 	var p1_pos = player.global_position
 	
 	if target == null:
@@ -47,7 +47,7 @@ func player_and_target_follow():
 		#either the target got freed, or next_target returned null
 		var p2_pos = target.global_position
 		var newpos = (p1_pos + p2_pos) * 0.5
-		global_position = newpos
+		set_global_position(lerp(get_global_position(), newpos, delta * smoothing_speed))
 		var distance = p1_pos.distance_to(p2_pos) * 2
 		var zoom_factor = distance * 0.002 / 3 
 
@@ -57,9 +57,10 @@ func player_and_target_follow():
 		if markers:
 			toggle_marker_visibility(zoom_multiplier * zoom_factor)
 
-func player_follow():
+func player_follow(delta):
 	if player:
-		global_position = player.global_position
+		#this makes the camera movement smoother
+		set_global_position(lerp(get_global_position(), player.get_global_position(), delta * smoothing_speed))
 		set_zoom(Vector2(5,5) * zoom_multiplier)
 		if markers:
 			toggle_marker_visibility(zoom_multiplier * 5)
@@ -67,9 +68,9 @@ func player_follow():
 		status = mode.STILL
 
 func hold():
-	set_zoom(Vector2(1, 1) * zoom_multiplier)
+	set_zoom(Vector2(10, 10) * zoom_multiplier)
 	if markers:
-		toggle_marker_visibility(zoom_multiplier)
+		toggle_marker_visibility(10 * zoom_multiplier)
 
 func next_target():
 	zoom_multiplier = 1

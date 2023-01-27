@@ -3,6 +3,7 @@ class_name BaseBullet
 
 onready var anim = $AnimationPlayer
 onready var timer = $Timer
+onready var sprite = $Sprite
 
 export(int) var damage : int = 20
 export(float) var bullet_weight : float = 0.1

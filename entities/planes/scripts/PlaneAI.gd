@@ -95,7 +95,6 @@ func update_thrust():
 
 	if distance_to_target < 2000:
 		#target is very close, there's a risk of overshooting/getting shot, slowing down makes it harder to hit
-		print("too close")
 		throttle_target = throttle_target * 0.5
 	
 	if engine_thrust_percentage > throttle_target:
