@@ -30,6 +30,7 @@ angular_velocity = 151.58
 angular_velocity_random = 1.0
 orbit_velocity = 0.0
 orbit_velocity_random = 1.0
+scale = 2.0
 scale_curve = SubResource( 9 )
 color = Color( 0, 0, 0, 1 )
 color_ramp = SubResource( 7 )
@@ -111,6 +112,7 @@ mass = 0.0510204
 script = ExtResource( 2 )
 
 [node name="Explosion" type="Particles2D" parent="."]
+emitting = false
 amount = 100
 lifetime = 10.0
 one_shot = true

@@ -5,7 +5,7 @@ onready var shot_range = $ShotRange
 onready var missile_safe_zone = $MissileSafeZone
 #used to avoid the plane shooting its own missile
 
-export(int) var machinegun_range : int = 10000
+export(int) var machinegun_range : int = 20000
 export(float) var tight_turn_thrust : float = 0.2
 export(float) var wide_turn_thrust : float = 0.8
 

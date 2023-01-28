@@ -1,6 +1,6 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=9 format=2]
 
-[ext_resource path="res://entities/planes/IntorvPlayer.tscn" type="PackedScene" id=1]
+[ext_resource path="res://entities/planes/InterzkiPlayer.tscn" type="PackedScene" id=1]
 [ext_resource path="res://entities/planes/InterzkiAI.tscn" type="PackedScene" id=2]
 [ext_resource path="res://textures/SkyParallax.tscn" type="PackedScene" id=3]
 [ext_resource path="res://ui/menus/InterfaceMarkers.tscn" type="PackedScene" id=4]
@@ -47,8 +47,6 @@ func game_over():
 	add_child(game_over)
 "
 
-[sub_resource type="PhysicsMaterial" id=53]
-
 [sub_resource type="PhysicsMaterial" id=16]
 
 [node name="Duel" type="Node2D"]
@@ -56,10 +54,7 @@ script = SubResource( 1 )
 
 [node name="Player" type="Node2D" parent="."]
 
-[node name="Player" parent="Player" instance=ExtResource( 1 )]
-position = Vector2( 941, 160 )
-physics_material_override = SubResource( 53 )
-plane_color = Color( 0.282353, 0.454902, 0.501961, 1 )
+[node name="InterzkiPlayer" parent="Player" instance=ExtResource( 1 )]
 
 [node name="AI" type="Node2D" parent="."]
 
@@ -68,6 +63,7 @@ position = Vector2( 81552, -22721 )
 rotation = -3.14159
 physics_material_override = SubResource( 16 )
 plane_color = Color( 0, 0, 0, 1 )
+machinegun_range = 20000
 
 [node name="PlayerCamera" parent="." instance=ExtResource( 6 )]
 

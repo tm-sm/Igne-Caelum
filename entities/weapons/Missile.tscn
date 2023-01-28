@@ -7,7 +7,7 @@
 
 [sub_resource type="CapsuleShape2D" id=13]
 radius = 5.0
-height = 74.0
+height = 166.0
 
 [sub_resource type="Gradient" id=17]
 offsets = PoolRealArray( 0, 0.180645, 0.632075, 0.948387, 0.987097 )
@@ -63,6 +63,7 @@ position = Vector2( -90, 0 )
 script = ExtResource( 2 )
 
 [node name="Missile" type="Sprite" parent="."]
+scale = Vector2( 1.5, 1.5 )
 texture = ExtResource( 1 )
 offset = Vector2( 0, -0.848 )
 
@@ -100,14 +101,14 @@ monitorable = false
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="HeatDetector"]
 position = Vector2( 86, 0 )
-polygon = PoolVector2Array( 0, 0, 500, -500, 15000, -5000, 15000, 5000, 500, 500 )
+polygon = PoolVector2Array( 250, 0, 1000, -1000, 30000, -10000, 30000, 10000, 1000, 1000 )
 
 [node name="ArmingDistance" type="Area2D" parent="."]
 input_pickable = false
 monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ArmingDistance"]
-position = Vector2( 209, 0 )
+position = Vector2( 153, 0 )
 shape = SubResource( 22 )
 
 [node name="Timer" type="Timer" parent="."]
