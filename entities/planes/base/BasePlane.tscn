@@ -84,7 +84,7 @@ tracks/0/keys = {
 "values": [ true ]
 }
 
-[node name="Interzki" type="RigidBody2D" groups=["sound_emitters"]]
+[node name="Neski" type="RigidBody2D" groups=["sound_emitters"]]
 position = Vector2( 575, 178 )
 physics_material_override = SubResource( 16 )
 contacts_reported = 2

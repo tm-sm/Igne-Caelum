@@ -35,7 +35,7 @@ export(float) var stall_speed = 800.0  #at which speed the aircraft starts to fe
 export(float) var agility : float = 70
 export(float) var brakes_power : float = 100
 export(float) var engine_power : float = 1200
-export(float) var torque_strength : float = 10000
+export(float) var torque_strength : float = 12000
 export(float) var wind_resistance_factor : float = 0.06 #value between 0.01 and 0.1
 
 var health
