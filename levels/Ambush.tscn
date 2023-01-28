@@ -1,8 +1,7 @@
 [gd_scene load_steps=20 format=2]
 
-[ext_resource path="res://entities/planes/MondenoAI.tscn" type="PackedScene" id=1]
-[ext_resource path="res://entities/planes/NeskiPlayer.tscn" type="PackedScene" id=2]
-[ext_resource path="res://entities/planes/NeskiAI.tscn" type="PackedScene" id=3]
+[ext_resource path="res://entities/planes/InterzkiPlayer.tscn" type="PackedScene" id=2]
+[ext_resource path="res://entities/planes/InterzkiAI.tscn" type="PackedScene" id=3]
 [ext_resource path="res://shaders/SkyParallax.tres" type="Material" id=4]
 [ext_resource path="res://ui/menus/InterfaceMarkers.tscn" type="PackedScene" id=5]
 [ext_resource path="res://ui/GUI.tscn" type="PackedScene" id=6]
@@ -52,6 +51,8 @@ func game_over():
 		add_child(game_over)
 		is_game_over = true
 "
+
+[sub_resource type="PhysicsMaterial" id=16]
 
 [sub_resource type="Shader" id=37]
 code = "shader_type canvas_item;
@@ -132,23 +133,24 @@ script = SubResource( 1 )
 
 [node name="Player" type="Node2D" parent="."]
 
-[node name="NeskiPlayer" parent="Player" instance=ExtResource( 2 )]
-position = Vector2( 575, 178 )
-plane_color = Color( 0.341176, 0.372549, 0.188235, 1 )
+[node name="Player" parent="Player" instance=ExtResource( 2 )]
+position = Vector2( 2497, 791 )
+physics_material_override = SubResource( 16 )
+plane_color = Color( 0.388235, 0.509804, 0.219608, 1 )
 
 [node name="AI" type="Node2D" parent="."]
 
-[node name="NeskiAI" parent="AI" instance=ExtResource( 3 )]
-position = Vector2( -74049, 30898 )
+[node name="InterzkiAI" parent="AI" instance=ExtResource( 3 )]
+position = Vector2( -17030, 13688 )
+physics_material_override = SubResource( 16 )
 plane_color = Color( 0, 0, 0, 1 )
+machinegun_range = 20000
 
-[node name="NeskiAI2" parent="AI" instance=ExtResource( 3 )]
-position = Vector2( -38593, -79566 )
+[node name="InterzkiAI2" parent="AI" instance=ExtResource( 3 )]
+position = Vector2( -842, -19779 )
+physics_material_override = SubResource( 16 )
 plane_color = Color( 0, 0, 0, 1 )
-
-[node name="MondenoAI" parent="AI" instance=ExtResource( 1 )]
-position = Vector2( -85185, -9038 )
-plane_color = Color( 0, 0, 0, 1 )
+machinegun_range = 20000
 
 [node name="PlayerCamera" parent="." instance=ExtResource( 7 )]
 

@@ -19,7 +19,7 @@ onready var fuse_safety = $FuseSafety
 export(float) var weight_tons : float = 10
 export(int) var damage : int = 500
 export(float) var engine_power : float = 1500
-export(float) var torque_strength : float = 2500
+export(float) var torque_strength : float = 2000
 export(float) var wind_resistance_factor : float = 1
 export(float) var lifespan : float = 10
 

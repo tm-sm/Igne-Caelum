@@ -1,7 +1,6 @@
 [gd_scene load_steps=8 format=2]
 
-[ext_resource path="res://entities/planes/MondenoAI.tscn" type="PackedScene" id=1]
-[ext_resource path="res://entities/planes/NeskiPlayer.tscn" type="PackedScene" id=2]
+[ext_resource path="res://entities/planes/InterzkiPlayer.tscn" type="PackedScene" id=2]
 [ext_resource path="res://textures/SkyParallax.tscn" type="PackedScene" id=3]
 [ext_resource path="res://ui/menus/InterfaceMarkers.tscn" type="PackedScene" id=4]
 [ext_resource path="res://ui/GUI.tscn" type="PackedScene" id=5]
@@ -58,26 +57,19 @@ func game_over():
 	add_child(game_over)
 "
 
+[sub_resource type="PhysicsMaterial" id=16]
+
 [node name="Interception" type="Node2D"]
 script = SubResource( 2 )
 
 [node name="Player" type="Node2D" parent="."]
 
-[node name="NeskiPlayer" parent="Player" instance=ExtResource( 2 )]
-position = Vector2( -84289, -35150 )
+[node name="Player" parent="Player" instance=ExtResource( 2 )]
+position = Vector2( 321, -26601 )
+physics_material_override = SubResource( 16 )
+plane_color = Color( 0.388235, 0.509804, 0.219608, 1 )
 
 [node name="AI" type="Node2D" parent="."]
-
-[node name="MondenoAI" parent="AI" instance=ExtResource( 1 )]
-position = Vector2( 203967, 27442 )
-rotation = 3.14159
-plane_color = Color( 0.203922, 0.0509804, 0.0509804, 1 )
-wind_resistance_factor = 0.1
-
-[node name="MondenoAI2" parent="AI" instance=ExtResource( 1 )]
-position = Vector2( 198463, 32562 )
-rotation = 3.14159
-plane_color = Color( 0.203922, 0.0509804, 0.0509804, 1 )
 
 [node name="PlayerCamera" parent="." instance=ExtResource( 6 )]
 

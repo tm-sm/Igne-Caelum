@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://entities/planes/base/Interzki.tscn" type="PackedScene" id=1]
+[ext_resource path="res://entities/planes/scripts/PlaneAI.gd" type="Script" id=2]
+
+[node name="InterzkiAI" instance=ExtResource( 1 )]
+script = ExtResource( 2 )
+machinegun_range = 20000
+tight_turn_thrust = 0.2
+wide_turn_thrust = 0.8
+
+[node name="ShotRange" type="Area2D" parent="." index="4"]
+position = Vector2( 244, -3 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="ShotRange" index="0"]
+polygon = PoolVector2Array( 0, 0, 20000, -3000, 20000, 3000 )
+
+[node name="MissileSafeZone" type="Timer" parent="." index="5"]
+one_shot = true
+
+[connection signal="timeout" from="MissileSafeZone" to="." method="_on_MissileSafeZone_timeout"]
