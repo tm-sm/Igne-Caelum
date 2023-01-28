@@ -1,18 +1,18 @@
 [gd_scene load_steps=24 format=2]
 
-[ext_resource path="res://textures/entities/Interzki_shape.png" type="Texture" id=1]
-[ext_resource path="res://textures/entities/Interzki_color.png" type="Texture" id=2]
-[ext_resource path="res://entities/planes/scripts/BasePlane.gd" type="Script" id=3]
-[ext_resource path="res://textures/entities/smoke.png" type="Texture" id=4]
-[ext_resource path="res://entities/particles/Smoke.tres" type="Material" id=5]
-[ext_resource path="res://entities/particles/Fire.tres" type="Material" id=6]
-[ext_resource path="res://entities/weapons/launchers/MachineGun.tscn" type="PackedScene" id=7]
-[ext_resource path="res://entities/particles/engine.tres" type="Material" id=8]
-[ext_resource path="res://sounds/jet_engine.ogg" type="AudioStream" id=9]
-[ext_resource path="res://entities/weapons/launchers/MissileLauncher.tscn" type="PackedScene" id=10]
-[ext_resource path="res://entities/weapons/launchers/FlareDispenser.tscn" type="PackedScene" id=11]
-[ext_resource path="res://anims/basedie.tres" type="Animation" id=12]
-[ext_resource path="res://sounds/hit.ogg" type="AudioStream" id=13]
+[ext_resource path="res://entities/planes/scripts/BasePlane.gd" type="Script" id=1]
+[ext_resource path="res://textures/entities/smoke.png" type="Texture" id=2]
+[ext_resource path="res://textures/entities/Interzki_color.png" type="Texture" id=3]
+[ext_resource path="res://sounds/jet_engine.ogg" type="AudioStream" id=4]
+[ext_resource path="res://textures/entities/Interzki_shape.png" type="Texture" id=5]
+[ext_resource path="res://sounds/hit.ogg" type="AudioStream" id=6]
+[ext_resource path="res://entities/particles/engine.tres" type="Material" id=7]
+[ext_resource path="res://anims/basedie.tres" type="Animation" id=8]
+[ext_resource path="res://entities/particles/Fire.tres" type="Material" id=9]
+[ext_resource path="res://entities/particles/Smoke.tres" type="Material" id=10]
+[ext_resource path="res://entities/weapons/launchers/MachineGun.tscn" type="PackedScene" id=11]
+[ext_resource path="res://entities/weapons/launchers/FlareDispenser.tscn" type="PackedScene" id=12]
+[ext_resource path="res://entities/weapons/launchers/MissileLauncher.tscn" type="PackedScene" id=13]
 
 [sub_resource type="PhysicsMaterial" id=16]
 
@@ -82,30 +82,30 @@ tracks/0/keys = {
 "values": [ true ]
 }
 
-[node name="Interzki" type="RigidBody2D" groups=["sound_emitters"]]
+[node name="BasePlane" type="RigidBody2D" groups=["sound_emitters"]]
 position = Vector2( 575, 178 )
 physics_material_override = SubResource( 16 )
 contacts_reported = 2
 contact_monitor = true
-script = ExtResource( 3 )
+script = ExtResource( 1 )
 __meta__ = {
 "_edit_group_": true
 }
 controls_enabled = false
 
 [node name="Plane" type="Sprite" parent="."]
-texture = ExtResource( 1 )
+texture = ExtResource( 5 )
 
 [node name="Color" type="Sprite" parent="Plane"]
 modulate = Color( 0.243137, 0.254902, 0.247059, 1 )
 show_behind_parent = true
-texture = ExtResource( 2 )
+texture = ExtResource( 3 )
 
 [node name="Engine" type="Particles2D" parent="Plane"]
 position = Vector2( -131, 5 )
 amount = 500
 speed_scale = 2.76
-process_material = ExtResource( 8 )
+process_material = ExtResource( 7 )
 
 [node name="Vapor" type="Particles2D" parent="Plane"]
 position = Vector2( -245, 5 )
@@ -114,8 +114,8 @@ amount = 500
 lifetime = 15.0
 visibility_rect = Rect2( -10000, -10000, 20000, 20000 )
 local_coords = false
-process_material = ExtResource( 5 )
-texture = ExtResource( 4 )
+process_material = ExtResource( 10 )
+texture = ExtResource( 2 )
 
 [node name="StallVapor" type="Particles2D" parent="Plane"]
 position = Vector2( -29, -13 )
@@ -123,7 +123,7 @@ amount = 250
 lifetime = 0.05
 local_coords = false
 process_material = SubResource( 13 )
-texture = ExtResource( 4 )
+texture = ExtResource( 2 )
 
 [node name="EnginePosition" type="Position2D" parent="Plane"]
 position = Vector2( -97, 2 )
@@ -136,8 +136,8 @@ lifetime = 2.0
 one_shot = true
 visibility_rect = Rect2( -10000, -10000, 20000, 20000 )
 local_coords = false
-process_material = ExtResource( 6 )
-texture = ExtResource( 4 )
+process_material = ExtResource( 9 )
+texture = ExtResource( 2 )
 
 [node name="Fire" type="Particles2D" parent="Plane"]
 material = SubResource( 30 )
@@ -145,15 +145,15 @@ position = Vector2( 3, 2 )
 amount = 50
 local_coords = false
 process_material = SubResource( 23 )
-texture = ExtResource( 4 )
+texture = ExtResource( 2 )
 
-[node name="MachineGun" parent="Plane" instance=ExtResource( 7 )]
+[node name="MachineGun" parent="Plane" instance=ExtResource( 11 )]
 position = Vector2( 97, 0 )
 
-[node name="MissileLauncher" parent="Plane" instance=ExtResource( 10 )]
+[node name="MissileLauncher" parent="Plane" instance=ExtResource( 13 )]
 position = Vector2( 57, 21 )
 
-[node name="FlareDispenser" parent="Plane" instance=ExtResource( 11 )]
+[node name="FlareDispenser" parent="Plane" instance=ExtResource( 12 )]
 position = Vector2( -20, 2 )
 
 [node name="HitBox" type="CollisionShape2D" parent="."]
@@ -162,7 +162,7 @@ shape = SubResource( 1 )
 
 [node name="JetSound" type="AudioStreamPlayer2D" parent="."]
 position = Vector2( -71, 0 )
-stream = ExtResource( 9 )
+stream = ExtResource( 4 )
 volume_db = -25.0
 pitch_scale = 1.5
 autoplay = true
@@ -171,13 +171,13 @@ attenuation = 1.46409
 bus = "Environment"
 
 [node name="Hit" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource( 13 )
+stream = ExtResource( 6 )
 volume_db = -5.0
 pitch_scale = 0.8
 bus = "Effects"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/die = ExtResource( 12 )
+anims/die = ExtResource( 8 )
 anims/empty = SubResource( 18 )
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

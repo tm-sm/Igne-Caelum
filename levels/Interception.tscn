@@ -1,7 +1,7 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=8 format=2]
 
-[ext_resource path="res://entities/planes/IntorvAI.tscn" type="PackedScene" id=1]
-[ext_resource path="res://entities/planes/InterzkiPlayer.tscn" type="PackedScene" id=2]
+[ext_resource path="res://entities/planes/NeskiPlayer.tscn" type="PackedScene" id=1]
+[ext_resource path="res://entities/planes/NeskiAI.tscn" type="PackedScene" id=2]
 [ext_resource path="res://textures/SkyParallax.tscn" type="PackedScene" id=3]
 [ext_resource path="res://ui/menus/InterfaceMarkers.tscn" type="PackedScene" id=4]
 [ext_resource path="res://ui/GUI.tscn" type="PackedScene" id=5]
@@ -58,33 +58,21 @@ func game_over():
 	add_child(game_over)
 "
 
-[sub_resource type="PhysicsMaterial" id=16]
-
-[sub_resource type="PhysicsMaterial" id=53]
-
 [node name="Interception" type="Node2D"]
 script = SubResource( 2 )
 
 [node name="Player" type="Node2D" parent="."]
 
-[node name="Player" parent="Player" instance=ExtResource( 2 )]
-position = Vector2( 321, -26601 )
-physics_material_override = SubResource( 16 )
-plane_color = Color( 0.388235, 0.509804, 0.219608, 1 )
+[node name="NeskiPlayer" parent="Player" instance=ExtResource( 1 )]
+position = Vector2( -9537, -20046 )
 
 [node name="AI" type="Node2D" parent="."]
 
-[node name="IntorvAI" parent="AI" instance=ExtResource( 1 )]
-position = Vector2( 77807, 17482 )
-rotation = 3.14159
-physics_material_override = SubResource( 53 )
-plane_color = Color( 0, 0, 0, 1 )
+[node name="NeskiAI" parent="AI" instance=ExtResource( 2 )]
+position = Vector2( 118591, 2354 )
 
-[node name="IntorvAI2" parent="AI" instance=ExtResource( 1 )]
-position = Vector2( 88510, 7730 )
-rotation = 3.14159
-physics_material_override = SubResource( 53 )
-plane_color = Color( 0, 0, 0, 1 )
+[node name="NeskiAI2" parent="AI" instance=ExtResource( 2 )]
+position = Vector2( 109631, 10546 )
 
 [node name="PlayerCamera" parent="." instance=ExtResource( 6 )]
 

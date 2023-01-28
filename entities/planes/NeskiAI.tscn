@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://entities/planes/scripts/PlaneAI.gd" type="Script" id=1]
+[ext_resource path="res://entities/planes/base/Neski.tscn" type="PackedScene" id=2]
+
+[node name="NeskiAI" instance=ExtResource( 2 )]
+script = ExtResource( 1 )
+controls_enabled = true
+machinegun_range = 10000
+tight_turn_thrust = 0.2
+wide_turn_thrust = 0.8
+
+[node name="ShotRange" type="Area2D" parent="." index="5"]
+position = Vector2( 138, 0 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="ShotRange" index="0"]
+polygon = PoolVector2Array( 0, 0, 10000, -1500, 10000, 1500 )
+
+[node name="MissileSafeZone" type="Timer" parent="." index="6"]
+one_shot = true
