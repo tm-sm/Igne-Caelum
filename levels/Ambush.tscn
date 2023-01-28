@@ -1,5 +1,6 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=22 format=2]
 
+[ext_resource path="res://entities/planes/IntorvAI.tscn" type="PackedScene" id=1]
 [ext_resource path="res://entities/planes/InterzkiPlayer.tscn" type="PackedScene" id=2]
 [ext_resource path="res://entities/planes/InterzkiAI.tscn" type="PackedScene" id=3]
 [ext_resource path="res://shaders/SkyParallax.tres" type="Material" id=4]
@@ -53,6 +54,8 @@ func game_over():
 "
 
 [sub_resource type="PhysicsMaterial" id=16]
+
+[sub_resource type="PhysicsMaterial" id=53]
 
 [sub_resource type="Shader" id=37]
 code = "shader_type canvas_item;
@@ -140,17 +143,20 @@ plane_color = Color( 0.388235, 0.509804, 0.219608, 1 )
 
 [node name="AI" type="Node2D" parent="."]
 
+[node name="IntorvAI" parent="AI" instance=ExtResource( 1 )]
+position = Vector2( -21224, -815 )
+physics_material_override = SubResource( 53 )
+plane_color = Color( 0, 0, 0, 1 )
+
 [node name="InterzkiAI" parent="AI" instance=ExtResource( 3 )]
 position = Vector2( -17030, 13688 )
 physics_material_override = SubResource( 16 )
 plane_color = Color( 0, 0, 0, 1 )
-machinegun_range = 20000
 
 [node name="InterzkiAI2" parent="AI" instance=ExtResource( 3 )]
 position = Vector2( -842, -19779 )
 physics_material_override = SubResource( 16 )
 plane_color = Color( 0, 0, 0, 1 )
-machinegun_range = 20000
 
 [node name="PlayerCamera" parent="." instance=ExtResource( 7 )]
 

@@ -23,6 +23,5 @@ initial_velocity_random = 1.0
 angular_velocity = 33.57
 orbit_velocity = 0.01
 orbit_velocity_random = 0.0
-scale = 1.2
 scale_curve = SubResource( 10 )
 color_ramp = SubResource( 15 )

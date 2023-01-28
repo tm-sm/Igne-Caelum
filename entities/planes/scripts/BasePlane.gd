@@ -13,11 +13,8 @@ onready var hit_sound = $Hit
 onready var machinegun = $Plane/MachineGun
 onready var missile_launcher = $Plane/MissileLauncher
 onready var flare_dispenser = $Plane/FlareDispenser
-onready var plane_body = $Plane
-onready var shape = $Plane/Shape
-onready var pilot = $Plane/Shape/Pilot
-onready var color = $Plane/Shape/Color
-onready var insignas = $Plane/Shape/Insignas
+onready var sprite = $Plane
+onready var color = $Plane/Color
 onready var vapor = $Plane/Vapor
 onready var stall_vapor = $Plane/StallVapor
 onready var smoke = $Plane/FireSmoke
@@ -30,12 +27,12 @@ export(Teams.group) var team
 export(Color) var plane_color = Color.dimgray
 export(float) var weight_tons : float = 20
 export(int) var max_health : int = 100
-export(float) var max_speed = 3000.0
-export(float) var stall_speed = 800.0  #at which speed the aircraft starts to feel the effects of gravity
+export(float) var max_speed = 2000.0
+export(float) var stall_speed = 600.0  #at which speed the aircraft starts to feel the effects of gravity
 export(float) var agility : float = 70
 export(float) var brakes_power : float = 100
-export(float) var engine_power : float = 1200
-export(float) var torque_strength : float = 10000
+export(float) var engine_power : float = 800
+export(float) var torque_strength : float = 5000
 export(float) var wind_resistance_factor : float = 0.06 #value between 0.01 and 0.1
 
 var health
@@ -227,24 +224,22 @@ func pitch_up():
 	pitching = true
 	if flipped:
 		#this way the aircraft completely flips, not just the sprites
-		for c in plane_body.get_children():
+		for c in sprite.get_children():
 			if not c is Sprite:
 				c.position.y = -c.position.y
-	shape.set_flip_v(false)
-	for s in shape.get_children():
-		s.set_flip_v(false)
+	sprite.set_flip_v(false)
+	color.flip_v = false
 	flipped = false
 
 func pitch_down():
 	pitch = torque_strength
 	pitching = true
 	if not flipped:
-		for c in plane_body.get_children():
+		for c in sprite.get_children():
 			if not c is Sprite:
 				c.position.y = -c.position.y
-	shape.set_flip_v(true)
-	for s in shape.get_children():
-		s.set_flip_v(true)
+	sprite.set_flip_v(true)
+	color.flip_v = true
 	flipped = true
 
 func throttle_up():
