@@ -224,21 +224,21 @@ func pitch_up():
 	pitch = -torque_strength
 	pitching = true
 	if flipped:
-		plane_model.flip_to_straight()
 		#this way the aircraft completely flips, not just the sprites
 		for c in plane_body.get_children():
 			if not c is Sprite:
 				c.position.y = -c.position.y
+	plane_model.straighten()
 	flipped = false
 
 func pitch_down():
 	pitch = torque_strength
 	pitching = true
 	if not flipped:
-		plane_model.flip_to_inverted()
 		for c in plane_body.get_children():
 			if not c is Sprite:
 				c.position.y = -c.position.y
+	plane_model.invert()
 	flipped = true
 
 func throttle_up():

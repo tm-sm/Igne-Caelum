@@ -64,6 +64,7 @@ script = SubResource( 2 )
 [node name="Player" type="Node2D" parent="."]
 
 [node name="NeskiPlayer" parent="Player" instance=ExtResource( 1 )]
+position = Vector2( 575, 178 )
 
 [node name="AI" type="Node2D" parent="."]
 
