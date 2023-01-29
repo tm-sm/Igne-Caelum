@@ -15,6 +15,7 @@ _data = [ Vector2( 0, 0.531818 ), 0.0, 0.0, 0, 0, Vector2( 0.994382, 0.731818 ),
 curve = SubResource( 3 )
 
 [resource]
+resource_local_to_scene = true
 emission_shape = 5
 emission_ring_radius = 9.91
 emission_ring_inner_radius = 0.0

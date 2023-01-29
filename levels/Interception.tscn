@@ -70,10 +70,14 @@ script = SubResource( 2 )
 [node name="NeskiAI" parent="AI" instance=ExtResource( 2 )]
 position = Vector2( 94872, 18091 )
 rotation = 3.14159
+airframe_color = Color( 0.713726, 0.713726, 0.713726, 1 )
+belly_color = Color( 1, 1, 1, 1 )
 
 [node name="NeskiAI2" parent="AI" instance=ExtResource( 2 )]
 position = Vector2( 85912, 26283 )
 rotation = 3.14159
+airframe_color = Color( 0.713726, 0.713726, 0.713726, 1 )
+belly_color = Color( 1, 1, 1, 1 )
 
 [node name="PlayerCamera" parent="." instance=ExtResource( 6 )]
 

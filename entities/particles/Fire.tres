@@ -15,6 +15,7 @@ _data = [ Vector2( 0, 0.818182 ), 0.0, 0.0, 0, 0, Vector2( 0.147287, 2.63636 ), 
 curve = SubResource( 3 )
 
 [resource]
+resource_local_to_scene = true
 lifetime_randomness = 1.0
 flag_disable_z = true
 gravity = Vector3( 1, 2, 0 )

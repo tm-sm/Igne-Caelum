@@ -2,7 +2,9 @@
 
 [ext_resource path="res://entities/planes/scripts/PlaneAI.gd" type="Script" id=1]
 [ext_resource path="res://entities/planes/base/Neski.tscn" type="PackedScene" id=2]
-[ext_resource path="res://textures/3D/Neski3D.tscn" type="PackedScene" id=3]
+
+[sub_resource type="ViewportTexture" id=1]
+viewport_path = NodePath("PlaneModel")
 
 [node name="NeskiAI" instance=ExtResource( 2 )]
 script = ExtResource( 1 )
@@ -10,6 +12,12 @@ controls_enabled = true
 machinegun_range = 10000
 tight_turn_thrust = 0.2
 wide_turn_thrust = 0.8
+
+[node name="Shape" parent="Plane" index="0"]
+texture = SubResource( 1 )
+
+[node name="Engine" parent="Plane" index="1"]
+position = Vector2( -131, 5 )
 
 [node name="ShotRange" type="Area2D" parent="." index="5"]
 position = Vector2( 138, 0 )
@@ -19,8 +27,3 @@ polygon = PoolVector2Array( 0, 0, 10000, -1500, 10000, 1500 )
 
 [node name="MissileSafeZone" type="Timer" parent="." index="6"]
 one_shot = true
-
-[node name="PlaneTextureViewport" parent="." index="7"]
-fxaa = false
-
-[node name="Neski3D" parent="PlaneTextureViewport" index="0" instance=ExtResource( 3 )]

@@ -36,6 +36,10 @@ export(float) var engine_power : float = 800
 export(float) var torque_strength : float = 5000
 export(float) var wind_resistance_factor : float = 0.06 #value between 0.01 and 0.1
 
+export(Color) var airframe_color : Color = Color.white
+export(Color) var belly_color : Color = Color.white
+export(Color) var cockpit_color : Color = Color.white
+
 var health
 
 var engine_thrust_percentage = 1
@@ -87,6 +91,8 @@ func _ready():
 	forward_speed = abs(relative_speed.x)
 	vertical_speed = relative_speed.y
 	speed_vector  = sqrt(pow(forward_speed, 2) + pow(vertical_speed, 2))
+	
+	plane_model.initialize(airframe_color, belly_color, cockpit_color)
 	
 	#weapon initializations
 	machinegun.initialize(self)

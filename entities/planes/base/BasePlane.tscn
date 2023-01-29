@@ -19,6 +19,7 @@
 viewport_path = NodePath("PlaneModel")
 
 [sub_resource type="ParticlesMaterial" id=13]
+resource_local_to_scene = true
 emission_shape = 5
 emission_ring_radius = 20.0
 emission_ring_inner_radius = 0.0
@@ -50,6 +51,7 @@ _data = [ Vector2( 0.0310078, 0.784091 ), 0.0, -1.64915, 0, 0, Vector2( 0.325581
 curve = SubResource( 21 )
 
 [sub_resource type="ParticlesMaterial" id=23]
+resource_local_to_scene = true
 emission_shape = 1
 emission_sphere_radius = 17.84
 flag_disable_z = true
@@ -103,7 +105,7 @@ scale = Vector2( 0.586, 0.586 )
 texture = SubResource( 31 )
 
 [node name="Engine" type="Particles2D" parent="Plane"]
-position = Vector2( -131, 5 )
+position = Vector2( -127, 3 )
 amount = 500
 speed_scale = 2.76
 process_material = ExtResource( 7 )

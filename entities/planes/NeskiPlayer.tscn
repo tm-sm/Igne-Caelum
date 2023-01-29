@@ -3,19 +3,19 @@
 [ext_resource path="res://entities/planes/base/Neski.tscn" type="PackedScene" id=1]
 [ext_resource path="res://misc/ListenerDoppler.tscn" type="PackedScene" id=2]
 [ext_resource path="res://entities/planes/scripts/PlanePlayer.gd" type="Script" id=3]
-[ext_resource path="res://entities/planes/PlaneTextureViewport.gd" type="Script" id=4]
+
+[sub_resource type="ViewportTexture" id=1]
+viewport_path = NodePath("PlaneModel")
 
 [node name="NeskiPlayer" instance=ExtResource( 1 )]
 script = ExtResource( 3 )
 controls_enabled = true
 
+[node name="Shape" parent="Plane" index="0"]
+texture = SubResource( 1 )
+
+[node name="Engine" parent="Plane" index="1"]
+position = Vector2( -131, 5 )
+
 [node name="ListenerDoppler" parent="." index="5" instance=ExtResource( 2 )]
 current = true
-
-[node name="PlaneModel" parent="." index="6"]
-size = Vector2( 1920, 1080 )
-transparent_bg = true
-fxaa = true
-render_target_v_flip = true
-gui_disable_input = true
-script = ExtResource( 4 )
