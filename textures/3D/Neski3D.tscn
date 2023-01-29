@@ -166,6 +166,7 @@ surfaces/1 = {
 }
 
 [sub_resource type="SpatialMaterial" id=16]
+resource_local_to_scene = true
 flags_unshaded = true
 params_blend_mode = 1
 albedo_color = Color( 1, 1, 1, 0 )

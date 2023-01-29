@@ -1,6 +1,7 @@
 [gd_resource type="PlaneMesh" load_steps=2 format=2]
 
 [sub_resource type="SpatialMaterial" id=1]
+resource_local_to_scene = true
 flags_unshaded = true
 params_blend_mode = 1
 albedo_color = Color( 1, 1, 1, 0 )

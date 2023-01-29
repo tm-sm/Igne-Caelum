@@ -87,7 +87,7 @@ func _physics_process(delta):
 		flight_state = flight_action.wide_turn
 	
 #	print(self, " | ", flight_state, " | ", combat_state, " : ", target, " | ", distance_to_target, " | ", angle_to_target)
-	._physics_process(delta)
+#	._physics_process(delta)
 
 func update_pitch():
 	pitch = 0
