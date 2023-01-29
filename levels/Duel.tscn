@@ -53,7 +53,6 @@ script = SubResource( 1 )
 [node name="Player" type="Node2D" parent="."]
 
 [node name="NeskiPlayer" parent="Player" instance=ExtResource( 1 )]
-position = Vector2( -15618, 1546 )
 
 [node name="AI" type="Node2D" parent="."]
 

@@ -2,9 +2,8 @@
 
 [ext_resource path="res://entities/planes/scripts/BasePlane.gd" type="Script" id=1]
 [ext_resource path="res://textures/entities/smoke.png" type="Texture" id=2]
-[ext_resource path="res://textures/entities/Interzki_color.png" type="Texture" id=3]
+[ext_resource path="res://entities/planes/PlaneModel.tscn" type="PackedScene" id=3]
 [ext_resource path="res://sounds/jet_engine.ogg" type="AudioStream" id=4]
-[ext_resource path="res://textures/entities/Interzki_shape.png" type="Texture" id=5]
 [ext_resource path="res://sounds/hit.ogg" type="AudioStream" id=6]
 [ext_resource path="res://entities/particles/engine.tres" type="Material" id=7]
 [ext_resource path="res://anims/basedie.tres" type="Animation" id=8]
@@ -15,6 +14,9 @@
 [ext_resource path="res://entities/weapons/launchers/MissileLauncher.tscn" type="PackedScene" id=13]
 
 [sub_resource type="PhysicsMaterial" id=16]
+
+[sub_resource type="ViewportTexture" id=31]
+viewport_path = NodePath("PlaneModel")
 
 [sub_resource type="ParticlesMaterial" id=13]
 emission_shape = 5
@@ -93,13 +95,12 @@ __meta__ = {
 }
 controls_enabled = false
 
-[node name="Plane" type="Sprite" parent="."]
-texture = ExtResource( 5 )
+[node name="Plane" type="Node2D" parent="."]
 
-[node name="Color" type="Sprite" parent="Plane"]
-modulate = Color( 0.243137, 0.254902, 0.247059, 1 )
+[node name="Shape" type="Sprite" parent="Plane"]
 show_behind_parent = true
-texture = ExtResource( 3 )
+scale = Vector2( 0.586, 0.586 )
+texture = SubResource( 31 )
 
 [node name="Engine" type="Particles2D" parent="Plane"]
 position = Vector2( -131, 5 )
@@ -179,5 +180,7 @@ bus = "Effects"
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/die = ExtResource( 8 )
 anims/empty = SubResource( 18 )
+
+[node name="PlaneModel" parent="." instance=ExtResource( 3 )]
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

@@ -10,21 +10,22 @@ onready var world = self
 onready var engine = $Plane/EnginePosition
 onready var engine_sound = $JetSound
 onready var hit_sound = $Hit
+onready var plane_body = $Plane
 onready var machinegun = $Plane/MachineGun
 onready var missile_launcher = $Plane/MissileLauncher
 onready var flare_dispenser = $Plane/FlareDispenser
-onready var sprite = $Plane
-onready var color = $Plane/Color
+onready var shape = $Plane/Shape
 onready var vapor = $Plane/Vapor
 onready var stall_vapor = $Plane/StallVapor
 onready var smoke = $Plane/FireSmoke
 onready var fire = $Plane/Fire
 onready var engine_particles = $Plane/Engine
 onready var anim = $AnimationPlayer
+onready var plane_model = $PlaneModel
+
 
 export(Teams.group) var team
 
-export(Color) var plane_color = Color.dimgray
 export(float) var weight_tons : float = 20
 export(int) var max_health : int = 100
 export(float) var max_speed = 2000.0
@@ -49,9 +50,6 @@ var locked_on_by_missile = false
 export var controls_enabled = true
 var missile_in_the_air = false
 var dead = false
-
-
-var sprite_angle_offset = 0
 
 var previous_linear_velocity
 var ideal_speed
@@ -94,9 +92,6 @@ func _ready():
 	machinegun.initialize(self)
 	missile_launcher.initialize(self)
 	flare_dispenser.initialize(self)
-	
-	#plane color
-	color.modulate = plane_color
 	
 	#this way the plane starts with momentum
 	set_throttle(1)
@@ -223,23 +218,21 @@ func pitch_up():
 	pitch = -torque_strength
 	pitching = true
 	if flipped:
+		plane_model.flip_to_straight()
 		#this way the aircraft completely flips, not just the sprites
-		for c in sprite.get_children():
+		for c in plane_body.get_children():
 			if not c is Sprite:
 				c.position.y = -c.position.y
-	sprite.set_flip_v(false)
-	color.flip_v = false
 	flipped = false
 
 func pitch_down():
 	pitch = torque_strength
 	pitching = true
 	if not flipped:
-		for c in sprite.get_children():
+		plane_model.flip_to_inverted()
+		for c in plane_body.get_children():
 			if not c is Sprite:
 				c.position.y = -c.position.y
-	sprite.set_flip_v(true)
-	color.flip_v = true
 	flipped = true
 
 func throttle_up():

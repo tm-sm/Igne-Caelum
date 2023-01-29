@@ -8,7 +8,7 @@ func load_scene(current_scene, next_scene):
 	
 	var loading_screen_ins = loading_screen.instance()
 	get_tree().get_root().call_deferred("add_child", loading_screen_ins)
-	
+
 	print("loading ", next_scene)
 	var loader = ResourceLoader.load_interactive(next_scene)
 	

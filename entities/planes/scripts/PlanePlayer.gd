@@ -7,7 +7,6 @@ var selected_weapon
 
 
 func _ready():
-	._ready()
 	engine_sound.volume_db = -15
 	selected_weapon = weapons.machinegun
 

@@ -45,7 +45,7 @@ func _input(event):
 		add_child(pause)
 		get_tree().paused = true
 
-func _process(delta):
+func _process(_delta):
 	if not attackers_alert:
 		if player.get_missile_launcher().targeting:
 			#the player is close enough
@@ -64,15 +64,16 @@ script = SubResource( 2 )
 [node name="Player" type="Node2D" parent="."]
 
 [node name="NeskiPlayer" parent="Player" instance=ExtResource( 1 )]
-position = Vector2( -9537, -20046 )
 
 [node name="AI" type="Node2D" parent="."]
 
 [node name="NeskiAI" parent="AI" instance=ExtResource( 2 )]
-position = Vector2( 118591, 2354 )
+position = Vector2( 94872, 18091 )
+rotation = 3.14159
 
 [node name="NeskiAI2" parent="AI" instance=ExtResource( 2 )]
-position = Vector2( 109631, 10546 )
+position = Vector2( 85912, 26283 )
+rotation = 3.14159
 
 [node name="PlayerCamera" parent="." instance=ExtResource( 6 )]
 

@@ -166,6 +166,7 @@ enabled=PoolStringArray( "res://addons/godot_sfxr/plugin.cfg" )
 [global]
 
 logging=false
+world=false
 
 [gui]
 

@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://entities/planes/scripts/PlaneAI.gd" type="Script" id=1]
 [ext_resource path="res://entities/planes/base/Neski.tscn" type="PackedScene" id=2]
+[ext_resource path="res://textures/3D/Neski3D.tscn" type="PackedScene" id=3]
 
 [node name="NeskiAI" instance=ExtResource( 2 )]
 script = ExtResource( 1 )
@@ -18,3 +19,8 @@ polygon = PoolVector2Array( 0, 0, 10000, -1500, 10000, 1500 )
 
 [node name="MissileSafeZone" type="Timer" parent="." index="6"]
 one_shot = true
+
+[node name="PlaneTextureViewport" parent="." index="7"]
+fxaa = false
+
+[node name="Neski3D" parent="PlaneTextureViewport" index="0" instance=ExtResource( 3 )]
