@@ -1,10 +1,10 @@
 extends Spatial
+class_name Airframe3D
 
-onready var shape = $Neski
-onready var body = $Neski/Airframe
-onready var animation_player = $AnimationPlayer
-onready var tail_insigna = $Neski/Tail/TailInsigna
-onready var wing_insigna = $Neski/Wings/WingInsigna
+onready var shape = $Plane
+onready var body = $Plane/Airframe
+onready var tail_insigna = $Plane/Tail/TailInsigna
+onready var wing_insigna = $Plane/Wings/WingInsigna
 
 
 var rng = RandomNumberGenerator.new()
@@ -17,13 +17,10 @@ var rot_to_inverted = Vector3(0, 0, 2) #the same but to invert it
 var last_rot = 0
 
 func initialize(airframe_color, belly_color, cockpit_color, insigna_tail, insigna_wing):
-	body.get_surface_material(0).albedo_color = airframe_color #airframe
-	body.get_surface_material(2).albedo_color = belly_color #belly
-	cockpit_color.a = 0.5 #now it's transparent
-	body.get_surface_material(4).albedo_color = cockpit_color #cockpit
-	
-	tail_insigna.get_mesh().surface_get_material(0).albedo_texture = insigna_tail
-	wing_insigna.get_mesh().surface_get_material(0).albedo_texture = insigna_wing
+	customize(airframe_color, belly_color, cockpit_color, insigna_tail, insigna_wing)
+
+func customize(airframe_color, belly_color, cockpit_color, insigna_tail, insigna_wing):
+	pass
 
 func _process(_delta):
 	if not rotating:

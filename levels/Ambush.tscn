@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://entities/planes/NeskiPlayer.tscn" type="PackedScene" id=1]
 [ext_resource path="res://entities/planes/NeskiAI.tscn" type="PackedScene" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://ui/GUI.tscn" type="PackedScene" id=6]
 [ext_resource path="res://entities/PlayerCamera.tscn" type="PackedScene" id=7]
 [ext_resource path="res://textures/entities/planes/vorlono/Vorlono_wing_insigna.png" type="Texture" id=8]
+[ext_resource path="res://entities/planes/MondenoAI.tscn" type="PackedScene" id=9]
 
 [sub_resource type="GDScript" id=1]
 script/source = "extends Node2D
@@ -149,8 +150,15 @@ insigna_wing = ExtResource( 8 )
 position = Vector2( -29039, -18440 )
 airframe_color = Color( 0.117647, 0.117647, 0.117647, 1 )
 belly_color = Color( 0.152941, 0.152941, 0.152941, 1 )
+cockpit_color = Color( 0.909804, 0.992157, 0.196078, 0.376471 )
 insigna_tail = ExtResource( 3 )
 insigna_wing = ExtResource( 8 )
+
+[node name="MondenoAI" parent="AI" instance=ExtResource( 9 )]
+position = Vector2( -42101, -4398 )
+airframe_color = Color( 0.117647, 0.117647, 0.117647, 1 )
+belly_color = Color( 0.152941, 0.152941, 0.152941, 1 )
+cockpit_color = Color( 0.411765, 1, 0.945098, 1 )
 
 [node name="PlayerCamera" parent="." instance=ExtResource( 7 )]
 

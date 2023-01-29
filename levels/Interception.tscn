@@ -1,13 +1,11 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://entities/planes/NeskiPlayer.tscn" type="PackedScene" id=1]
-[ext_resource path="res://entities/planes/NeskiAI.tscn" type="PackedScene" id=2]
+[ext_resource path="res://entities/planes/MondenoAI.tscn" type="PackedScene" id=2]
 [ext_resource path="res://textures/SkyParallax.tscn" type="PackedScene" id=3]
 [ext_resource path="res://ui/menus/InterfaceMarkers.tscn" type="PackedScene" id=4]
 [ext_resource path="res://ui/GUI.tscn" type="PackedScene" id=5]
 [ext_resource path="res://entities/PlayerCamera.tscn" type="PackedScene" id=6]
-[ext_resource path="res://textures/entities/planes/vorlono/Vorlono_insigna.png" type="Texture" id=7]
-[ext_resource path="res://textures/entities/planes/vorlono/Vorlono_wing_insigna.png" type="Texture" id=8]
 
 [sub_resource type="GDScript" id=2]
 script/source = "extends Node2D
@@ -70,21 +68,19 @@ position = Vector2( 575, 178 )
 
 [node name="AI" type="Node2D" parent="."]
 
-[node name="NeskiAI" parent="AI" instance=ExtResource( 2 )]
-position = Vector2( 94872, 18091 )
+[node name="MondenoAI" parent="AI" instance=ExtResource( 2 )]
+position = Vector2( 80191, 21298 )
 rotation = 3.14159
-airframe_color = Color( 0.713726, 0.713726, 0.713726, 1 )
+airframe_color = Color( 0.603922, 0.603922, 0.603922, 1 )
 belly_color = Color( 1, 1, 1, 1 )
-insigna_tail = ExtResource( 7 )
-insigna_wing = ExtResource( 8 )
+cockpit_color = Color( 0.411765, 1, 0.945098, 1 )
 
-[node name="NeskiAI2" parent="AI" instance=ExtResource( 2 )]
-position = Vector2( 85912, 26283 )
+[node name="MondenoAI2" parent="AI" instance=ExtResource( 2 )]
+position = Vector2( 75199, 26930 )
 rotation = 3.14159
-airframe_color = Color( 0.713726, 0.713726, 0.713726, 1 )
+airframe_color = Color( 0.603922, 0.603922, 0.603922, 1 )
 belly_color = Color( 1, 1, 1, 1 )
-insigna_tail = ExtResource( 7 )
-insigna_wing = ExtResource( 8 )
+cockpit_color = Color( 0.411765, 1, 0.945098, 1 )
 
 [node name="PlayerCamera" parent="." instance=ExtResource( 6 )]
 

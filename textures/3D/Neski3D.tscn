@@ -1,11 +1,11 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://textures/entities/planes/hazkani/neski3D/BottomPaint.material" type="Material" id=1]
 [ext_resource path="res://textures/entities/planes/hazkani/neski3D/Material_005.material" type="Material" id=2]
 [ext_resource path="res://textures/entities/planes/hazkani/neski3D/Metal_001.material" type="Material" id=3]
 [ext_resource path="res://textures/entities/planes/hazkani/neski3D/Airframe.material" type="Material" id=4]
 [ext_resource path="res://textures/entities/planes/hazkani/neski3D/Leather.material" type="Material" id=5]
-[ext_resource path="res://textures/3D/3DTexture.gd" type="Script" id=6]
+[ext_resource path="res://textures/3D/Neski3D.gd" type="Script" id=6]
 [ext_resource path="res://textures/3D/meshes/wing_insigna.tres" type="PlaneMesh" id=7]
 
 [sub_resource type="ArrayMesh" id=1]
@@ -165,7 +165,7 @@ surfaces/1 = {
 "vertex_count": 16
 }
 
-[sub_resource type="SpatialMaterial" id=16]
+[sub_resource type="SpatialMaterial" id=18]
 resource_local_to_scene = true
 flags_unshaded = true
 params_blend_mode = 1
@@ -173,7 +173,7 @@ albedo_color = Color( 1, 1, 1, 0 )
 
 [sub_resource type="PlaneMesh" id=17]
 resource_local_to_scene = true
-material = SubResource( 16 )
+material = SubResource( 18 )
 size = Vector2( 1, 1 )
 
 [sub_resource type="ArrayMesh" id=5]
@@ -218,168 +218,15 @@ surfaces/0 = {
 "vertex_count": 39
 }
 
-[sub_resource type="Animation" id=8]
-resource_name = "crashing"
-
-[sub_resource type="Animation" id=12]
-resource_name = "flying_inverted"
-length = 2.0
-loop = true
-tracks/0/type = "value"
-tracks/0/path = NodePath("Neski:rotation_degrees")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.9 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Vector3( 0, 0, 183 ), Vector3( 0, 0, 177 ) ]
-}
-
-[sub_resource type="Animation" id=9]
-resource_name = "flying_straight"
-length = 2.0
-loop = true
-tracks/0/type = "value"
-tracks/0/path = NodePath("Neski:rotation_degrees")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.9 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Vector3( 0, 0, 3 ), Vector3( 0, 0, -3 ) ]
-}
-
-[sub_resource type="Animation" id=13]
-resource_name = "turning_inverted_belly"
-tracks/0/type = "value"
-tracks/0/path = NodePath("Neski:rotation_degrees")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 1 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Vector3( 0, 0, -180 ), Vector3( 0, 0, 3 ) ]
-}
-tracks/1/type = "method"
-tracks/1/path = NodePath("AnimationPlayer")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 1 ),
-"transitions": PoolRealArray( 1 ),
-"values": [ {
-"args": [ "flying_straight" ],
-"method": "play"
-} ]
-}
-
-[sub_resource type="Animation" id=14]
-resource_name = "turning_inverted_front"
-tracks/0/type = "value"
-tracks/0/path = NodePath("Neski:rotation_degrees")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 1 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Vector3( 0, 0, 180 ), Vector3( 0, 0, 3 ) ]
-}
-tracks/1/type = "method"
-tracks/1/path = NodePath("AnimationPlayer")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 1 ),
-"transitions": PoolRealArray( 1 ),
-"values": [ {
-"args": [ "flying_straight" ],
-"method": "play"
-} ]
-}
-
-[sub_resource type="Animation" id=10]
-resource_name = "turning_straight_belly"
-tracks/0/type = "value"
-tracks/0/path = NodePath("Neski:rotation_degrees")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.9, 1 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 0,
-"values": [ Vector3( 0, 0, 0 ), Vector3( 0, 0, -180 ), Vector3( 0, 0, -177 ) ]
-}
-tracks/1/type = "method"
-tracks/1/path = NodePath("AnimationPlayer")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 1 ),
-"transitions": PoolRealArray( 1 ),
-"values": [ {
-"args": [ "flying_inverted" ],
-"method": "play"
-} ]
-}
-
-[sub_resource type="Animation" id=15]
-resource_name = "turning_straight_front"
-tracks/0/type = "value"
-tracks/0/path = NodePath("Neski:rotation_degrees")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.9, 1 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 0,
-"values": [ Vector3( 0, 0, 0 ), Vector3( 0, 0, 189 ), Vector3( 0, 0, 183 ) ]
-}
-tracks/1/type = "method"
-tracks/1/path = NodePath("AnimationPlayer")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 1 ),
-"transitions": PoolRealArray( 1 ),
-"values": [ {
-"args": [ "flying_inverted" ],
-"method": "play"
-} ]
-}
-
 [sub_resource type="Environment" id=11]
 ambient_light_color = Color( 1, 1, 1, 1 )
 
 [node name="Neski3D" type="Spatial"]
 script = ExtResource( 6 )
 
-[node name="Neski" type="Spatial" parent="."]
+[node name="Plane" type="Spatial" parent="."]
 
-[node name="Airframe" type="MeshInstance" parent="Neski"]
+[node name="Airframe" type="MeshInstance" parent="Plane"]
 transform = Transform( 0.79886, 0, 0, 0, 0, 0.79886, 0, -0.79886, 0, -0.00192451, 0.00748121, 5.54242 )
 mesh = SubResource( 1 )
 material/0 = ExtResource( 4 )
@@ -388,56 +235,47 @@ material/2 = ExtResource( 1 )
 material/3 = ExtResource( 5 )
 material/4 = ExtResource( 2 )
 
-[node name="Intake" type="MeshInstance" parent="Neski"]
+[node name="Intake" type="MeshInstance" parent="Plane"]
 transform = Transform( 0.308304, 0, 0, 0, 0.308304, 0, 0, 0, 0.308304, 0, 0, 4.026 )
 mesh = SubResource( 2 )
 material/0 = ExtResource( 4 )
 material/1 = ExtResource( 3 )
 material/2 = ExtResource( 1 )
 
-[node name="Wings" type="MeshInstance" parent="Neski"]
+[node name="Wings" type="MeshInstance" parent="Plane"]
 mesh = SubResource( 3 )
 material/0 = ExtResource( 4 )
 material/1 = ExtResource( 1 )
 
-[node name="WingInsigna" type="MeshInstance" parent="Neski/Wings"]
+[node name="WingInsigna" type="MeshInstance" parent="Plane/Wings"]
 transform = Transform( 1, 0, 0, 0, 0.999018, 0.0443168, 0, -0.0443168, 0.999018, -3, -0.398, -1.5 )
 mesh = ExtResource( 7 )
 
-[node name="WingInsigna2" type="MeshInstance" parent="Neski/Wings"]
+[node name="WingInsigna2" type="MeshInstance" parent="Plane/Wings"]
 transform = Transform( 1, 0, 0, 0, 0.999048, 0.0436194, 0, -0.0436194, 0.999048, 3, -0.3, -1.5 )
 mesh = ExtResource( 7 )
 
-[node name="Tail" type="MeshInstance" parent="Neski"]
+[node name="Tail" type="MeshInstance" parent="Plane"]
 mesh = SubResource( 4 )
 material/0 = ExtResource( 4 )
 material/1 = ExtResource( 3 )
 
-[node name="TailInsigna" type="MeshInstance" parent="Neski/Tail"]
+[node name="TailInsigna" type="MeshInstance" parent="Plane/Tail"]
 transform = Transform( -4.37114e-08, -1, 0, -4.37114e-08, 1.91069e-15, -1, 1, -4.37114e-08, -4.37114e-08, -0.134761, 1.23109, -5.2088 )
 mesh = SubResource( 17 )
 
-[node name="TailInsigna2" type="MeshInstance" parent="Neski/Tail"]
+[node name="TailInsigna2" type="MeshInstance" parent="Plane/Tail"]
 transform = Transform( -4.37114e-08, 1, 4.37114e-08, 0, -4.37114e-08, 1, 1, 4.37114e-08, 1.91069e-15, 0.0986552, 1.23109, -5.2088 )
 mesh = SubResource( 17 )
 
-[node name="BackWings" type="MeshInstance" parent="Neski"]
+[node name="BackWings" type="MeshInstance" parent="Plane"]
 mesh = SubResource( 5 )
 material/0 = ExtResource( 4 )
 material/1 = ExtResource( 3 )
 
-[node name="TailAddon" type="MeshInstance" parent="Neski"]
+[node name="TailAddon" type="MeshInstance" parent="Plane"]
 mesh = SubResource( 6 )
 material/0 = ExtResource( 4 )
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/crashing = SubResource( 8 )
-anims/flying_inverted = SubResource( 12 )
-anims/flying_straight = SubResource( 9 )
-anims/turning_inverted_belly = SubResource( 13 )
-anims/turning_inverted_front = SubResource( 14 )
-anims/turning_straight_belly = SubResource( 10 )
-anims/turning_straight_front = SubResource( 15 )
 
 [node name="Camera" type="Camera" parent="."]
 transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -24.9657, 5.71919e-08, -1.3084 )

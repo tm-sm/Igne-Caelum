@@ -1,0 +1,171 @@
+[gd_scene load_steps=25 format=2]
+
+[ext_resource path="res://entities/planes/scripts/PlaneAI.gd" type="Script" id=1]
+[ext_resource path="res://entities/planes/base/Mondeno.tscn" type="PackedScene" id=2]
+
+[sub_resource type="ViewportTexture" id=29]
+viewport_path = NodePath("PlaneModel")
+
+[sub_resource type="Gradient" id=11]
+offsets = PoolRealArray( 0, 0.535484, 1 )
+colors = PoolColorArray( 1, 0, 0, 1, 0.891113, 0.863048, 0.222778, 1, 1, 1, 1, 1 )
+
+[sub_resource type="GradientTexture" id=12]
+gradient = SubResource( 11 )
+
+[sub_resource type="Curve" id=3]
+max_value = 2.0
+_data = [ Vector2( 0, 0.531818 ), 0.0, 0.0, 0, 0, Vector2( 0.994382, 0.731818 ), -7.28182, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=4]
+curve = SubResource( 3 )
+
+[sub_resource type="ParticlesMaterial" id=30]
+resource_local_to_scene = true
+emission_shape = 5
+emission_ring_radius = 9.91
+emission_ring_inner_radius = 0.0
+emission_ring_height = 0.0
+emission_ring_axis = Vector3( 0, 0, 1 )
+flag_disable_z = true
+direction = Vector3( 0, 0, 0 )
+spread = 52.13
+gravity = Vector3( -40, 0, 0 )
+initial_velocity = 15.71
+initial_velocity_random = 1.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+scale_curve = SubResource( 4 )
+color_ramp = SubResource( 12 )
+
+[sub_resource type="Gradient" id=16]
+offsets = PoolRealArray( 0, 0.216981, 0.632075, 0.993548 )
+colors = PoolColorArray( 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0 )
+
+[sub_resource type="GradientTexture" id=15]
+gradient = SubResource( 16 )
+
+[sub_resource type="Curve" id=9]
+max_value = 6.0
+_data = [ Vector2( 0, 0.504545 ), 0.0, 0.0, 0, 0, Vector2( 1, 2.89773 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=10]
+curve = SubResource( 9 )
+
+[sub_resource type="ParticlesMaterial" id=31]
+resource_local_to_scene = true
+lifetime_randomness = 1.0
+flag_disable_z = true
+gravity = Vector3( 0, 1, 0 )
+initial_velocity = 2.0
+initial_velocity_random = 1.0
+angular_velocity = 33.57
+orbit_velocity = 0.01
+orbit_velocity_random = 0.0
+scale_curve = SubResource( 10 )
+color_ramp = SubResource( 15 )
+
+[sub_resource type="ParticlesMaterial" id=32]
+resource_local_to_scene = true
+emission_shape = 5
+emission_ring_radius = 20.0
+emission_ring_inner_radius = 0.0
+emission_ring_height = 0.0
+emission_ring_axis = Vector3( 0, 0, 1 )
+flag_disable_z = true
+gravity = Vector3( 0, 0, 0 )
+angular_velocity = 25.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+scale = 0.1
+
+[sub_resource type="Gradient" id=1]
+offsets = PoolRealArray( 0.179245, 0.566038, 0.993548 )
+colors = PoolColorArray( 0.207031, 0.207031, 0.207031, 1, 0, 0, 0, 1, 0, 0, 0, 0 )
+
+[sub_resource type="GradientTexture" id=2]
+gradient = SubResource( 1 )
+
+[sub_resource type="Curve" id=27]
+max_value = 10.0
+_data = [ Vector2( 0, 0.818182 ), 0.0, 0.0, 0, 0, Vector2( 0.147287, 2.63636 ), 0.0, 0.0, 0, 0, Vector2( 0.968992, 3.18182 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=28]
+curve = SubResource( 27 )
+
+[sub_resource type="ParticlesMaterial" id=33]
+resource_local_to_scene = true
+lifetime_randomness = 1.0
+flag_disable_z = true
+gravity = Vector3( 1, 2, 0 )
+initial_velocity = 2.0
+initial_velocity_random = 1.0
+angular_velocity = 33.57
+orbit_velocity = 0.01
+orbit_velocity_random = 0.0
+scale_curve = SubResource( 28 )
+color_ramp = SubResource( 2 )
+
+[sub_resource type="Gradient" id=19]
+offsets = PoolRealArray( 0, 0.113208, 0.660377, 0.811321, 0.95283 )
+colors = PoolColorArray( 0.839844, 0.831335, 0.295258, 1, 0.943945, 0.438269, 0.10334, 1, 0.96875, 1, 0, 1, 1, 0.996094, 0.996094, 1, 0, 0, 0, 0 )
+
+[sub_resource type="GradientTexture" id=20]
+gradient = SubResource( 19 )
+
+[sub_resource type="Curve" id=21]
+max_value = 5.0
+_data = [ Vector2( 0.0310078, 0.784091 ), 0.0, -1.64915, 0, 0, Vector2( 0.325581, 0.329545 ), 0.0, 0.0, 0, 0, Vector2( 0.906977, 0.329545 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=22]
+curve = SubResource( 21 )
+
+[sub_resource type="ParticlesMaterial" id=34]
+resource_local_to_scene = true
+emission_shape = 1
+emission_sphere_radius = 17.84
+flag_disable_z = true
+gravity = Vector3( -50, 0, 0 )
+angular_velocity = 2.0
+orbit_velocity = 0.0
+orbit_velocity_random = 1.0
+linear_accel = 100.44
+radial_accel = 35.96
+tangential_accel = 21.76
+tangential_accel_random = 1.0
+scale_curve = SubResource( 22 )
+color_ramp = SubResource( 20 )
+
+[node name="MondenoAI" instance=ExtResource( 2 )]
+script = ExtResource( 1 )
+controls_enabled = true
+machinegun_range = 10000
+tight_turn_thrust = 0.2
+wide_turn_thrust = 0.8
+
+[node name="Shape" parent="Plane" index="0"]
+texture = SubResource( 29 )
+
+[node name="Engine" parent="Plane" index="1"]
+process_material = SubResource( 30 )
+
+[node name="Vapor" parent="Plane" index="2"]
+process_material = SubResource( 31 )
+
+[node name="StallVapor" parent="Plane" index="3"]
+process_material = SubResource( 32 )
+
+[node name="FireSmoke" parent="Plane" index="5"]
+process_material = SubResource( 33 )
+
+[node name="Fire" parent="Plane" index="6"]
+process_material = SubResource( 34 )
+
+[node name="ShotRange" type="Area2D" parent="." index="6"]
+position = Vector2( 177, -1 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="ShotRange" index="0"]
+polygon = PoolVector2Array( 0, 0, 10000, -1500, 10000, 1500 )
+
+[node name="MissileSafeZone" type="Timer" parent="." index="7"]
+one_shot = true
