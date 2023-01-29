@@ -145,7 +145,6 @@ controls_enabled = true
 texture = SubResource( 1 )
 
 [node name="Engine" parent="Plane" index="1"]
-position = Vector2( -131, 5 )
 process_material = SubResource( 29 )
 
 [node name="Vapor" parent="Plane" index="2"]

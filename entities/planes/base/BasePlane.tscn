@@ -105,13 +105,13 @@ scale = Vector2( 0.586, 0.586 )
 texture = SubResource( 31 )
 
 [node name="Engine" type="Particles2D" parent="Plane"]
-position = Vector2( -127, 3 )
+position = Vector2( -108, 2 )
 amount = 500
 speed_scale = 2.76
 process_material = ExtResource( 7 )
 
 [node name="Vapor" type="Particles2D" parent="Plane"]
-position = Vector2( -245, 5 )
+position = Vector2( -157, 2 )
 emitting = false
 amount = 500
 lifetime = 15.0
@@ -154,7 +154,7 @@ texture = ExtResource( 2 )
 position = Vector2( 97, 0 )
 
 [node name="MissileLauncher" parent="Plane" instance=ExtResource( 13 )]
-position = Vector2( 57, 21 )
+position = Vector2( 69, 22 )
 
 [node name="FlareDispenser" parent="Plane" instance=ExtResource( 12 )]
 position = Vector2( -20, 2 )

@@ -40,6 +40,9 @@ export(Color) var airframe_color : Color = Color.white
 export(Color) var belly_color : Color = Color.white
 export(Color) var cockpit_color : Color = Color.white
 
+export(Texture) var insigna_tail
+export(Texture) var insigna_wing
+
 var health
 
 var engine_thrust_percentage = 1
@@ -92,8 +95,6 @@ func _ready():
 	vertical_speed = relative_speed.y
 	speed_vector  = sqrt(pow(forward_speed, 2) + pow(vertical_speed, 2))
 	
-	plane_model.initialize(airframe_color, belly_color, cockpit_color)
-	
 	#weapon initializations
 	machinegun.initialize(self)
 	missile_launcher.initialize(self)
@@ -106,6 +107,7 @@ func _ready():
 func initialize(wrld, tm):
 	world = wrld
 	team = tm
+	plane_model.initialize(airframe_color, belly_color, cockpit_color, insigna_tail, insigna_wing)
 
 func _process(delta):
 	#this lets the lock_on_alarm stay on the screen for a while longer

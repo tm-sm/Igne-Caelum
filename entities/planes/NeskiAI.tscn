@@ -147,7 +147,6 @@ wide_turn_thrust = 0.8
 texture = SubResource( 1 )
 
 [node name="Engine" parent="Plane" index="1"]
-position = Vector2( -131, 5 )
 process_material = SubResource( 29 )
 
 [node name="Vapor" parent="Plane" index="2"]
@@ -163,7 +162,7 @@ process_material = SubResource( 32 )
 process_material = SubResource( 33 )
 
 [node name="ShotRange" type="Area2D" parent="." index="5"]
-position = Vector2( 138, 0 )
+position = Vector2( 172, 0 )
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="ShotRange" index="0"]
 polygon = PoolVector2Array( 0, 0, 10000, -1500, 10000, 1500 )

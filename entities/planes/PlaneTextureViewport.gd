@@ -8,8 +8,8 @@ func _ready():
 	plane_shape = res.instance()
 	add_child(plane_shape)
 
-func initialize(airframe, belly, cockpit):
-	plane_shape.initialize(airframe, belly, cockpit)
+func initialize(airframe, belly, cockpit, insigna_tail, insigna_wing):
+	plane_shape.initialize(airframe, belly, cockpit, insigna_tail, insigna_wing)
 
 func straighten():
 	plane_shape.flip_to_straight()
