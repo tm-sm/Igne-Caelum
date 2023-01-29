@@ -92,7 +92,7 @@ func next_camera_mode():
 		mode.PLAYER:
 			status = mode.PLAYER_AND_TARGET
 		mode.PLAYER_AND_TARGET:
-			status = mode.STILL
+			status = mode.PLAYER
 
 func _on_target_destroyed(t):
 	if t == target:
