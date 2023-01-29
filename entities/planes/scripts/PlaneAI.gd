@@ -127,7 +127,7 @@ func update_weapons():
 				if not missile_in_the_air and missile_launcher.targeting and missile_launcher.get_most_likely_target() == target:
 					fire_missile()
 					missile_in_safe_zone = false
-					missile_safe_zone.start(3)
+					missile_safe_zone.start(2)
 					#now it won't shoot its own missile off the sky the moment it fires it
 				elif has_clear_shot() and missile_in_safe_zone:
 					#there's little risk of hitting a friendly
