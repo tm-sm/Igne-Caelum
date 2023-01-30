@@ -12,7 +12,7 @@ _global_script_classes=[ {
 "base": "Spatial",
 "class": "Airframe3D",
 "language": "GDScript",
-"path": "res://textures/3D/3DTexture.gd"
+"path": "res://textures/3D/Airframe3D.gd"
 }, {
 "base": "RigidBody2D",
 "class": "BaseBullet",

@@ -19,11 +19,9 @@ func load_scene(current_scene, next_scene):
 	#this way the loading scene has time to appear
 	yield(get_tree().create_timer(0.5), "timeout")
 	
-	print("here")
-	var t = OS.get_ticks_msec()
-	# Use "time_max" to control for how long we block this thread.
-	while OS.get_ticks_msec() < t + time_max:
+	while true:
 		var error = loader.poll()
+		print(error)
 		if error == OK:
 			#data was loaded correctly
 			var progress_bar = loading_screen_ins.get_node("PanelContainer/VBoxContainer/ProgressBar")

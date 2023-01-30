@@ -3,29 +3,50 @@ class_name Airframe3D
 
 onready var shape = $Plane
 onready var body = $Plane/Airframe
-onready var tail_insigna = $Plane/Tail/TailInsigna
-onready var wing_insigna = $Plane/Wings/WingInsigna
+onready var tail_insigna = $Plane/Airframe/TailInsigna
+onready var wing_insigna = $Plane/Airframe/WingInsigna
 
 
 var rng = RandomNumberGenerator.new()
 
 var rotating = false
+var control = true
+var parent
+
+var elapsed_time = 0.0
 
 var rot_to_straight = Vector3(0, 0, 2) #the current vector being used to straighten the plane
 var rot_to_inverted = Vector3(0, 0, 2) #the same but to invert it
 
 var last_rot = 0
 
-func initialize(airframe_color, belly_color, cockpit_color, insigna_tail, insigna_wing):
+func initialize(prnt, airframe_color, belly_color, cockpit_color, insigna_tail, insigna_wing):
+	parent = prnt
 	customize(airframe_color, belly_color, cockpit_color, insigna_tail, insigna_wing)
 
-func customize(airframe_color, belly_color, cockpit_color, insigna_tail, insigna_wing):
+func customize(_airframe_color, _belly_color, _cockpit_color, _insigna_tail, _insigna_wing):
 	pass
 
-func _process(_delta):
-	if not rotating:
-		mantain_momentum()
-	rotating = false
+func _process(delta):
+	if control:
+		#to smooth out movement
+		elapsed_time += delta
+		if rotating:
+			#prevents the straightening from occuring
+			elapsed_time = 0.0
+		else:
+			mantain_momentum()
+		rotating = false
+		if elapsed_time >= 3.0:
+			#the plane will straighten out in the direction its facing
+			if abs(parent.rotation_degrees) >= 90:
+				#facing left
+				flip_to_inverted_no_rot()
+			else:
+				flip_to_straight_no_rot()
+	else:
+		shape.rotation_degrees += Vector3(0.5, 1, 3)
+	
 
 func mantain_momentum():
 	last_rot = last_rot * 0.5
@@ -86,6 +107,14 @@ func flip_to_inverted():
 		return 
 	shape.rotation_degrees.z = rot.z + rot_to_straight.z
 	keep_within_360_degrees()
+
+func flip_to_straight_no_rot():
+	flip_to_straight()
+	rotating = false
+
+func flip_to_inverted_no_rot():
+	flip_to_inverted()
+	rotating = false
 
 func keep_within_360_degrees():
 	if abs(shape.rotation_degrees.z) >= 360.0:

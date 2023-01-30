@@ -145,9 +145,9 @@ stall_speed = 700.0
 engine_power = 1000.0
 torque_strength = 5500.0
 wind_resistance_factor = 0.09
-airframe_color = Color( 0.643137, 0.321569, 0.321569, 1 )
-belly_color = Color( 0.372549, 0.466667, 0.470588, 1 )
-cockpit_color = Color( 0.411765, 1, 0.945098, 1 )
+airframe_color = Color( 0.505882, 0.505882, 0.505882, 1 )
+belly_color = Color( 0.603922, 0.603922, 0.603922, 1 )
+cockpit_color = Color( 0.254902, 0.498039, 0.537255, 1 )
 insigna_tail = ExtResource( 2 )
 insigna_wing = ExtResource( 3 )
 

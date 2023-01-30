@@ -48,7 +48,7 @@ func set_target(t):
 		objective = objective_type.fight
 
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	var target_position
 	if not locked_on_by_missile:
 		dodging = false

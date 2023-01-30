@@ -1,8 +1,8 @@
 extends Airframe3D
 
 func customize(airframe_color, belly_color, cockpit_color, insigna_tail, insigna_wing):
-	body.get_surface_material(0).albedo_color = airframe_color #airframe
-	body.get_surface_material(2).albedo_color = belly_color #belly
+	body.get_surface_material(2).albedo_color = airframe_color #airframe
+	body.get_surface_material(1).albedo_color = belly_color #belly
 	cockpit_color.a = 0.5 #now it's transparent
 	body.get_surface_material(4).albedo_color = cockpit_color #cockpit
 	

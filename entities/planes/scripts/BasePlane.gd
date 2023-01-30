@@ -107,7 +107,7 @@ func _ready():
 func initialize(wrld, tm):
 	world = wrld
 	team = tm
-	plane_model.initialize(airframe_color, belly_color, cockpit_color, insigna_tail, insigna_wing)
+	plane_model.initialize(self, airframe_color, belly_color, cockpit_color, insigna_tail, insigna_wing)
 
 func _process(delta):
 	#this lets the lock_on_alarm stay on the screen for a while longer
@@ -155,6 +155,8 @@ func recieve_damage(dmg):
 	hit_sound.play(0)
 	if health <= 0 and not dead:
 		smoke.emitting = true
+		engine_particles.emitting = false
+		plane_model.lose_control()
 		emit_signal("destroyed")
 		dead = true
 		#50/50 chance it explodes immediately
