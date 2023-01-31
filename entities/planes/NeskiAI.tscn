@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=2]
+[gd_scene load_steps=26 format=2]
 
 [ext_resource path="res://entities/planes/scripts/PlaneAI.gd" type="Script" id=1]
 [ext_resource path="res://entities/planes/base/Neski.tscn" type="PackedScene" id=2]
@@ -136,6 +136,9 @@ tangential_accel_random = 1.0
 scale_curve = SubResource( 22 )
 color_ramp = SubResource( 20 )
 
+[sub_resource type="CircleShape2D" id=34]
+radius = 600.0
+
 [node name="NeskiAI" instance=ExtResource( 2 )]
 script = ExtResource( 1 )
 controls_enabled = true
@@ -163,9 +166,17 @@ process_material = SubResource( 33 )
 
 [node name="ShotRange" type="Area2D" parent="." index="5"]
 position = Vector2( 172, 0 )
+monitoring = false
+monitorable = false
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="ShotRange" index="0"]
 polygon = PoolVector2Array( 0, 0, 10000, -1500, 10000, 1500 )
 
 [node name="MissileSafeZone" type="Timer" parent="." index="6"]
 one_shot = true
+
+[node name="CollisionEvader" type="Area2D" parent="." index="8"]
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CollisionEvader" index="0"]
+shape = SubResource( 34 )

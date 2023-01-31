@@ -1,6 +1,7 @@
 extends BasePlane
 class_name PlaneAI
 
+onready var collision_evader = $CollisionEvader
 onready var shot_range = $ShotRange
 onready var missile_safe_zone = $MissileSafeZone
 #used to avoid the plane shooting its own missile
@@ -50,7 +51,7 @@ func set_target(t):
 
 func _physics_process(_delta):
 	var target_position
-	if not locked_on_by_missile:
+	if not locked_on_by_missile and no_bogeys_nearby():
 		dodging = false
 		if objective != objective_type.retreat:
 			target_position = target.global_position
@@ -145,6 +146,15 @@ func has_clear_shot()->bool:
 			#shooting risks damaging a friendly
 			return false
 	return true
+
+func no_bogeys_nearby()->bool:
+	var obstacles = collision_evader.get_overlapping_bodies()
+	for o in obstacles:
+		if o.is_in_group("bogey") and o != self:
+			print(o)
+			return false
+	return true
+	
 
 func _on_MissileSafeZone_timeout():
 	missile_in_safe_zone = true

@@ -140,7 +140,7 @@ position = Vector2( 575, 178 )
 [node name="AI" type="Node2D" parent="."]
 
 [node name="NeskiAI" parent="AI" instance=ExtResource( 2 )]
-position = Vector2( -29679, 9144 )
+position = Vector2( 291, -79 )
 airframe_color = Color( 0.117647, 0.117647, 0.117647, 1 )
 belly_color = Color( 0.152941, 0.152941, 0.152941, 1 )
 insigna_tail = ExtResource( 3 )
