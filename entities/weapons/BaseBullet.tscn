@@ -105,7 +105,7 @@ sleeping = true
 script = ExtResource( 3 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 113, 3 )
+position = Vector2( 109, -1 )
 rotation = 1.5708
 shape = SubResource( 17 )
 
@@ -123,21 +123,21 @@ texture = ExtResource( 2 )
 anims/explode = SubResource( 11 )
 
 [node name="Sprite" type="Sprite" parent="."]
-modulate = Color( 53.18, 43.02, 0, 0.79 )
+modulate = Color( 1, 1, 1, 0.788235 )
 material = SubResource( 18 )
-scale = Vector2( 25, 3 )
+position = Vector2( 81, 0 )
+scale = Vector2( 0.300781, 0.222656 )
 texture = ExtResource( 1 )
-centered = false
 offset = Vector2( 0, -4 )
 
 [node name="Light2D" type="Light2D" parent="Sprite"]
-position = Vector2( -0.7, 4 )
-scale = Vector2( 0.5, 1 )
+position = Vector2( 59.1699, 0 )
+scale = Vector2( 0.595868, 0.414071 )
 texture = ExtResource( 1 )
 offset = Vector2( 10, 0 )
 texture_scale = 2.45
 color = Color( 1, 0, 0, 1 )
-energy = 6.66
+energy = 9.5
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 10.0

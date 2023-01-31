@@ -166,7 +166,6 @@ process_material = SubResource( 33 )
 
 [node name="ShotRange" type="Area2D" parent="." index="5"]
 position = Vector2( 172, 0 )
-monitoring = false
 monitorable = false
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="ShotRange" index="0"]
