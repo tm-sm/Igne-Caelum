@@ -2,12 +2,12 @@
 
 importer="scene"
 type="PackedScene"
-path="res://.import/Mondeno_test.glb-8c9d9aab2a72b931fd75de6f00336f59.scn"
+path="res://.import/Mondeno.glb-9c6483605cf205a344d395b67f8913a7.scn"
 
 [deps]
 
-source_file="res://textures/entities/planes/vorlono/Mondeno/Mondeno_test.glb"
-dest_files=[ "res://.import/Mondeno_test.glb-8c9d9aab2a72b931fd75de6f00336f59.scn" ]
+source_file="res://textures/3D/materials/mondeno/Mondeno.glb"
+dest_files=[ "res://.import/Mondeno.glb-9c6483605cf205a344d395b67f8913a7.scn" ]
 
 [params]
 

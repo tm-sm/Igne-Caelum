@@ -1,10 +1,10 @@
 [gd_scene load_steps=13 format=2]
 
-[ext_resource path="res://textures/entities/planes/hazkani/neski3D/BottomPaint.material" type="Material" id=1]
-[ext_resource path="res://textures/entities/planes/hazkani/neski3D/Material_005.material" type="Material" id=2]
-[ext_resource path="res://textures/entities/planes/hazkani/neski3D/Metal_001.material" type="Material" id=3]
-[ext_resource path="res://textures/entities/planes/hazkani/neski3D/Airframe.material" type="Material" id=4]
-[ext_resource path="res://textures/entities/planes/hazkani/neski3D/Leather.material" type="Material" id=5]
+[ext_resource path="res://textures/3D/materials/neski/BottomPaint.material" type="Material" id=1]
+[ext_resource path="res://textures/3D/materials/neski/Material_005.material" type="Material" id=2]
+[ext_resource path="res://textures/3D/materials/neski/Metal_001.material" type="Material" id=3]
+[ext_resource path="res://textures/3D/materials/neski/Airframe.material" type="Material" id=4]
+[ext_resource path="res://textures/3D/materials/neski/Leather.material" type="Material" id=5]
 [ext_resource path="res://textures/3D/Neski3D.gd" type="Script" id=6]
 [ext_resource path="res://textures/3D/meshes/wing_insigna.tres" type="PlaneMesh" id=7]
 

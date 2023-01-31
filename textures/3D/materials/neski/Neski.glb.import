@@ -2,12 +2,12 @@
 
 importer="scene"
 type="PackedScene"
-path="res://.import/Neski.glb-8f1c68cba28c3c38eb50db6a52de2fa9.scn"
+path="res://.import/Neski.glb-821ccd8f81182c904c8180761309b945.scn"
 
 [deps]
 
-source_file="res://textures/entities/planes/hazkani/neski3D/Neski.glb"
-dest_files=[ "res://.import/Neski.glb-8f1c68cba28c3c38eb50db6a52de2fa9.scn" ]
+source_file="res://textures/3D/materials/neski/Neski.glb"
+dest_files=[ "res://.import/Neski.glb-821ccd8f81182c904c8180761309b945.scn" ]
 
 [params]
 

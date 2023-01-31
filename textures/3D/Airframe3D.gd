@@ -45,7 +45,7 @@ func _process(delta):
 			else:
 				flip_to_straight_no_rot()
 	else:
-		shape.rotation_degrees += Vector3(0.5, 1, 3)
+		shape.rotation_degrees += Vector3(0, 0, 3)
 	
 
 func mantain_momentum():
