@@ -1,6 +1,6 @@
 # Igne Caelum
 
-2D plane dogfighting game created in the Godot engine. The project is abandoned for now, mostly due to university taking away most of my time.
+2D physics-based dogfighting game created in the Godot engine. The project is abandoned for now, mostly due to university taking away most of my time.
 
 ## Controls:
 
